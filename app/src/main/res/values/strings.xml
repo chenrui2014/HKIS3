@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HKIS</string>
+    <string name="splash_input">进 入</string>
+
+    <!-- 页面名称 -->
+    <string name="main_navigation_up">上架</string>
+    <string name="main_navigation_down">下架</string>
+    <string name="main_navigation_change">移仓</string>
+    <string name="main_navigation_check">盘点</string>
+    <string name="main_navigation_user">我的</string>
 </resources>
