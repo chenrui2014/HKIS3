@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:text=""
+        android:background="@color/gray_line"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/up_fragment_condition_text1"
+        android:textColor="@color/black_bt_tx"
+        android:drawableEnd="@mipmap/drop_down_black"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:contentDescription="@string/up_fragment_condition_desc"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_line"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+        <ImageView
+            android:id="@+id/upikon_img"
+            android:layout_width="310dp"
+            android:layout_height="170dp"
+            app:srcCompat="@drawable/up_ikon"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
+
+        <Button
+            android:id="@+id/up_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/up_fragment_bt_text"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black_bt_tx"
+            android:textSize="16sp"
+            android:background="@drawable/bt_bg1"
+            app:layout_constraintTop_toBottomOf="@+id/up_et"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+        <EditText
+            android:id="@+id/up_et"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#a2b0c6"
+            android:background="@drawable/tx_border"
+            android:textColorHint="@color/gray_hint"
+            android:ems="30"
+            android:inputType="text"
+            android:hint="@string/up_fragment_tv_hint"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/upikon_img"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
