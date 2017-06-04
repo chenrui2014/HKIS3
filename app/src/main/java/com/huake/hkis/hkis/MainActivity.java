@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Window;
 import android.widget.RadioGroup;
 
 import com.huake.hkis.hkis.ui.ChangeFragment;
 import com.huake.hkis.hkis.ui.CheckFragment;
 import com.huake.hkis.hkis.ui.DownFragment;
 import com.huake.hkis.hkis.ui.UpFragment;
+import com.huake.hkis.hkis.ui.UpFragment2;
 import com.huake.hkis.hkis.ui.UserFragment;
 import com.huake.hkis.hkis.utils.UIHelper;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData(Bundle savedInstanceState) {
-        fragmentTags = new ArrayList<>(Arrays.asList("UpFragment", "DownFragment", "ChangeFragment", "CheckFragment", "UserFragment"));
+        fragmentTags = new ArrayList<>(Arrays.asList("UpFragment2", "DownFragment", "ChangeFragment", "CheckFragment", "UserFragment"));
         currIndex = 0;
         if(savedInstanceState != null) {
             currIndex = savedInstanceState.getInt(CURR_INDEX);
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         if (fragment.isAdded()) {
             fragmentTransaction.show(fragment);
         } else {
-            fragmentTransaction.add(R.id.fragment_container, fragment, fragmentTags.get(currIndex));
+            fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTags.get(currIndex));
         }
         fragmentTransaction.commitAllowingStateLoss();
         fragmentManager.executePendingTransactions();
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment instantFragment(int currIndex) {
         switch (currIndex) {
-            case 0: return new UpFragment();
+            case 0: return new UpFragment2();
             case 1: return new DownFragment();
             case 2: return new ChangeFragment();
             case 3: return new CheckFragment();

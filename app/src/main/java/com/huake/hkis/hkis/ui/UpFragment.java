@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import com.huake.hkis.hkis.R;
 import com.huake.hkis.hkis.databinding.FragmentMainBinding;
@@ -23,10 +24,13 @@ public class UpFragment extends LifecycleFragment {
 
     private FragmentMainBinding viewDataBinding;
 
+    private PopupWindow mPopupWindow;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //get the databinding from the layout
+
         this.viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
         return viewDataBinding.getRoot();
     }
