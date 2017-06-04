@@ -8,4 +8,59 @@
     <string name="main_navigation_change">移仓</string>
     <string name="main_navigation_check">盘点</string>
     <string name="main_navigation_user">我的</string>
+<!--上架页面-->
+    <string name="up_fragment_tv_hint">请输入单号（非必填）</string>
+    <string name="up_fragment_bt_text">立即上架</string>
+    <string name="up_fragment_condition_text1">销售订单号</string>
+    <string name="up_fragment_condition_text2">采购订单号</string>
+    <string name="up_fragment_condition_text3">调拨单号</string>
+    <string name="up_fragment_condition_text4">采料单</string>
+    <string name="up_fragment_condition_text5">报废单</string>
+    <string name="up_fragment_condition_reset">重置</string>
+    <string name="up_fragment_condition_confirm">确定</string>
+    <string name="up_fragment_condition_desc">上架图片</string>
+    <!--登陆页面-->
+    <string name="login_bt_login">登录</string>
+    <string name="login_tv_setting">设置</string>
+    <string name="login_et_name_hint">请输入用户名</string>
+    <string name="login_et_pwd_hint">请输入密码</string>
+    <!--设置页面-->
+    <string name="setting_et_address_hint">IP地址或域名</string>
+    <string name="setting_et_port_hint">端口号</string>
+    <string name="setting_bt_confirm">确定</string>
+    <!--入库汇总页页面-->
+    <string name="sum_tv_inBill">入库单号</string>
+    <string name="sum_tv_whNO">仓库号</string>
+    <string name="sum_tv_billType">单据类型</string>
+    <string name="sum_tv_po">采购订单</string>
+    <string name="sum_tv_wh">仓库号</string>
+    <string name="sum_tv_docNO">单据号</string>
+    <string name="sum_tv_date">到货日期</string>
+    <string name="sum_bt_PO">采购订单</string>
+    <string name="sum_bt_ll">领料单</string>
+    <string name="sum_bt_db">调拨单</string>
+    <!--上架物料明细页面-->
+    <string name="smd_tv_wlh">物料号</string>
+    <string name="smd_tv_hasbeen">已上架</string>
+    <string name="smd_tv_tostayon">待上架</string>
+    <string name="smd_tv_suggest">建议仓位</string>
+    <string name="smd_tv_confirm">确定</string>
+    <string name="smd_radio_full">全选</string>
+
+    <!--上架信息页面-->
+    <string name="store_info_tv_wlh">物  料  号</string>
+    <string name="store_info_tv_desc">物料描述</string>
+    <string name="store_info_tv_inNum">入库数量</string>
+    <string name="store_info_tv_unit">物料单位</string>
+    <string name="store_info_tv_suggest">建议仓位</string>
+    <string name="store_info_tv_qr">物料条码</string>
+    <string name="store_info_tv_store">上架仓位</string>
+    <string name="store_info_tv_storeNum">上架数量</string>
+    <string name="store_info_tv_boxNum">上架箱数</string>
+    <string name="store_info_bt_confirm">确认上架</string>
+
+    <!--移仓首页面-->
+    <string name="change_et_hint_scan">请扫描源仓位</string>
+    <string name="change_bt_change">立即移仓</string>
+
 </resources>

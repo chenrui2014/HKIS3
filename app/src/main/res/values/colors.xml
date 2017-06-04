@@ -28,4 +28,9 @@
     <color name="gray_white">#F5F5F5</color>
     <color name="gray_slate">#708090</color>
     <color name="blue_light">#0083FF</color>
+    <color name="gray_hint">#a2b0c6</color>
+    <color name="gray_bt_bg">#d2d5dc</color>
+    <color name="black_bt_tx">#282e39</color>
+    <color name="gray_line">#b8c2c8</color>
+    <color name="up_condition_font">#616976</color>
 </resources>
