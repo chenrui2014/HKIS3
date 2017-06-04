@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp"/>
+    <TextView
+        android:id="@+id/tv_lb_wlh"
+        android:text="@string/store_info_tv_wlh"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_wlh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="TextView"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="tv_lb_wlh"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_wlh" />
+
+    <TextView
+        android:id="@+id/tv_lb_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_desc"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_wlh"/>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_desc"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_desc"/>
+
+    <TextView
+        android:id="@+id/tv_lb_inNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_inNum"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_desc"
+        app:layout_constraintLeft_toLeftOf="@+id/gl" />
+
+    <TextView
+        android:id="@+id/tv_inNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_inNum"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_inNum"/>
+
+    <TextView
+        android:id="@+id/tv_lb_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_unit"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_inNum" />
+
+    <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_unit"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_unit"/>
+
+    <TextView
+        android:id="@+id/tv_lb_suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginTop="20dp"
+        android:text="@string/store_info_tv_suggest"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_unit"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"/>
+
+    <TextView
+        android:id="@+id/tv_suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_suggest"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_suggest"/>
+
+    <TextView
+        android:id="@+id/tv_lb_qr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_qr"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_qr"
+        />
+
+    <EditText
+        android:id="@+id/et_qr"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="50"
+        android:background="@drawable/et_bg"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:padding="5dp"
+        android:drawableEnd="@drawable/scan"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_qr"
+        app:layout_constraintTop_toBottomOf="@+id/tv_suggest"/>
+
+    <TextView
+        android:id="@+id/tv_lb_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:text="@string/store_info_tv_store"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_store"/>
+
+    <EditText
+        android:id="@+id/et_store"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:ems="50"
+        android:background="@drawable/et_bg"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:padding="5dp"
+        android:drawableEnd="@drawable/scan"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_store"
+        app:layout_constraintTop_toBottomOf="@+id/et_qr"/>
+
+    <TextView
+        android:id="@+id/tv_lb_storeNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_storeNum"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_storeNum"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"/>
+
+    <EditText
+        android:id="@+id/et_storeNum"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:ems="20"
+        android:background="@drawable/et_bg"
+        android:drawableEnd="@drawable/input"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/et_store"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_storeNum"/>
+
+    <TextView
+        android:id="@+id/tv_lb_boxNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_info_tv_boxNum"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_boxNum"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"/>
+
+    <EditText
+        android:id="@+id/et_boxNum"
+        android:layout_width="210dp"
+        android:layout_height="44dp"
+        android:ems="20"
+        android:background="@drawable/et_bg"
+        android:drawableEnd="@drawable/input"
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/et_storeNum"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_boxNum" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_container"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:background="#34aff7"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_condition_billType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_line1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/sum_tv_po"
+        android:gravity="center_vertical"
+        android:textColor="#d7e6ef"
+        android:textSize="14sp"
+        android:drawableEnd="@drawable/select_white"/>
+    <TextView
+        android:id="@+id/tv_line1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#d7e6ef"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_condition_billType"
+        app:layout_constraintRight_toLeftOf="@+id/tv_wh_NO"/>
+
+    <TextView
+        android:id="@+id/tv_wh_NO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#d7e6ef"
+        android:textSize="14sp"
+        android:drawableEnd="@drawable/select_white"
+        android:text="@string/sum_tv_whNO"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_line1"
+        app:layout_constraintRight_toLeftOf="@+id/tv_line2"/>
+    <TextView
+        android:id="@+id/tv_line2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#d7e6ef"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_wh_NO"
+        app:layout_constraintRight_toLeftOf="@+id/tv_bill_NO"/>
+    <TextView
+        android:id="@+id/tv_bill_NO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#d7e6ef"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/select_white"
+        android:text="@string/sum_tv_docNO"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_line2"
+        app:layout_constraintRight_toLeftOf="@+id/tv_line3"/>
+    <TextView
+        android:id="@+id/tv_line3"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#d7e6ef"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_bill_NO"
+        app:layout_constraintRight_toLeftOf="@+id/tv_inDate"/>
+
+    <TextView
+        android:id="@+id/tv_inDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#d7e6ef"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/select_white"
+        android:text="@string/sum_tv_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_line3"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_container">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_inBillSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scrollbars="vertical">
+
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.constraint.ConstraintLayout>

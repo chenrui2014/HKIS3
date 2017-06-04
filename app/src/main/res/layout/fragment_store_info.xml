@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/bt_confirm"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:text="@string/store_info_bt_confirm"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/shape_corner_press2"
+        />
+</android.support.constraint.ConstraintLayout>
