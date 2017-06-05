@@ -63,4 +63,9 @@
     <string name="change_et_hint_scan">请扫描源仓位</string>
     <string name="change_bt_change">立即移仓</string>
 
+    <!--移仓详情页-->
+    <string name="change_detail_tv_wlh">物料号</string>
+    <string name="change_detail_tv_unit">单位：</string>
+    <string name="change_detail_tv_kc">库存</string>
+    <string name="change_detail_tv_changeNum">转移数量</string>
 </resources>

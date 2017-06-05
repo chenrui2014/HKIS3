@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_container">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_inBillSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scrollbars="vertical">
+
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/con_con2"
+        android:background="#e5ffffff"
+        android:drawableStart="@drawable/card_unselect"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/smd_radio_full"
+        android:textSize="16sp"
+        android:textColor="#282f39"
+        android:gravity="center_vertical|left"
+        android:drawablePadding="15dp"
+        android:paddingStart="15dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/con_con3"
+        app:layout_constraintHorizontal_bias="0.6">
+
+    </TextView>
+    <TextView
+        android:id="@+id/con_con3"
+        android:background="#36adf7"
+        android:layout_width="0dp"
+        android:text="@string/smd_tv_confirm"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_height="60dp"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/con_con2"
+        app:layout_constraintRight_toRightOf="parent"></TextView>
 </android.support.constraint.ConstraintLayout>

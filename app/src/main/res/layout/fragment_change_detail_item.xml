@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp">
     <android.support.constraint.ConstraintLayout
         android:id="@+id/con_con"
         android:layout_width="0dp"
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
-            android:text="@string/smd_tv_wlh"
+            android:text="@string/change_detail_tv_wlh"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:layout_marginTop="15dp"
@@ -34,7 +35,7 @@
             app:layout_constraintLeft_toRightOf="@+id/tv_lb_wlh"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
     <android.support.constraint.Guideline
         android:id="@+id/gl"
         android:layout_width="wrap_content"
@@ -52,76 +53,62 @@
         app:layout_constraintLeft_toLeftOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/con_con"/>
     <TextView
-        android:id="@+id/tv_lb_hasBeen"
+        android:id="@+id/tv_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/smd_tv_hasbeen"
+        android:text="@string/change_detail_tv_unit"
         android:textSize="14sp"
+        android:textColor="#a2b0c6"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_wlm"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/tv_lb_kc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_detail_tv_kc"
+        android:textSize="16sp"
         android:textColor="#616976"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/has_been"
+        android:drawableStart="@drawable/change_kc"
         android:drawablePadding="2dp"
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/tv_wlm"/>
     <TextView
-        android:id="@+id/tv_hasBeen"
+        android:id="@+id/tv_kc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="#f2a929"
         android:layout_marginLeft="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_hasBeen"
-        app:layout_constraintLeft_toRightOf="@+id/tv_lb_hasBeen"/>
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_kc"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_kc"/>
     <TextView
-        android:id="@+id/tv_lb_toStay"
+        android:id="@+id/tv_lb_changeNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/smd_tv_tostayon"
-        android:textSize="14sp"
+        android:text="@string/change_detail_tv_changeNum"
+        android:textSize="16sp"
         android:textColor="#616976"
         android:gravity="center_vertical"
-        android:drawableStart="@drawable/to_stayon"
+        android:drawableStart="@drawable/change_num"
         android:drawablePadding="2dp"
         android:layout_marginStart="30dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_hasBeen"
-        app:layout_constraintLeft_toRightOf="@+id/tv_hasBeen"/>
-    <TextView
-        android:id="@+id/tv_toStay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_kc"
+        app:layout_constraintLeft_toRightOf="@+id/tv_kc"/>
+    <EditText
+        android:id="@+id/tv_changeNum"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
         android:text=""
-        android:textSize="14sp"
+        android:background="@drawable/shape_corner_press4"
+        android:textSize="16sp"
         android:textColor="#4cb6f8"
         android:layout_marginStart="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_toStay"
-        app:layout_constraintLeft_toRightOf="@+id/tv_lb_toStay"/>
-
-    <TextView
-        android:id="@+id/tv_lb_suggest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/smd_tv_suggest"
-        android:textSize="14sp"
-        android:textColor="#616976"
-        android:layout_marginTop="10dp"
-        android:drawablePadding="2dp"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/suggest_position"
-        app:layout_constraintLeft_toLeftOf="@+id/gl"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lb_hasBeen" />
-
-    <TextView
-        android:id="@+id/tv_suggest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="14sp"
-        android:textColor="#616976"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_suggest"
-        app:layout_constraintLeft_toRightOf="@+id/tv_lb_suggest"/>
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_changeNum"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_changeNum"/>
 
     <ImageView
         android:layout_width="wrap_content"
