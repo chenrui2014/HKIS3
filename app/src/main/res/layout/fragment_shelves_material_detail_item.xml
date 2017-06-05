@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:margin="15dp">
 <android.support.constraint.ConstraintLayout
-    android:id="@+id/con_con"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:background="#a8d3ef">
-    <TextView
-        android:id="@+id/tv_lb_wlh"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/con_con"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#a8d3ef">
+        <TextView
+            android:id="@+id/tv_lb_wlh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="@string/smd_tv_wlh"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_lb_wlh"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.Guideline
+        android:id="@+id/gl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:text="@string/smd_tv_wlh"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintLeft_toRightOf="@+id/tv_lb_wlh"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-</android.support.constraint.ConstraintLayout>
-<android.support.constraint.Guideline
-    android:id="@+id/gl"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintGuide_begin="80dp"
-    android:orientation="vertical"
-    tools:layout_editor_absoluteY="0dp"
-    tools:layout_editor_absoluteX="80dp" />
+        app:layout_constraintGuide_begin="80dp"
+        android:orientation="vertical"/>
     <TextView
         android:id="@+id/tv_wlm"
         android:layout_width="wrap_content"
@@ -54,7 +50,6 @@
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/con_con"/>
-
     <TextView
         android:id="@+id/tv_lb_hasBeen"
         android:layout_width="wrap_content"
@@ -68,18 +63,16 @@
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/tv_wlm"/>
-
     <TextView
         android:id="@+id/tv_hasBeen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="14sp"
-        android:textColor="#f2a9w9"
+        android:textColor="#f2a929"
         android:layout_marginLeft="5dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_hasBeen"
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_hasBeen"/>
-
     <TextView
         android:id="@+id/tv_lb_toStay"
         android:layout_width="wrap_content"
