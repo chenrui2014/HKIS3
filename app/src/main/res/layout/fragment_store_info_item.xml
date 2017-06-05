@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="15dp">
@@ -21,7 +20,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/gl"
         app:layout_constraintTop_toTopOf="parent"/>
-
     <TextView
         android:id="@+id/tv_wlh"
         android:layout_width="wrap_content"
@@ -30,7 +28,7 @@
         android:text="TextView"
         android:textColor="#616976"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="tv_lb_wlh"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wlh"
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_wlh" />
 
     <TextView
@@ -230,5 +228,4 @@
         android:text="Name"
         app:layout_constraintTop_toBottomOf="@+id/et_storeNum"
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_boxNum" />
-
 </android.support.constraint.ConstraintLayout>
