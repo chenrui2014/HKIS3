@@ -36,7 +36,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:' + project.supportLibVersion
-    compile 'com.android.support.constraint:constraint-layout:1.0.0'
 
     compile 'com.google.dagger:dagger:2.10'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
@@ -52,4 +51,5 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:" + project.archLifecycleVersion;
 
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
