@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:background="@drawable/pd_sum_item">
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="24"
+        android:textSize="16sp"
+        android:textColor="#fff2cb"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_month"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="05"
+        android:textColor="#fff2cb"
+        android:textSize="12sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/gl1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_begin="50dp"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_begin="250dp"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/tv_lb_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_tv_pddh"
+        android:layout_marginTop="20dp"
+        android:textColor="#a2b0c7"
+        android:textSize="12sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_pddh"/>
+
+    <TextView
+        android:id="@+id/tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textColor="#282e39"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_pddh"/>
+
+    <TextView
+        android:id="@+id/tv_lb_ckh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_tv_ckh"
+        android:textColor="#a2b0c7"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_pddh"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"/>
+
+    <TextView
+        android:id="@+id/tv_ckh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="z107"
+        android:textSize="24sp"
+        android:textColor="#36adf7"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_pddh"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"/>
+
+</android.support.constraint.ConstraintLayout>

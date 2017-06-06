@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pd_material_detail"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp">
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:srcCompat="@drawable/back"
+        android:layout_marginStart="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/pd_sum_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_titlee_md"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="30dp"
+        android:orientation="vertical" />
+    <android.support.constraint.Guideline
+        android:id="@+id/gl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="250dp"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:text="@string/pd_tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#ffe5af"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/pd_sum_title"/>
+
+    <TextView
+        android:id="@+id/tv_lb_pddh"
+        android:text="@string/pd_tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#abdbf7"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_position"/>
+
+    <TextView
+        android:id="@+id/tv_lb_ckh"
+        android:text="@string/pd_tv_ckh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="12sp"
+        android:textColor="#abdbf7"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_position"/>
+
+    <TextView
+        android:id="@+id/tv_pddh"
+        android:text="dd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#deebff"
+        android:textSize="16dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_ckh"/>
+
+    <TextView
+        android:id="@+id/tv_ckh"
+        android:text="@string/pd_tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="#deebff"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_ckh"/>
+
+</android.support.constraint.ConstraintLayout>

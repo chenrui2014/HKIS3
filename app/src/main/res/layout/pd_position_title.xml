@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pd_position_title_bg"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp">
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:srcCompat="@drawable/back"
+        android:layout_marginStart="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/pd_sum_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_title_position"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="30dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="30dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/gl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="250dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="250dp" />
+
+    <TextView
+        android:id="@+id/tv_lb_pddh"
+        android:text="@string/pd_tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#abdbf7"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/pd_sum_title"/>
+
+    <TextView
+        android:id="@+id/tv_lb_ckh"
+        android:text="@string/pd_tv_ckh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="12sp"
+        android:textColor="#abdbf7"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"
+        app:layout_constraintTop_toBottomOf="@+id/pd_sum_title"/>
+
+    <TextView
+        android:id="@+id/tv_pddh"
+        android:text="dd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="#ffe5af"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_ckh"/>
+
+    <TextView
+        android:id="@+id/tv_ckh"
+        android:text="@string/pd_tv_pddh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="#ffe5af"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_ckh"/>
+
+    <TextView
+        android:id="@+id/tv_splite"
+        android:text=""
+        android:layout_width="344dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#69c3fa"
+        app:layout_constraintLeft_toLeftOf="@+id/gl1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pddh"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_con_ckh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_tv_ckh"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:drawableEnd="@drawable/select_white"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/tv_splite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_splite1" />
+
+    <TextView
+        android:id="@+id/tv_splite1"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:text=""
+        android:background="#8bcafb"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
+        app:layout_constraintLeft_toRightOf="@+id/tv_con_ckh"
+        app:layout_constraintRight_toLeftOf="@+id/tv_title_djh"/>
+
+    <TextView
+        android:id="@+id/tv_title_djh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_title_dj"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:drawableEnd="@drawable/select_white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
+        app:layout_constraintLeft_toRightOf="@+id/tv_splite1"
+        app:layout_constraintRight_toLeftOf="@+id/tv_splite2"/>
+
+    <TextView
+        android:id="@+id/tv_splite2"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:text=""
+        android:background="#8bcafb"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
+        app:layout_constraintLeft_toRightOf="@+id/tv_title_djh"
+        app:layout_constraintRight_toLeftOf="@+id/tv_pd_date"/>
+
+    <TextView
+        android:id="@+id/tv_pd_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pd_title_date"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:drawableEnd="@drawable/select_white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
+        app:layout_constraintLeft_toRightOf="@+id/tv_splite2"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
