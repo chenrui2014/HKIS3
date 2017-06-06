@@ -68,4 +68,25 @@
     <string name="change_detail_tv_unit">单位：</string>
     <string name="change_detail_tv_kc">库存</string>
     <string name="change_detail_tv_changeNum">转移数量</string>
+    <string name="change_detail_tv_target">目的仓位</string>
+    <string name="change_pop_tb_cancel">取消</string>
+    <string name="change_pop_tb_confirm">确定</string>
+
+    <!--盘点页面-->
+    <string name="pd_et_hint">请输入盘点单号</string>
+    <string name="pd_bt_confirm">确认</string>
+    <string name="pd_tv_pddh">盘点单号</string>
+    <string name="pd_tv_ckh">仓库号</string>
+    <string name="pd_title_date">盘点日期</string>
+    <string name="pd_title_dj">单据号</string>
+    <string name="pd_title_pddhz">盘点单汇总</string>
+    <string name="pd_title_position">盘点仓位</string>
+    <string name="pd_title_con_storetype">存储类型</string>
+    <string name="pd_title_con_storeArea">存储区</string>
+    <string name="pd_title_con_uncheck">未盘点</string>
+    <string name="pd_titlee_md">盘点物料明细</string>
+    <string name="pd_md_zm">账面</string>
+    <string name="pd_md_real">实盘数量</string>
+    <string name="pd_md_unit">单位</string>
+    <string name="pd_md_scan">请扫描物料条码</string>
 </resources>
