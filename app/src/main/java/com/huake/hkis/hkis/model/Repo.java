@@ -1,8 +1,6 @@
 package com.huake.hkis.hkis.model;
 
-/**
- * Created by florentchampigny on 03/06/15.
- */
+
 public class Repo implements Comparable<Repo> {
     int id;
     String name;

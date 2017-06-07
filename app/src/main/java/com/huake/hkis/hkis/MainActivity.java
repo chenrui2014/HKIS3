@@ -27,6 +27,7 @@ import com.huake.hkis.hkis.ui.DownFragment;
 import com.huake.hkis.hkis.ui.UpFragment;
 import com.huake.hkis.hkis.ui.UpFragment2;
 import com.huake.hkis.hkis.ui.UserFragment;
+import com.huake.hkis.hkis.utils.SharedPreferences;
 import com.huake.hkis.hkis.utils.UIHelper;
 import com.pda.scan.IHWScan;
 
@@ -125,6 +126,12 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
 
     } ;
 
+    /**
+     * android5.0 无法隐式申明Intent启动service的解决办法
+     * @param context
+     * @param implicitIntent
+     * @return
+     */
     public static Intent createExplicitFromImplicitIntent(Context context, Intent implicitIntent) {
         // Retrieve all services that can match the given intent
         PackageManager pm = context.getPackageManager();
@@ -155,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, MainFragment.newInstance())

@@ -2,9 +2,7 @@ package com.huake.hkis.hkis.model;
 
 import java.util.List;
 
-/**
- * Created by florentchampigny on 31/07/15.
- */
+
 public class User {
 
     String login;

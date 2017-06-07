@@ -8,7 +8,7 @@ import com.huake.hkis.hkis.MainApplication;
 
 public class SharedPreferences {
 
-    private static final String SP_NAME = "souyue";
+    private static final String SP_NAME = "hkis";
     public static final String KEY_LOGIN_TOKEN = "login_token";
     public static final String KEY_LOGIN_TYPE = "login_type";
 
