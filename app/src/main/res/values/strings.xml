@@ -98,4 +98,26 @@
     <string name="down_lb_position">下架仓位</string>
     <string name="down_lb_downNum">下架数量</string>
     <string name="down_lb_downBox">下架箱数</string>
+    <!--我的页面-->
+    <string name="user_pwd">修改密码</string>
+    <string name="user_about">关于我们</string>
+    <string name="user_update">版本升级</string>
+    <string name="user_exit">退出登陆</string>
+    <string name="user_pwd_old_hint">请输入原密码</string>
+    <string name="user_pwd_new_hint">请输入新密码</string>
+    <string name="user_pwd_bt_confirm">确定</string>
+    <string name="about">华科智能仓储是北京华科众合科技有限公司旗下专注于智能仓发展的品牌，通过移动互联网为更多的企业用户提供优质的标准化的智能存储空间服务</string>
+    <string name="about_lb_wx">微信服务号</string>
+    <string name="about_wx">智能仓储</string>
+    <string name="about_lb_offic">官方网站</string>
+    <string name="about_offic">www.cangchu.com</string>
+    <string name="about_lb_com">商务合作</string>
+    <string name="about_com">hezuo@huake.com</string>
+    <string name="about_lb_phone">联系电话</string>
+    <string name="about_phone">010-8283-788</string>
+    <string name="copyright">Copyright © HuaKe Unite (beijing) Co.,Ltd</string>
+    <string name="cn_name">北京华科合众科技有限公司</string>
+    <string name="com_app_name">华科智能仓储</string>
+    <string name="com_app_version">V2.4.0</string>
+    <string name="update_new">检查新版本</string>
 </resources>

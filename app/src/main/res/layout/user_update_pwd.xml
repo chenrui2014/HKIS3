@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/user_pwd_old"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="50"
+        android:hint="@string/user_pwd_old_hint"
+        android:textColorHint="#b6d0e1"
+        android:padding="10dp"
+        android:drawableStart="@mipmap/login_pwd"
+        android:inputType="textPassword"
+        android:background="@drawable/et_bg3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <EditText
+        android:id="@+id/user_pwd_new1"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="50"
+        android:textColorHint="#b6d0e1"
+        android:hint="@string/user_pwd_new_hint"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:drawableStart="@mipmap/login_pwd"
+        android:background="@drawable/et_bg3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pwd_old"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/user_pwd_new2"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:ems="50"
+        android:textColorHint="#b6d0e1"
+        android:hint="@string/user_pwd_new_hint"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:drawableStart="@mipmap/login_pwd"
+        android:background="@drawable/et_bg3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pwd_new1"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/user_bt_update"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:text="@string/user_pwd_bt_confirm"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_corner_login_bt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pwd_new2"/>
+</android.support.constraint.ConstraintLayout>

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/mp_img"
-        android:layout_width="360dp"
-        android:layout_height="279dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:srcCompat="@mipmap/mp_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
