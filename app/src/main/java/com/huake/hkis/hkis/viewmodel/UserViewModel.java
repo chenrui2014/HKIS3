@@ -21,8 +21,8 @@ public class UserViewModel extends ViewModel {
         this.hkisRepository = hkisRepository;
     }
 
-    public LiveData<User> getUser(String userName) {
+    public LiveData<User> getUser(String userName,String pwd) {
         //userLiveData will be notified when the user is fetched
-        return hkisRepository.getUser(userName);
+        return hkisRepository.getUser(userName,pwd);
     }
 }

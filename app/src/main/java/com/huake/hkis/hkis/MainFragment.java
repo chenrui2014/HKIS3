@@ -58,7 +58,7 @@ public class MainFragment extends LifecycleFragment {
         //inject the viewmodel responding to List<Repo>
 
         //fetch the user from the datasource
-        userViewModel.getUser("chenrui2014")
+        userViewModel.getUser("chenrui2014","pwd")
                 .observe(this, new Observer<User>() {
                     @Override
                     public void onChanged(@Nullable User user) {

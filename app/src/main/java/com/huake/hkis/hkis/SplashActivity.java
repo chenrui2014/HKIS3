@@ -22,7 +22,7 @@ public class SplashActivity extends FragmentActivity {
     private ViewPager pager;
     private GalleryPagerAdapter adapter;
     private int[] images = {
-            R.drawable.splash01
+            R.mipmap.splash01
     };
 
     @Override
