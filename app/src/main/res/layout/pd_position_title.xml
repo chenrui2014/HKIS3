@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/pd_position_title_bg"
+    android:background="@mipmap/pd_position_title_bg"
     android:paddingBottom="15dp"
     android:paddingTop="15dp">
     <ImageView
         android:id="@+id/img_back"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/back"
+        app:srcCompat="@mipmap/back"
         android:layout_marginStart="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -108,7 +108,7 @@
         android:text="@string/pd_tv_ckh"
         android:textColor="#ffffff"
         android:textSize="12sp"
-        android:drawableEnd="@drawable/select_white"
+        android:drawableEnd="@mipmap/select_white"
         android:layout_marginTop="10dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/tv_splite"
@@ -133,7 +133,7 @@
         android:textSize="12sp"
         android:textColor="#ffffff"
         android:gravity="center"
-        android:drawableEnd="@drawable/select_white"
+        android:drawableEnd="@mipmap/select_white"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
         app:layout_constraintLeft_toRightOf="@+id/tv_splite1"
         app:layout_constraintRight_toLeftOf="@+id/tv_splite2"/>
@@ -157,7 +157,7 @@
         android:textColor="#ffffff"
         android:textSize="12sp"
         android:gravity="center"
-        android:drawableEnd="@drawable/select_white"
+        android:drawableEnd="@mipmap/select_white"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_con_ckh"
         app:layout_constraintLeft_toRightOf="@+id/tv_splite2"
         app:layout_constraintRight_toRightOf="parent"/>

@@ -10,7 +10,7 @@
         android:id="@+id/ap_img"
         android:layout_width="360dp"
         android:layout_height="279dp"
-        app:srcCompat="@drawable/ap_img"
+        app:srcCompat="@mipmap/ap_img"
         android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -10,7 +10,7 @@
         android:id="@+id/mp_img"
         android:layout_width="360dp"
         android:layout_height="279dp"
-        app:srcCompat="@drawable/mp_img"
+        app:srcCompat="@mipmap/mp_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

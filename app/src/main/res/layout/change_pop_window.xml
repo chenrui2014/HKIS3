@@ -14,7 +14,7 @@
         android:id="@+id/img_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/target_position"
+        app:srcCompat="@mipmap/target_position"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />

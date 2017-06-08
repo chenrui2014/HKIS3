@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/pd_material_detail"
+    android:background="@mipmap/pd_material_detail"
     android:paddingBottom="15dp"
     android:paddingTop="15dp">
 
@@ -11,7 +11,7 @@
         android:id="@+id/img_back"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        app:srcCompat="@drawable/back"
+        app:srcCompat="@mipmap/back"
         android:layout_marginStart="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -103,7 +103,7 @@
         android:layout_height="48dp"
         android:hint="@string/pd_md_scan"
         android:gravity="center"
-        android:drawableEnd="@drawable/scan"
+        android:drawableEnd="@mipmap/scan"
         android:paddingEnd="10dp"
         android:drawablePadding="10dp"
         android:background="@drawable/shape_corner_normal2"

@@ -9,7 +9,7 @@
         android:id="@+id/ms_img"
         android:layout_width="360dp"
         android:layout_height="279dp"
-        app:srcCompat="@drawable/ms_img"
+        app:srcCompat="@mipmap/ms_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/change">
+    android:background="@mipmap/change">
 
         <Button
             android:id="@+id/bt_change"
@@ -32,7 +32,7 @@
             android:background="@drawable/tx_border"
             android:textColorHint="@color/gray_hint"
             android:ems="50"
-            android:drawableEnd="@drawable/scan"
+            android:drawableEnd="@mipmap/scan"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:inputType="text"

@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/con_con2"
         android:background="#e5ffffff"
-        android:drawableStart="@drawable/card_unselect"
+        android:drawableStart="@mipmap/card_unselect"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:text="@string/smd_radio_full"

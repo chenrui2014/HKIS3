@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@mipmap/warehouse_sum_card"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_lb_inBills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#a2b0c7"
+        android:textSize="12sp"
+        android:text="@string/down_lb_ckdh"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_inDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="12sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginEnd="15dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tv_inBills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="24sp"
+        android:textColor="#282e39"
+        android:layout_marginTop="7dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_inBills" />
+
+    <TextView
+        android:id="@+id/tv_lb_wareHouse_NO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sum_tv_whNO"
+        android:textSize="14sp"
+        android:textColor="#616976"
+        android:gravity="center_vertical"
+        android:drawableStart="@mipmap/warehouse_no"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_inBills"/>
+
+    <TextView
+        android:id="@+id/tv_wareHouse_NO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="#616976"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_inBills"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wareHouse_NO"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_wareHouse_NO"/>
+
+    <TextView
+        android:id="@+id/tv_lb_billType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sum_tv_billType"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:textSize="14sp"
+        android:drawableStart="@mipmap/bill_type"
+        android:textColor="#616976"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wareHouse_NO"
+        app:layout_constraintLeft_toRightOf="@+id/tv_wareHouse_NO"/>
+
+    <TextView
+        android:id="@+id/tv_billType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="#616976"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wareHouse_NO"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_billType"/>
+
+</android.support.constraint.ConstraintLayout>
