@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public interface HKISRepository {
-    LiveData<User> getUser(String userName);
+    LiveData<User> getUser(String userName,String pwd);
 
     LiveData<List<Repo>> getRepos(String userName);
 }

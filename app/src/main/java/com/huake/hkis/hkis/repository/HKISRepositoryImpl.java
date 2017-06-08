@@ -22,10 +22,10 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<User> getUser(String userName){
+    public LiveData<User> getUser(String userName,String pwd){
         final MutableLiveData<User> liveData = new MutableLiveData<>();
 
-        hkisAPI.user(userName).enqueue(new Callback<User>() {
+        hkisAPI.user(userName,pwd).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()) {
