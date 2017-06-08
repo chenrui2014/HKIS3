@@ -89,4 +89,13 @@
     <string name="pd_md_real">实盘数量</string>
     <string name="pd_md_unit">单位</string>
     <string name="pd_md_scan">请扫描物料条码</string>
+    <!--下架页面-->
+    <string name="down_bt_down">立即下架</string>
+    <string name="down_lb_ckdh">出库单号</string>
+    <string name="down_lb_hasbeendown">已下架</string>
+    <string name="down_lb_stayoff">待下架</string>
+    <string name="down_lb_outNum">出库数量</string>
+    <string name="down_lb_position">下架仓位</string>
+    <string name="down_lb_downNum">下架数量</string>
+    <string name="down_lb_downBox">下架箱数</string>
 </resources>
