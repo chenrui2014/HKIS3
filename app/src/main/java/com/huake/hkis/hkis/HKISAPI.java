@@ -28,12 +28,13 @@ public interface HKISAPI {
 
     String URL = "http://59.110.164.202:8082/storage/";
 
-    @GET("/users/{user}/repos")
-    Call<List<Repo>> listRepos(@Path("user") String user);
-
     @FormUrlEncoded
     @POST("/mine/login")
     Call<User> user(@Field("loginName") String loginName, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/mine/login")
+    Call<User> login(@Field("loginName") String loginName, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/task/shelves")

@@ -51,7 +51,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:' + project.supportLibVersion
     compile 'com.android.support:design:' + project.supportLibVersion
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    compile 'com.chanven.lib:cptr:1.1.0'
     compile 'com.google.dagger:dagger:2.10'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'

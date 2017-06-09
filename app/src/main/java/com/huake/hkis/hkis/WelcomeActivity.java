@@ -12,15 +12,13 @@ import android.support.annotation.Nullable;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.huake.hkis.hkis.utils.Constants;
+
 /**
  * Created by ysstech on 2017/6/2.
  */
 
 public class WelcomeActivity extends LifecycleActivity {
-
-    private static final String SP_STORE_KEY = "hkis";
-    private static final String SP_VERSION_KEY = "versionCode";
-    private static final String SP_ISCHECK_KEY = "isCheck";
 
     private Handler handler = new Handler() {
         @Override
@@ -47,18 +45,18 @@ public class WelcomeActivity extends LifecycleActivity {
 
     public void getHome(){
         float currentVersionCode = getVersionCode(WelcomeActivity.this);
-        android.content.SharedPreferences sp = getSharedPreferences(SP_STORE_KEY,MODE_PRIVATE);
-        float spVersionCode = sp.getFloat(SP_VERSION_KEY,0);
+        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
+        float spVersionCode = sp.getFloat(Constants.SP_VERSION_KEY,0);
         if(currentVersionCode > spVersionCode){
             SharedPreferences.Editor editor = sp.edit();
-            editor.putFloat(SP_VERSION_KEY,currentVersionCode);
+            editor.putFloat(Constants.SP_VERSION_KEY,currentVersionCode);
             editor.commit();
             //首次启动调转到服务器设置界面
             Intent intent = new Intent(WelcomeActivity.this, SettingActivity.class);
             startActivity(intent);
             finish();
         }else{
-            Boolean isCheck = sp.getBoolean(SP_ISCHECK_KEY,false);
+            Boolean isCheck = sp.getBoolean(Constants.SP_ISCHECK_KEY,false);
             if(isCheck){
                 //已登陆用户跳转到主界面
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);

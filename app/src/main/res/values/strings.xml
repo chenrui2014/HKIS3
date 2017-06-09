@@ -28,6 +28,7 @@
     <string name="setting_et_address_hint">IP地址或域名</string>
     <string name="setting_et_port_hint">端口号</string>
     <string name="setting_bt_confirm">确定</string>
+    <string name="setting_title">服务器设置</string>
     <!--入库汇总页页面-->
     <string name="sum_tv_inBill">入库单号</string>
     <string name="sum_tv_whNO">仓库号</string>

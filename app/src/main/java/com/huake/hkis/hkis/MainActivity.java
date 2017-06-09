@@ -20,16 +20,11 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.RadioGroup;
 
-import com.huake.hkis.hkis.ui.ChangeFragment;
 import com.huake.hkis.hkis.ui.ChangeFragment2;
-import com.huake.hkis.hkis.ui.CheckFragment;
 import com.huake.hkis.hkis.ui.CheckFragment2;
-import com.huake.hkis.hkis.ui.DownFragment;
 import com.huake.hkis.hkis.ui.DownFragment2;
-import com.huake.hkis.hkis.ui.UpFragment;
 import com.huake.hkis.hkis.ui.UpFragment2;
-import com.huake.hkis.hkis.ui.UserFragment;
-import com.huake.hkis.hkis.utils.SharedPreferences;
+import com.huake.hkis.hkis.ui.UserFragment2;
 import com.huake.hkis.hkis.utils.UIHelper;
 import com.pda.scan.IHWScan;
 
@@ -181,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
     }
 
     private void initData(Bundle savedInstanceState) {
-        fragmentTags = new ArrayList<>(Arrays.asList("UpFragment2", "DownFragment2", "ChangeFragment2", "CheckFragment2", "UserFragment"));
+        fragmentTags = new ArrayList<>(Arrays.asList("UpFragment2", "DownFragment2", "ChangeFragment2", "CheckFragment2", "UserFragment2"));
         currIndex = 0;
         if(savedInstanceState != null) {
             currIndex = savedInstanceState.getInt(CURR_INDEX);
@@ -246,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
             case 1: return new DownFragment2();
             case 2: return new ChangeFragment2();
             case 3: return new CheckFragment2();
-            case 4: return new UserFragment();
+            case 4: return new UserFragment2();
             default: return null;
         }
     }

@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_update"
-        android:drawableTop="@mipmap/user_exit"
+        android:drawableTop="@mipmap/user_update"
         android:drawablePadding="10dp"
         android:gravity="center_horizontal"
         android:layout_marginBottom="70dp"

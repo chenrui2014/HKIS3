@@ -1,5 +1,6 @@
 package com.huake.hkis.hkis.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -10,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.R;
+import com.huake.hkis.hkis.WareHousingSummaryActivity;
 
 /**
  * Created by chen on 2017/6/3.
@@ -31,6 +34,9 @@ public class UpFragment2 extends Fragment {
     private Button bt3;
     private Button bt4;
     private Button bt5;
+
+    private Button upBtn;
+    private EditText taskNOEt;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -187,6 +193,17 @@ public class UpFragment2 extends Fragment {
             @Override
             public void onClick(View v) {
                 mPopupWindow.showAsDropDown(v);
+            }
+        });
+        taskNOEt = (EditText) fv.findViewById(R.id.up_et);
+        upBtn = (Button)fv.findViewById(R.id.up_btn);
+        upBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taskNO = taskNOEt.getText().toString().trim();
+                Intent intent = new Intent(getActivity(), WareHousingSummaryActivity.class);
+                intent.putExtra("taskNO", taskNO);
+                startActivity(intent);
             }
         });
         return fv;

@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.huake.hkis.hkis.HKISAPI;
 import com.huake.hkis.hkis.model.Repo;
+import com.huake.hkis.hkis.model.Task;
 import com.huake.hkis.hkis.model.User;
 
 import java.util.List;
@@ -43,23 +44,42 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<List<Repo>> getRepos(String userName){
-        final MutableLiveData<List<Repo>> liveData = new MutableLiveData<>();
-
-        hkisAPI.listRepos(userName).enqueue(new Callback<List<Repo>>() {
+    public User login(String userName, String pwd) {
+        final MutableLiveData<User> liveData = new MutableLiveData<>();
+        hkisAPI.login(userName,pwd).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
                     liveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Repo>> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
 
             }
         });
 
-        return liveData;
+        return liveData.getValue();
+    }
+
+    @Override
+    public List<Task> getTask(String userId, String taskType, String taskNO) {
+        final MutableLiveData<List<Task>> liveData = new MutableLiveData<>();
+        hkisAPI.task(userId,taskType,taskNO).enqueue(new Callback<List<Task>>() {
+            @Override
+            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
+                if(response.isSuccessful()){
+                    liveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Task>> call, Throwable t) {
+
+            }
+        });
+
+        return liveData.getValue();
     }
 }

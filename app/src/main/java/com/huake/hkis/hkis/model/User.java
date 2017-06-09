@@ -5,64 +5,67 @@ import java.util.List;
 
 public class User {
 
-    String login;
-    String avatar_url;
-    String url;
-    String name;
-    String email;
-    int followers;
-    int following;
+    private String userId;
+    private String loginName;
+    private String insertTime;
+    private String insertUser;
+    private String modifyTime;
+    private String modifyUser;
 
-    private List<Repo> repos;
-
-    public User(String name, String email, String avatar_url) {
-        this.avatar_url = avatar_url;
-        this.name = name;
-        this.email = email;
+    public User(String userId, String loginName, String insertTime, String insertUser, String modifyTime, String modifyUser) {
+        this.userId = userId;
+        this.loginName = loginName;
+        this.insertTime = insertTime;
+        this.insertUser = insertUser;
+        this.modifyTime = modifyTime;
+        this.modifyUser = modifyUser;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getAvatar_url() {
-        return avatar_url;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public String getName() {
-        return name;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
-    public int getFollowers() {
-        return followers;
+    public String getInsertTime() {
+        return insertTime;
     }
 
-    public int getFollowing() {
-        return following;
+    public void setInsertTime(String insertTime) {
+        this.insertTime = insertTime;
     }
 
-    public String getEmail() {
-        return email;
+    public String getInsertUser() {
+        return insertUser;
     }
 
-    public void setRepos(List<Repo> repos) {
-        this.repos = repos;
+    public void setInsertUser(String insertUser) {
+        this.insertUser = insertUser;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", avatar_url='" + avatar_url + '\'' +
-                ", url='" + url + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", followers=" + followers +
-                ", following=" + following +
-                '}';
+    public String getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public String getModifyUser() {
+        return modifyUser;
+    }
+
+    public void setModifyUser(String modifyUser) {
+        this.modifyUser = modifyUser;
     }
 }

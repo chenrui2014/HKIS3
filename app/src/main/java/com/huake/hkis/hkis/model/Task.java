@@ -8,11 +8,15 @@ public class Task {
     private String taskNum;
     private String wareHouseNum;
     private String userId;
+    private String taskType;
+    private String inDate;
 
-    public Task(String taskNum, String wareHouseNum, String userId) {
+    public Task(String taskNum, String wareHouseNum, String userId,String taskType,String inDate) {
         this.taskNum = taskNum;
         this.wareHouseNum = wareHouseNum;
         this.userId = userId;
+        this.taskType = taskType;
+        this.inDate = inDate;
     }
 
     public String getTaskNum() {
@@ -37,5 +41,21 @@ public class Task {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
+    }
+
+    public String getInDate() {
+        return inDate;
+    }
+
+    public void setInDate(String inDate) {
+        this.inDate = inDate;
     }
 }
