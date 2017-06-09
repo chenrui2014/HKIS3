@@ -24,7 +24,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public HKISAPI providesGithubApi(){
+    public HKISAPI providesHKISApi(){
         return new Retrofit.Builder()
                 .baseUrl(HKISAPI.URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +34,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public HKISRepository providesGithubRepository(HKISAPI hkisAPI){
+    public HKISRepository providesHKISRepository(HKISAPI hkisAPI){
         return new HKISRepositoryImpl(hkisAPI);
     }
 }

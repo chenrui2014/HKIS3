@@ -3,6 +3,7 @@ package com.huake.hkis.hkis.repository;
 import android.arch.lifecycle.LiveData;
 
 import com.huake.hkis.hkis.model.Repo;
+import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.model.Task;
 import com.huake.hkis.hkis.model.User;
 
@@ -17,4 +18,5 @@ public interface HKISRepository {
     User login(String userName,String pwd);
 
     List<Task> getTask(String userId,String taskType,String taskNO);
+    List<ShelvesDetail> getShelvesDetail(String loginName,String taskType,String taskNO);
 }
