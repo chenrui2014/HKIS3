@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/title_layout3"></include>
+    <com.chanven.lib.cptr.PtrClassicFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recycler_view_frame"
+        android:layout_width="344dp"
+        android:layout_height="0dp"
+        android:background="#f0f0f0"
+        cube_ptr:ptr_duration_to_close="200"
+        cube_ptr:ptr_duration_to_close_header="700"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.8"
+        cube_ptr:layout_constraintLeft_toLeftOf="parent"
+        cube_ptr:layout_constraintRight_toRightOf="parent"
+        cube_ptr:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="74dp">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_container">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_inBillSum"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:scrollbars="vertical">
-
-
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+    </com.chanven.lib.cptr.PtrClassicFrameLayout>
     <TextView
         android:id="@+id/con_con2"
         android:background="#a217232f"
@@ -32,7 +40,6 @@
         android:gravity="center_vertical|left"
         android:drawablePadding="15dp"
         android:paddingStart="15dp"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/con_con3"

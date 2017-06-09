@@ -1,10 +1,12 @@
 package com.huake.hkis.hkis.model;
 
+import java.io.Serializable;
+
 /**
  * Created by ysstech on 2017/6/7.
  */
 
-public class ShelvesDetail {
+public class ShelvesDetail implements Serializable {
     public String taskNum;
     public String wareHouseNum;
     public String materialNum;

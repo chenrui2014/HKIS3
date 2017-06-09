@@ -2,7 +2,20 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/title_layout1"></include>
+    <in.arjsna.swipecardlib.SwipeCardView
+        android:id="@+id/frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:rotation_degrees="15.5"
+        app:bottom_swipe_detect="false"
+        tools:context=".CardSwipeActivity"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bt_confirm"

@@ -8,14 +8,14 @@ public class Task {
     private String taskNum;
     private String wareHouseNum;
     private String userId;
-    private String taskType;
+    private String sheetType;//单据类型
     private String inDate;
 
-    public Task(String taskNum, String wareHouseNum, String userId,String taskType,String inDate) {
+    public Task(String taskNum, String wareHouseNum, String userId,String sheetType,String inDate) {
         this.taskNum = taskNum;
         this.wareHouseNum = wareHouseNum;
         this.userId = userId;
-        this.taskType = taskType;
+        this.sheetType = sheetType;
         this.inDate = inDate;
     }
 
@@ -43,12 +43,12 @@ public class Task {
         this.userId = userId;
     }
 
-    public String getTaskType() {
-        return taskType;
+    public String getSheetType() {
+        return sheetType;
     }
 
-    public void setTaskType(String taskType) {
-        this.taskType = taskType;
+    public void setSheetType(String sheetType) {
+        this.sheetType = sheetType;
     }
 
     public String getInDate() {

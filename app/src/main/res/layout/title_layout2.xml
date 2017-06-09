@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/setting_title"
-        android:textColor="#282e39"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toTopOf="parent"
