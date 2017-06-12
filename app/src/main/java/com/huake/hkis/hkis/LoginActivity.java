@@ -1,5 +1,7 @@
 package com.huake.hkis.hkis;
 
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,13 +16,16 @@ import android.widget.Toast;
 import com.huake.hkis.hkis.dagger.AppModule;
 import com.huake.hkis.hkis.model.User;
 import com.huake.hkis.hkis.repository.HKISRepository;
-import com.huake.hkis.hkis.repository.HKISRepositoryImpl;
 import com.huake.hkis.hkis.utils.Constants;
+
+import okhttp3.ResponseBody;
 
 /**
  *
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LifecycleRegistryOwner {
+
+    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
     private EditText userNameEt;
     private EditText pwdEt;
@@ -50,24 +55,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else{
                     LiveData<User> user = hkisRep.getUser(userName,pwd);
-                    if(user != null && user.getValue() != null){
-                        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
-                        SharedPreferences.Editor spet = sp.edit();
-                        spet.putString(Constants.SP_USERNAME_KEY,user.getValue().getLoginName());
-                        spet.putString(Constants.SP_PWD_KEY,pwd);
-                        spet.putBoolean(Constants.SP_ISCHECK_KEY,true);
-                        spet.putString(Constants.SP_USER_ID_KEY,user.getValue().getUserId());
-                        spet.commit();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        Toast.makeText(getApplicationContext(),"服务器异常！",Toast.LENGTH_LONG).show();
-                    }
-
+                    user.observe(LoginActivity.this,myUser -> {
+                        if(myUser != null){
+                            SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
+                            SharedPreferences.Editor spet = sp.edit();
+                            spet.putString(Constants.SP_USERNAME_KEY,myUser.getLoginName());
+                            spet.putString(Constants.SP_PWD_KEY,pwd);
+                            spet.putBoolean(Constants.SP_ISCHECK_KEY,true);
+                            spet.putString(Constants.SP_USER_ID_KEY,myUser.getUserId());
+                            spet.commit();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"服务器异常！",Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-
-
             }
         });
         settingTv.setOnClickListener(new View.OnClickListener() {
@@ -79,4 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return lifecycleRegistry;
+    }
 }

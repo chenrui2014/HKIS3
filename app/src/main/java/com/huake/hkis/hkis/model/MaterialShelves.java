@@ -5,7 +5,8 @@ package com.huake.hkis.hkis.model;
  */
 
 public class MaterialShelves {
-    public String loginName;
+
+    public String userId;
     public String taskType;
     public String materialNO;
     public String materialDesc;
@@ -16,8 +17,8 @@ public class MaterialShelves {
     public String storageSpace;
     public String recommendAmount;
 
-    public MaterialShelves(String loginName, String taskType, String materialNO, String materialDesc, String barcode, String amount, String calculateUnit, String sysRecommendWarehouse, String storageSpace, String recommendAmount) {
-        this.loginName = loginName;
+    public MaterialShelves(String userId, String taskType, String materialNO, String materialDesc, String barcode, String amount, String calculateUnit, String sysRecommendWarehouse, String storageSpace, String recommendAmount) {
+        this.userId = userId;
         this.taskType = taskType;
         this.materialNO = materialNO;
         this.materialDesc = materialDesc;
@@ -29,12 +30,12 @@ public class MaterialShelves {
         this.recommendAmount = recommendAmount;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTaskType() {

@@ -7,14 +7,18 @@ public class User {
 
     private String userId;
     private String loginName;
+    private String realName;
     private String insertTime;
     private String insertUser;
     private String modifyTime;
     private String modifyUser;
 
-    public User(String userId, String loginName, String insertTime, String insertUser, String modifyTime, String modifyUser) {
+    public User(){}
+
+    public User(String userId, String loginName, String realName,String insertTime, String insertUser, String modifyTime, String modifyUser) {
         this.userId = userId;
         this.loginName = loginName;
+        this.realName = realName;
         this.insertTime = insertTime;
         this.insertUser = insertUser;
         this.modifyTime = modifyTime;
@@ -67,5 +71,13 @@ public class User {
 
     public void setModifyUser(String modifyUser) {
         this.modifyUser = modifyUser;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

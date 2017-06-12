@@ -26,17 +26,15 @@ public class SimpleCardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_check_mp, null);
         switch(this.index){
             case 0:
-                v = inflater.inflate(R.layout.fragment_check_mp, null);
+                return inflater.inflate(R.layout.fragment_check_mp, null);
             case 1:
-                v = inflater.inflate(R.layout.fragment_check_ap, null);
+                return inflater.inflate(R.layout.fragment_check_ap, null);
             case 2:
-                v = inflater.inflate(R.layout.fragment_check_ms, null);
-            default:
+                return inflater.inflate(R.layout.fragment_check_ms, null);
+            default:return inflater.inflate(R.layout.fragment_check_mp, null);
         }
 
-        return v;
     }
 }

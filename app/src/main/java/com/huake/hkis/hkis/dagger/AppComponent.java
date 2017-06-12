@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.huake.hkis.hkis.MainApplication;
-import com.huake.hkis.hkis.MainFragment;
 
 import javax.inject.Singleton;
 
@@ -21,6 +20,4 @@ public abstract class AppComponent {
     public static AppComponent from(@NonNull Context context){
         return ((MainApplication) context.getApplicationContext()).getAppComponent();
     }
-
-    public abstract void inject(MainFragment mainFragment);
 }

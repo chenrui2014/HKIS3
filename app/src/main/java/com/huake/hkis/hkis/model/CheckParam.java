@@ -5,24 +5,24 @@ package com.huake.hkis.hkis.model;
  */
 
 public class CheckParam {
-    private String userId;
+    private String checkUser;
     private String checkType;
     private String warehouseNum;
     private String checkNum;
 
-    public CheckParam(String userId, String checkType, String warehouseNum, String checkNum) {
-        this.userId = userId;
+    public CheckParam(String checkUser, String checkType, String warehouseNum, String checkNum) {
+        this.checkUser = checkUser;
         this.checkType = checkType;
         this.warehouseNum = warehouseNum;
         this.checkNum = checkNum;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCheckUser() {
+        return checkUser;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCheckUser(String checkUser) {
+        this.checkUser = checkUser;
     }
 
     public String getCheckType() {

@@ -30,9 +30,14 @@ import com.pda.scan.IHWScan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements OnScanListener{
+import static android.R.attr.value;
+
+public class MainActivity extends AppCompatActivity implements OnFragmentListener,OnScanListener{
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String CURR_INDEX = "currIndex";
     private static int currIndex = 0;
@@ -162,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, MainFragment.newInstance())
+                .replace(R.id.fragment_container, new UpFragment2())
                 .commit();
         initData(savedInstanceState);
         initView();
@@ -211,9 +216,6 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
     }
 
     private void showFragment() {
-        if (currIndex == 4) {
-            UIHelper.showLogin(MainActivity.this);
-        }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = fragmentManager.findFragmentByTag(fragmentTags.get(currIndex));
@@ -315,5 +317,20 @@ public class MainActivity extends AppCompatActivity implements OnScanListener{
     @Override
     public void onScanListener() {
         scan();
+    }
+
+    @Override
+    public void onFragmentAction(Map<String,String> params, Class intentClass) {
+
+        Intent intent = new Intent(MainActivity.this, intentClass);
+        if(params != null){
+            Iterator<Map.Entry<String,String>> it = params.entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<String,String> entry = it.next();
+                intent.putExtra(entry.getKey(), entry.getValue());
+            }
+        }
+
+        startActivity(intent);
     }
 }

@@ -1,5 +1,8 @@
 package com.huake.hkis.hkis;
 
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +36,9 @@ import java.util.List;
  * Created by ysstech on 2017/6/9.
  */
 
-public class WareHousingSummaryActivity extends AppCompatActivity implements MyItemClickListener {
+public class WareHousingSummaryActivity extends AppCompatActivity implements LifecycleRegistryOwner,MyItemClickListener {
+
+    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
     PtrClassicFrameLayout ptrClassicFrameLayout;
     RecyclerView mRecyclerView;
@@ -45,7 +50,11 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements MyI
     private HKISRepository hkisRep;
     int page = 0;
 
-    private String taskNO;
+    private static final int PAGE_SIZE = 5;
+
+    private String taskNO = "2017052511";
+
+    private String documentsType= "入库单";
 
     private ImageView backImg;
     @Override
@@ -76,7 +85,13 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements MyI
 
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
-        hkisRep.getTask(userId,"1",taskNO);
+        documentsType = intent.getStringExtra("documentsType");
+
+        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+        tasks.observe(this,myTasks ->{
+
+            mData = myTasks;
+        });
 
     }
 
@@ -102,10 +117,17 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements MyI
                     @Override
                     public void run() {
                         page = 0;
-                        mData.clear();
+                       if(mData != null &&mData.size() > 0){
+                           mData.clear();
+                       }
+
                         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
                         String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
-                        hkisRep.getTask(userId,"1",taskNO);
+                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        tasks.observe(WareHousingSummaryActivity.this,myTasks ->{
+
+                            mData = myTasks;
+                        });
                         mAdapter.notifyDataSetChanged();
                         ptrClassicFrameLayout.refreshComplete();
                         ptrClassicFrameLayout.setLoadMoreEnable(true);
@@ -117,29 +139,31 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements MyI
         /**
          * 加载跟多功能
          */
-//        ptrClassicFrameLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//
-//            @Override
-//            public void loadMore() {
-//                handler.postDelayed(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
-//                        String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
-//                        List<Task> tasks = hkisRep.getTask(userId,"1",taskNO);
-//                        if(mData.size() < tasks.size()){
-//                            mData.add(tasks.get(mData.size()));
-//                        }
-//
-//                        mAdapter.notifyDataSetChanged();
-//                        ptrClassicFrameLayout.loadMoreComplete(true);
-//                        page++;
-//                        Toast.makeText(WareHousingSummaryActivity.this, "load more complete", Toast.LENGTH_SHORT).show();
-//                    }
-//                }, 1000);
-//            }
-//        });
+        ptrClassicFrameLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void loadMore() {
+                handler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
+                        String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
+
+                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        tasks.observe(WareHousingSummaryActivity.this,myTasks ->{
+
+                            mData.addAll(myTasks);
+                        });
+
+                        mAdapter.notifyDataSetChanged();
+                        ptrClassicFrameLayout.loadMoreComplete(true);
+                        page++;
+                        Toast.makeText(WareHousingSummaryActivity.this, "load more complete", Toast.LENGTH_SHORT).show();
+                    }
+                }, 1000);
+            }
+        });
     }
 
     @Override
@@ -149,6 +173,11 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements MyI
         intent.putExtra("taskNO", task.getTaskNum());
         startActivity(intent);
 
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return this.lifecycleRegistry;
     }
 
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

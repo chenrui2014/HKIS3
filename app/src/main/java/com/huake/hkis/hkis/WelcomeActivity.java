@@ -20,13 +20,7 @@ import com.huake.hkis.hkis.utils.Constants;
 
 public class WelcomeActivity extends LifecycleActivity {
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            getHome();
-            super.handleMessage(msg);
-        }
-    };
+    private final int SPLASH_DISPLAY_LENGHT = 3000; //延迟三秒
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,37 +34,39 @@ public class WelcomeActivity extends LifecycleActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_welcome);
-        handler.sendEmptyMessageDelayed(0,3000);
-    }
+        new Handler().postDelayed(new Runnable(){
 
-    public void getHome(){
-        float currentVersionCode = getVersionCode(WelcomeActivity.this);
-        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
-        float spVersionCode = sp.getFloat(Constants.SP_VERSION_KEY,0);
-        if(currentVersionCode > spVersionCode){
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putFloat(Constants.SP_VERSION_KEY,currentVersionCode);
-            editor.commit();
-            //首次启动调转到服务器设置界面
-            Intent intent = new Intent(WelcomeActivity.this, SettingActivity.class);
-            startActivity(intent);
-            finish();
-        }else{
-            Boolean isCheck = sp.getBoolean(Constants.SP_ISCHECK_KEY,false);
-            if(isCheck){
-                //已登陆用户跳转到主界面
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }else{
-                //未登陆用户跳转到登陆页面
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+            @Override
+            public void run() {
+                float currentVersionCode = getVersionCode(WelcomeActivity.this);
+                SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
+                float spVersionCode = sp.getFloat(Constants.SP_VERSION_KEY,0);
+                if(currentVersionCode > spVersionCode){
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putFloat(Constants.SP_VERSION_KEY,currentVersionCode);
+                    editor.commit();
+                    //首次启动调转到服务器设置界面
+                    Intent intent = new Intent(WelcomeActivity.this, SettingActivity.class);
+                    startActivity(intent);
+                    //finish();
+                }else{
+                    Boolean isCheck = sp.getBoolean(Constants.SP_ISCHECK_KEY,false);
+                    if(isCheck){
+                        //已登陆用户跳转到主界面
+                        Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        //finish();
+                    }else{
+                        //未登陆用户跳转到登陆页面
+                        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        // finish();
+                    }
+
+                }
             }
 
-        }
-
+        }, SPLASH_DISPLAY_LENGHT);
     }
 
     private float getVersionCode(Context context){

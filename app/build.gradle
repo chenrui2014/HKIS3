@@ -10,6 +10,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -27,7 +36,10 @@ android {
     dataBinding {
         enabled = true;
     }
-
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     lintOptions {
         lintConfig rootProject.file('lint.xml')
     }
@@ -39,6 +51,7 @@ ext {
     buildToolsVersion = "25.0.2"
     supportLibVersion = "25.3.1"
     archLifecycleVersion = "1.0.0-alpha1"
+    timber_version = "4.5.1"
 }
 
 dependencies {
@@ -54,6 +67,8 @@ dependencies {
     compile 'com.chanven.lib:cptr:1.1.0'
     compile 'in.arjsna:swipecardlib:1.0.2'
     compile 'com.google.dagger:dagger:2.10'
+    compile 'com.jakewharton.timber:timber:' + project.timber_version
+    compile 'android.arch.persistence.room:runtime:' + project.archLifecycleVersion
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
