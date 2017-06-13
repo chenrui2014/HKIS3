@@ -73,7 +73,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(ShelvesMaterialDetailActivity.this, WareHousingSummaryActivity.class);
+                intent.setClass(ShelvesMaterialDetailActivity.this, InStoreSummaryActivity.class);
                 startActivity(intent);
                 ShelvesMaterialDetailActivity.this.finish();
             }
@@ -257,10 +257,10 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             ShelvesMaterialDetailActivity.ChildViewHolder holder = (ShelvesMaterialDetailActivity.ChildViewHolder) viewHolder;
-            holder.wlhTv.setText(datas.get(position).getMaterialNum());
-            holder.wlmTv.setText(datas.get(position).getMaterialDesc());
+            holder.wlhTv.setText(datas.get(position).getMaterialNO());
+            holder.wlmTv.setText(datas.get(position).getMaterialCode());
             holder.toStayTV.setText(datas.get(position).getAmount());
-            holder.sysRecommendWarehouseTv.setText(datas.get(position).getSysRecommendWarehouse());
+            holder.sysRecommendWarehouseTv.setText(datas.get(position).getWareHouseNum());
             if(isSelected(position)){
                 holder.selectImg.setImageResource(R.mipmap.card_select);
             }else{

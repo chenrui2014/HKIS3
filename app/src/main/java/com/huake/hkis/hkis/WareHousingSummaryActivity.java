@@ -86,11 +86,13 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
+        documentsType = null;
 
         LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
         tasks.observe(this,myTasks ->{
 
             mData = myTasks;
+            init();
         });
 
     }
@@ -101,13 +103,13 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
         mAdapter = new RecyclerAdapterWithHF(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        ptrClassicFrameLayout.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                ptrClassicFrameLayout.autoRefresh(true);
-            }
-        }, 150);
+//        ptrClassicFrameLayout.postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                ptrClassicFrameLayout.autoRefresh(true);
+//            }
+//        }, 150);
 
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
 
@@ -170,7 +172,7 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
     public void onItemClick(View view, int postion) {
         Task task = mData.get(postion);
         Intent intent = new Intent(WareHousingSummaryActivity.this,ShelvesMaterialDetailActivity.class);
-        intent.putExtra("taskNO", task.getTaskNum());
+        intent.putExtra("taskNO", task.getTaskNO());
         startActivity(intent);
 
     }
@@ -180,7 +182,7 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
         return this.lifecycleRegistry;
     }
 
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
         private List<Task> datas;
         private LayoutInflater inflater;
 
@@ -204,18 +206,26 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             ChildViewHolder holder = (ChildViewHolder) viewHolder;
-            holder.inDateTv.setText(datas.get(position).getInDate());
-            holder.taskNOTV.setText(datas.get(position).getTaskNum());
-            holder.wareHouseNumTV.setText(datas.get(position).getWareHouseNum());
-            holder.taskTypeTv.setText(datas.get(position).getSheetType());
+            holder.inDateTv.setText(datas.get(position).getInStorageTime());
+            holder.taskNOTV.setText(datas.get(position).getTaskNO());
+            holder.wareHouseNumTV.setText(datas.get(position).getResourceStorageSpace());
+            holder.taskTypeTv.setText(datas.get(position).getDocumentsType());
+            holder.itemView.setTag(position);
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewHolder, int position) {
             View view = inflater.inflate(R.layout.fragment_up_putin_item, null);
+            view.setOnClickListener(this);
             return new ChildViewHolder(view,myItemClickListener);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (myItemClickListener != null) {
+                myItemClickListener.onItemClick(v,(int)v.getTag());
+            }
+        }
     }
 
     public class ChildViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

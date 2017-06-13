@@ -8,13 +8,13 @@ public class CheckParam {
     private String checkUser;
     private String checkType;
     private String warehouseNum;
-    private String checkNum;
+    private String checkNO;
 
-    public CheckParam(String checkUser, String checkType, String warehouseNum, String checkNum) {
+    public CheckParam(String checkUser, String checkType, String warehouseNum, String checkNO) {
         this.checkUser = checkUser;
         this.checkType = checkType;
         this.warehouseNum = warehouseNum;
-        this.checkNum = checkNum;
+        this.checkNO = checkNO;
     }
 
     public String getCheckUser() {
@@ -41,11 +41,11 @@ public class CheckParam {
         this.warehouseNum = warehouseNum;
     }
 
-    public String getCheckNum() {
-        return checkNum;
+    public String getCheckNO() {
+        return checkNO;
     }
 
-    public void setCheckNum(String checkNum) {
-        this.checkNum = checkNum;
+    public void setCheckNO(String checkNO) {
+        this.checkNO = checkNO;
     }
 }

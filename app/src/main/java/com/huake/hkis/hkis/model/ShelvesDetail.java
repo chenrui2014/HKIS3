@@ -7,28 +7,38 @@ import java.io.Serializable;
  */
 
 public class ShelvesDetail implements Serializable {
-    public String taskNum;
+    public String taskNO;
     public String wareHouseNum;
-    public String materialNum;
-    public String materialDesc;
-    public int amount;
-    public String sysRecommendWarehouse;
+    public String materialNO;
+    public String materialCode;
+    public String foxAmount;
+    public String supplierNum;
+    public String storageSpaceCode;
+    public String amount;
+    public String recommendAmount;
+    public String handleStatus;
+    public String recommendStorageSpace;
 
-    public ShelvesDetail(String taskNum, String wareHouseNum, String materialNum, String materialDesc, int amount, String sysRecommendWarehouse) {
-        this.taskNum = taskNum;
+    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace) {
+        this.taskNO = taskNO;
         this.wareHouseNum = wareHouseNum;
-        this.materialNum = materialNum;
-        this.materialDesc = materialDesc;
+        this.materialNO = materialNO;
+        this.materialCode = materialCode;
+        this.foxAmount = foxAmount;
+        this.supplierNum = supplierNum;
+        this.storageSpaceCode = storageSpaceCode;
         this.amount = amount;
-        this.sysRecommendWarehouse = sysRecommendWarehouse;
+        this.recommendAmount = recommendAmount;
+        this.handleStatus = handleStatus;
+        this.recommendStorageSpace = recommendStorageSpace;
     }
 
-    public String getTaskNum() {
-        return taskNum;
+    public String getTaskNO() {
+        return taskNO;
     }
 
-    public void setTaskNum(String taskNum) {
-        this.taskNum = taskNum;
+    public void setTaskNO(String taskNO) {
+        this.taskNO = taskNO;
     }
 
     public String getWareHouseNum() {
@@ -39,35 +49,75 @@ public class ShelvesDetail implements Serializable {
         this.wareHouseNum = wareHouseNum;
     }
 
-    public String getMaterialNum() {
-        return materialNum;
+    public String getMaterialNO() {
+        return materialNO;
     }
 
-    public void setMaterialNum(String materialNum) {
-        this.materialNum = materialNum;
+    public void setMaterialNO(String materialNO) {
+        this.materialNO = materialNO;
     }
 
-    public String getMaterialDesc() {
-        return materialDesc;
+    public String getFoxAmount() {
+        return foxAmount;
     }
 
-    public void setMaterialDesc(String materialDesc) {
-        this.materialDesc = materialDesc;
+    public void setFoxAmount(String foxAmount) {
+        this.foxAmount = foxAmount;
     }
 
-    public int getAmount() {
+    public String getSupplierNum() {
+        return supplierNum;
+    }
+
+    public void setSupplierNum(String supplierNum) {
+        this.supplierNum = supplierNum;
+    }
+
+    public String getStorageSpaceCode() {
+        return storageSpaceCode;
+    }
+
+    public void setStorageSpaceCode(String storageSpaceCode) {
+        this.storageSpaceCode = storageSpaceCode;
+    }
+
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public String getSysRecommendWarehouse() {
-        return sysRecommendWarehouse;
+    public String getRecommendAmount() {
+        return recommendAmount;
     }
 
-    public void setSysRecommendWarehouse(String sysRecommendWarehouse) {
-        this.sysRecommendWarehouse = sysRecommendWarehouse;
+    public void setRecommendAmount(String recommendAmount) {
+        this.recommendAmount = recommendAmount;
+    }
+
+    public String getHandleStatus() {
+        return handleStatus;
+    }
+
+    public void setHandleStatus(String handleStatus) {
+        this.handleStatus = handleStatus;
+    }
+
+    public String getRecommendStorageSpace() {
+        return recommendStorageSpace;
+    }
+
+    public void setRecommendStorageSpace(String recommendStorageSpace) {
+        this.recommendStorageSpace = recommendStorageSpace;
+    }
+
+    public String getMaterialCode() {
+        return materialCode;
+    }
+
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
     }
 }

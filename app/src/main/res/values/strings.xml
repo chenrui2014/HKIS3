@@ -33,8 +33,8 @@
     <string name="setting_title">服务器设置</string>
     <!--入库汇总页页面-->
     <string name="sum_tv_inBill">入库单号</string>
-    <string name="sum_tv_whNO">仓库号</string>
-    <string name="sum_tv_billType">单据类型</string>
+    <string name="sum_tv_whNO">仓库号:</string>
+    <string name="sum_tv_billType">单据类型:</string>
     <string name="sum_tv_po">采购订单</string>
     <string name="sum_tv_wh">仓库号</string>
     <string name="sum_tv_docNO">单据号</string>

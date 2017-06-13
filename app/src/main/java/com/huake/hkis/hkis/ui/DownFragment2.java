@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.huake.hkis.hkis.InStoreSummaryActivity;
 import com.huake.hkis.hkis.OnFragmentListener;
 import com.huake.hkis.hkis.R;
 import com.huake.hkis.hkis.WareHousingSummaryActivity;
@@ -188,7 +189,7 @@ public class DownFragment2 extends Fragment {
                 }
                 params.put("taskNO",taskNO);
                 params.put("documentsType",documentsType);
-                fListener.onFragmentAction(params,WareHousingSummaryActivity.class);
+                fListener.onFragmentAction(params,InStoreSummaryActivity.class);
 
             }
         });

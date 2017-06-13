@@ -10,6 +10,13 @@
     android:layout_marginBottom="5dp"
     android:padding="15dp">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"/>
+
     <TextView
         android:id="@+id/tv_lb_inBills"
         android:layout_width="wrap_content"
@@ -17,7 +24,7 @@
         android:textColor="#a2b0c7"
         android:textSize="12sp"
         android:text="@string/sum_tv_inBill"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/gl"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -39,7 +46,7 @@
         android:textSize="24sp"
         android:textColor="#282e39"
         android:layout_marginTop="7dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/tv_lb_inBills" />
 
     <TextView
@@ -53,7 +60,7 @@
         android:drawableStart="@mipmap/warehouse_no"
         android:drawablePadding="5dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/tv_inBills"/>
 
     <TextView
@@ -65,7 +72,7 @@
         android:textColor="#616976"
         android:layout_marginTop="12dp"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_inBills"
+        android:layout_marginStart="5dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wareHouse_NO"
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_wareHouse_NO"/>
 
@@ -90,6 +97,7 @@
         android:text=""
         android:textSize="14sp"
         android:textColor="#616976"
+        android:layout_marginStart="5dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_wareHouse_NO"
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_billType"/>
 
