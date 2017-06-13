@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/pd_sum_title"></include>
+    <include layout="@layout/pd_sum_title"
+        android:id="@+id/pd_title"></include>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_container">
+        app:layout_constraintTop_toBottomOf="@+id/pd_title">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_inBillSum"
             android:layout_width="match_parent"

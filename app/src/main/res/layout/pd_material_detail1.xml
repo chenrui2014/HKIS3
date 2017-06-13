@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include android:id="@+id/pd_md_title" layout="@layout/pd_material_detail_title"></include>
+    <include android:id="@+id/pd_md_title" layout="@layout/pd_material_detail_title2"></include>
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

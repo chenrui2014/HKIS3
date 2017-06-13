@@ -8,6 +8,7 @@ import com.huake.hkis.hkis.model.AboutUs;
 import com.huake.hkis.hkis.model.Check;
 import com.huake.hkis.hkis.model.CheckDetail;
 import com.huake.hkis.hkis.model.CheckParam;
+import com.huake.hkis.hkis.model.HKISMessage;
 import com.huake.hkis.hkis.model.MaterialDetails;
 import com.huake.hkis.hkis.model.MaterialShelves;
 import com.huake.hkis.hkis.model.MyResponsBody;
@@ -22,6 +23,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HKISRepositoryImpl implements HKISRepository {
+
+    private static final String SUCCESS_CODE = "0000";
+    private static final String FAILURE_CODE = "0001";
 
     private final HKISAPI hkisAPI;
 
@@ -98,22 +102,25 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<String> getMaterialShelves(MaterialShelves materialShelves) {
-        final MutableLiveData<String> liveData = new MutableLiveData<>();
+    public LiveData<Boolean> getMaterialShelves(MaterialShelves materialShelves) {
+        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
         hkisAPI.materialShelves(materialShelves).enqueue(new Callback<MyResponsBody<String>>() {
             @Override
             public void onResponse(Call<MyResponsBody<String>> call, Response<MyResponsBody<String>> response) {
                 if(response.isSuccessful()){
 
                     MyResponsBody<String> rb = response.body();
-                    String tempshelvesDetail = "物料上架成功";
-                    liveData.setValue(tempshelvesDetail);
+                    if(SUCCESS_CODE.equals(rb.getMsg())){
+                        liveData.setValue(true);
+                    }
+                    liveData.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<MyResponsBody<String>> call, Throwable t) {
 
+                liveData.setValue(false);
             }
         });
 
@@ -259,22 +266,26 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<String> exit(String userId) {
-        final MutableLiveData<String> liveData = new MutableLiveData<>();
+    public LiveData<Boolean> exit(String userId) {
+        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
         hkisAPI.exit(userId).enqueue(new Callback<MyResponsBody<String>>() {
             @Override
             public void onResponse(Call<MyResponsBody<String>> call, Response<MyResponsBody<String>> response) {
                 if(response.isSuccessful()){
 
                     MyResponsBody<String> rb = response.body();
-                    String tempshelvesDetail = "成功退出！";
-                    liveData.setValue(tempshelvesDetail);
+                    HKISMessage msg = rb.getMsg();
+                    if(SUCCESS_CODE.equals(msg.getCode())){
+                        liveData.setValue(true);
+                    }
                 }
+                liveData.setValue(false);
             }
 
             @Override
             public void onFailure(Call<MyResponsBody<String>> call, Throwable t) {
 
+                liveData.setValue(false);
             }
         });
 
@@ -282,22 +293,25 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<String> editPw(String userId, String password, String newPw) {
-        final MutableLiveData<String> liveData = new MutableLiveData<>();
+    public LiveData<Boolean> editPw(String userId, String password, String newPw) {
+        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
         hkisAPI.editPw(userId,password,newPw).enqueue(new Callback<MyResponsBody<String>>() {
             @Override
             public void onResponse(Call<MyResponsBody<String>> call, Response<MyResponsBody<String>> response) {
                 if(response.isSuccessful()){
-
                     MyResponsBody<String> rb = response.body();
-                    String tempshelvesDetail = rb.getData();
-                    liveData.setValue(tempshelvesDetail);
+                    HKISMessage msg = rb.getMsg();
+                    if(SUCCESS_CODE.equals(msg.getCode())){
+                        liveData.setValue(true);
+                    }
                 }
+                liveData.setValue(false);
             }
 
             @Override
             public void onFailure(Call<MyResponsBody<String>> call, Throwable t) {
 
+                liveData.setValue(false);
             }
         });
 

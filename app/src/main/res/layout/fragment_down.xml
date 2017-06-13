@@ -22,7 +22,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/up_fragment_condition_text1"
+        android:text="@string/down_condition_text"
         android:textColor="@color/black_bt_tx"
         android:drawableEnd="@mipmap/drop_down_black"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
         app:layout_constraintLeft_toLeftOf="parent">
         <ImageView
             android:id="@+id/upikon_img"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/down_ikon"
             android:layout_marginTop="10dp"

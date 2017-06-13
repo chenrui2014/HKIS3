@@ -16,7 +16,6 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -172,7 +171,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
                 }
 
                 Intent intent = new Intent();
-                intent.setClass(ShelvesMaterialDetailActivity.this,MaterialShelvesActiviity.class);
+                intent.setClass(ShelvesMaterialDetailActivity.this,MaterialShelvesActivity.class);
                 intent.putExtra("selectShelvesDetail",(Serializable) selectShelvesDetail);
                 startActivity(intent);
             }

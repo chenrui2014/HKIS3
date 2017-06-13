@@ -51,6 +51,10 @@
     <string name="smd_tv_confirm">确定</string>
     <string name="smd_radio_full">全选</string>
 
+    <!--出库汇总页页面-->
+
+    <string name="out_title_deliveryDate">发货日期</string>
+
     <!--上架信息页面-->
     <string name="store_info_tv_wlh">物  料  号</string>
     <string name="store_info_tv_desc">物料描述</string>
@@ -68,6 +72,7 @@
     <string name="change_bt_change">立即移仓</string>
 
     <!--移仓详情页-->
+    <string name="out_title_tv">原仓位</string>
     <string name="change_detail_tv_wlh">物料号</string>
     <string name="change_detail_tv_unit">单位：</string>
     <string name="change_detail_tv_kc">库存</string>
@@ -77,6 +82,7 @@
     <string name="change_pop_tb_confirm">确定</string>
 
     <!--盘点页面-->
+    <string name="check_title_deliveryDate">盘点日期</string>
     <string name="pd_et_hint">请输入盘点单号</string>
     <string name="pd_bt_confirm">确认</string>
     <string name="pd_tv_pddh">盘点单号</string>

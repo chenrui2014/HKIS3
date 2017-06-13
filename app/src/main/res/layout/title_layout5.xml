@@ -88,7 +88,7 @@
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:drawableEnd="@mipmap/select_white"
-        android:text="@string/sum_tv_date"
+        android:text="@string/out_title_deliveryDate"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"

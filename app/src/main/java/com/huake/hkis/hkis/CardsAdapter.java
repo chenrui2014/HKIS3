@@ -5,22 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.model.MaterialShelves;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by arjun on 4/25/16.
  */
-public class CardsAdapter extends ArrayAdapter<MaterialShelves> {
+public class CardsAdapter extends BaseAdapter {
   private final ArrayList<MaterialShelves> mss;
   private final LayoutInflater layoutInflater;
 
   public CardsAdapter(Context context, ArrayList<MaterialShelves> mss) {
-    super(context, -1);
+    super();
     this.mss = mss;
     this.layoutInflater = LayoutInflater.from(context);
   }
@@ -40,11 +45,44 @@ public class CardsAdapter extends ArrayAdapter<MaterialShelves> {
     return view;
   }
 
-  @Override public MaterialShelves getItem(int position) {
+  public void addAll(Collection<MaterialShelves> collection) {
+    if (isEmpty()) {
+      mss.addAll(collection);
+      notifyDataSetChanged();
+    } else {
+      mss.addAll(collection);
+    }
+  }
+
+  @Override
+  public MaterialShelves getItem(int position) {
+    if(mss==null ||mss.size()==0) return null;
     return mss.get(position);
   }
 
-  @Override public int getCount() {
+  @Override
+  public long getItemId(int position) {
+    return position;
+  }
+  public void clear() {
+    mss.clear();
+    notifyDataSetChanged();
+  }
+
+  public boolean isEmpty() {
+    return mss.isEmpty();
+  }
+
+  public void remove(int index) {
+    if (index > -1 && index < mss.size()) {
+      mss.remove(index);
+      notifyDataSetChanged();
+    }
+  }
+
+
+  @Override
+  public int getCount() {
     return mss.size();
   }
 }

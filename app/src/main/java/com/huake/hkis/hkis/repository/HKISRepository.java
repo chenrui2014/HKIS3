@@ -56,7 +56,7 @@ public interface HKISRepository {
      * @param materialShelves
      * @return
      */
-    LiveData<String> getMaterialShelves(MaterialShelves materialShelves);
+    LiveData<Boolean> getMaterialShelves(MaterialShelves materialShelves);
 
     /**
      * 物料明细接口
@@ -118,7 +118,7 @@ public interface HKISRepository {
      * @param userId
      * @return
      */
-    LiveData<String> exit(String userId);
+    LiveData<Boolean> exit(String userId);
 
     /**
      * 修改密码
@@ -127,7 +127,7 @@ public interface HKISRepository {
      * @param newPw
      * @return
      */
-    LiveData<String> editPw(String userId, String password, String newPw);
+    LiveData<Boolean> editPw(String userId, String password, String newPw);
 
     /**
      * 关于我们
