@@ -11,6 +11,8 @@
 <!--上架页面-->
     <string name="up_fragment_tv_hint">请输入单号（非必填）</string>
     <string name="up_fragment_bt_text">立即上架</string>
+    <string name="up_condition_text6">入库单</string>
+    <string name="down_condition_text">出库单</string>
     <string name="up_fragment_condition_text1">销售订单号</string>
     <string name="up_fragment_condition_text2">采购订单号</string>
     <string name="up_fragment_condition_text3">调拨单号</string>
@@ -41,6 +43,7 @@
     <string name="sum_bt_ll">领料单</string>
     <string name="sum_bt_db">调拨单</string>
     <!--上架物料明细页面-->
+    <string name="smd_title">上架物料明细</string>
     <string name="smd_tv_wlh">物料号</string>
     <string name="smd_tv_hasbeen">已上架</string>
     <string name="smd_tv_tostayon">待上架</string>

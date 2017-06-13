@@ -1,13 +1,15 @@
-// IScan.aidl
 package com.huake.hkis.hkis;
 
-// Declare any non-default types here with import statements
+import com.huake.hkis.hkis.IScanResult;
+interface IScan{
 
-interface IScan {
-    //初始化扫描头
-    void initEngine();
-    //扫描
-    String scan();
-    //关闭扫描
-    void close();
+	int init();  //init scaner engine
+	
+	void close();
+	
+	void scan();  //start scanning 
+	
+	void setOnResultListener(IScanResult iLister); //listen scan result
+	
+	void setChar(String charSetName);
 }

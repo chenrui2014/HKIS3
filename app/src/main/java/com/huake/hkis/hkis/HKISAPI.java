@@ -1,14 +1,14 @@
 package com.huake.hkis.hkis;
 
+import com.huake.hkis.hkis.model.AboutUs;
 import com.huake.hkis.hkis.model.Check;
 import com.huake.hkis.hkis.model.CheckDetail;
 import com.huake.hkis.hkis.model.CheckParam;
 import com.huake.hkis.hkis.model.MaterialShelves;
 import com.huake.hkis.hkis.model.MaterialDetails;
-import com.huake.hkis.hkis.model.Repo;
+import com.huake.hkis.hkis.model.MyResponsBody;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.model.Task;
-import com.huake.hkis.hkis.model.UpdateDetailParam;
 import com.huake.hkis.hkis.model.User;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  *
@@ -29,42 +29,55 @@ public interface HKISAPI {
     String URL = "http://59.110.164.202:8082/storage/";
 
     @FormUrlEncoded
-    @POST("/mine/login")
-    Call<User> user(@Field("loginName") String loginName, @Field("password") String password);
+    @POST("/storage/mine/login.do")
+    Call<MyResponsBody<User>> user(@Field("loginName") String loginName, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("/mine/login")
-    Call<User> login(@Field("loginName") String loginName, @Field("password") String password);
+    @POST("/storage/task/shelves.do")
+    Call<MyResponsBody<List<Task>>> task(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO,@Field("documentsType")String documentsType,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
 
     @FormUrlEncoded
-    @POST("/task/shelves")
-    Call<List<Task>> task(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO);
+    @POST("/storage/task/shelvesDetail.do")
+    Call<MyResponsBody<List<ShelvesDetail>>> shelvesDetail(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO);
 
-    @FormUrlEncoded
-    @POST("/task/shelvesDetail")
-    Call<List<ShelvesDetail>> shelvesDetail(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO);
+    @POST("/storage/task/materialShelves.do")
+    Call<MyResponsBody<String>> materialShelves(@Body MaterialShelves materialShelves);
 
-    @POST("/task/materialShelves")
-    Call<String> materialShelves(@Body MaterialShelves materialShelves);
+    @POST("/storage/task/MaterialDetails.do")
+    Call<MyResponsBody<List<MaterialDetails>>> materialDetails(@Field("userId") String userId, @Field("resourceStorageSpace") String resourceStorageSpace,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
 
-    @POST("/task/MaterialDetails")
-    Call<List<MaterialDetails>> materialDetails(@Field("loginName") String loginName, @Field("wareHouseNum") String wareHouseNum);
+    @POST("/storage/task/insertMdetailed.do")
+    Call<MyResponsBody<String>> insertMdetailed(@Field("userId") String userId, @Field("materialNO") String materialNO);
 
-    @POST("/task/insertMdetailed")
-    Call<String> insertMdetailed(@Field("loginName") String loginName, @Field("materialNO") String materialNO);
+    @GET("/storage/task/updataMdetailed.do")
+    Call<MyResponsBody<String>> updataMdetailed(@Query("userId") String userId,@Query("resourceStorageSpace") String resourceStorageSpace,@Query("targetStorageSpace") String targetStorageSpace);
 
-    @POST("/user/register")
-    Call<String> register(@Field("resourceStorageSpace") String resourceStorageSpace, @Field("targetStorageSpace") String targetStorageSpace);
+    //@POST("/storage/user/register.do")
+    //Call<String> register(@Field("resourceStorageSpace") String resourceStorageSpace, @Field("targetStorageSpace") String targetStorageSpace);
 
-    @POST("/check/checkList")
-    Call<List<Check>> check(@Body CheckParam checkParam);
+    @POST("/storage/check/checkList.do")
+    Call<MyResponsBody<List<Check>>> check(@Body CheckParam checkParam,@Field("pageNo") String pageNo, @Field("pageSize") String pageSize);
 
-    @POST("/check/checkDetailList")
-    Call<List<CheckDetail>> checkDetail(@Field("userId") String userId, @Field("storageSpace") String storageSpace);
+    @POST("/storage/check/checkDetailList.do")
+    Call<MyResponsBody<List<CheckDetail>>> checkDetail(@Field("userId") String userId, @Field("storageSpace") String storageSpace,@Field("pageNo") String pageNo,@Field("pageSize") String pageSize);
 
-    @POST("/check/updatacheckDetail")
-    Call<String> updateCheckDetail(@Body UpdateDetailParam updateDetailParam);
+    @POST("/storage/check/updatacheckDetail.do")
+    Call<MyResponsBody<String>> updateCheckDetail(@Query("userId") String userId,@Query("checkDetailId") String checkDetailId,@Query("checkAmount") String checkAmount);
 
-    @POST("/mine/exit")
-    Call<String> exit(@Field("userId") String userId);
+    @GET("/storage/mine/exit.do")
+    Call<MyResponsBody<String>> exit(@Query("userId") String userId);
+
+    @POST("/storage/mine/editPw.do")
+    Call<MyResponsBody<String>> editPw(@Field("userId") String userId,@Field("password") String password,@Field("newPw") String newPw);
+
+    @GET("/storage/mine/aboutUs.do")
+    Call<MyResponsBody<AboutUs>> aboutUs();
+
+    @GET("/storage/task/taskNoList.do")
+    Call<MyResponsBody<List<String>>> taskNoList();
+    @GET("/storage/repertory/WarehouseList.do")
+    Call<MyResponsBody<List<String>>> warehouseList();
+    @GET("/storage/check/CheckNoList.do")
+    Call<MyResponsBody<List<String>>> checkNoList();
+
 }
