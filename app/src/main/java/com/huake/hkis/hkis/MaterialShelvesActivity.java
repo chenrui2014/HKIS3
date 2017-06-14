@@ -3,20 +3,25 @@ package com.huake.hkis.hkis;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huake.hkis.hkis.dagger.AppModule;
 import com.huake.hkis.hkis.flingswipe.SwipeFlingAdapterView;
 import com.huake.hkis.hkis.model.MaterialShelves;
+import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.repository.HKISRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by chen on 2017/6/9.
@@ -38,13 +43,40 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
 
     private MaterialShelves current;
 
+    private TextView titleTv;
+    private ImageView backImg;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_store_info);
+        titleTv = (TextView) findViewById(R.id.textView4);
+        titleTv.setText(getResources().getText(R.string.smd_title));
+        backImg = (ImageView) findViewById(R.id.img_back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MaterialShelvesActivity.this, ShelvesMDActivity.class);
+                startActivity(intent);
+                MaterialShelvesActivity.this.finish();
+            }
+        });
+        listObj = new ArrayList<MaterialShelves>();
         AppModule appModule = new AppModule(getApplication());
         hkisRep = appModule.providesHKISRepository(appModule.providesHKISApi());
-        listObj =  (ArrayList<MaterialShelves>) getIntent().getSerializableExtra("selectShelvesDetail");
+        List<ShelvesDetail> shelvesDetailList = (ArrayList<ShelvesDetail>) getIntent().getSerializableExtra("selectShelvesDetail");
+        if(shelvesDetailList != null && shelvesDetailList.size() > 0){
+            for(ShelvesDetail sd:shelvesDetailList){
+                MaterialShelves materialShelves = new MaterialShelves();
+                materialShelves.setMaterialNO(sd.getMaterialNO());
+                materialShelves.setMaterialDesc(sd.getMaterialDesc());
+                materialShelves.setAmount(sd.getAmount());
+                materialShelves.setCalculateUnit("");
+                materialShelves.setSysRecommendWarehouse(sd.getRecommendStorageSpace());
+                listObj.add(materialShelves);
+            }
+        }
         if(listObj != null && listObj.size() > 0){
             current = listObj.get(0);
         }

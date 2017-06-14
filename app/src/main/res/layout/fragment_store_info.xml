@@ -2,8 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/title_layout1"></include>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff">
+    <include layout="@layout/title_layout1"
+        android:id="@+id/title1"></include>
 
     <com.huake.hkis.hkis.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
@@ -11,9 +13,10 @@
         android:layout_height="0dp"
         app:min_adapter_stack="4"
         app:max_visible="4"
-        app:y_offset_step="28dp"
+        app:y_offset_step="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1"
         app:layout_constraintBottom_toTopOf="@+id/bt_confirm" />
 
     <Button

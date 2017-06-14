@@ -17,6 +17,7 @@ public class MaterialShelves {
     public String storageSpace;
     public String recommendAmount;
 
+    public MaterialShelves(){}
     public MaterialShelves(String userId, String taskType, String materialNO, String materialDesc, String barcode, String amount, String calculateUnit, String sysRecommendWarehouse, String storageSpace, String recommendAmount) {
         this.userId = userId;
         this.taskType = taskType;

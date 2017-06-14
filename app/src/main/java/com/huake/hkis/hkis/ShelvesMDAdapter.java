@@ -64,7 +64,7 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
         } else {
             selectedItems.put(position, true);
         }
-        notifyItemChanged(position);
+        //notifyItemChanged(position);
     }
 
     public List<Integer> getSelectedItems() {
@@ -96,12 +96,6 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    if(isSelected(pos)){
-
-                        holder.selectImg.setImageResource(R.mipmap.card_select);
-                    }else{
-                        holder.selectImg.setImageResource(R.mipmap.card_unselect);
-                    }
                     mOnItemClickListener.onItemClick(holder.itemView, pos);
                 }
             });

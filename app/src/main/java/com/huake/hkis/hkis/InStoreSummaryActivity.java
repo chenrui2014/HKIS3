@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -49,10 +50,24 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private String userId;
 
+    private ImageView backImg;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_up_putin);
+
+        backImg = (ImageView) findViewById(R.id.img_back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(InStoreSummaryActivity.this, MainActivity.class);
+                startActivity(intent);
+                InStoreSummaryActivity.this.finish();
+            }
+        });
+
         initData();
        // initRecyclerView();
        // initRefreshLayout();

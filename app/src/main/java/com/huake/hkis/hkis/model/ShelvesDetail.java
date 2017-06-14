@@ -19,7 +19,11 @@ public class ShelvesDetail implements Serializable {
     public String handleStatus;
     public String recommendStorageSpace;
 
-    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace) {
+    public String finishAmount;
+    public String surplusAmount;
+    public String materialDesc;
+
+    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace,String finishAmount,String surplusAmount,String materialDesc) {
         this.taskNO = taskNO;
         this.wareHouseNum = wareHouseNum;
         this.materialNO = materialNO;
@@ -31,6 +35,9 @@ public class ShelvesDetail implements Serializable {
         this.recommendAmount = recommendAmount;
         this.handleStatus = handleStatus;
         this.recommendStorageSpace = recommendStorageSpace;
+        this.finishAmount = finishAmount;
+        this.surplusAmount = surplusAmount;
+        this.materialDesc = materialDesc;
     }
 
     public String getTaskNO() {
@@ -119,5 +126,29 @@ public class ShelvesDetail implements Serializable {
 
     public void setMaterialCode(String materialCode) {
         this.materialCode = materialCode;
+    }
+
+    public String getFinishAmount() {
+        return finishAmount;
+    }
+
+    public void setFinishAmount(String finishAmount) {
+        this.finishAmount = finishAmount;
+    }
+
+    public String getSurplusAmount() {
+        return surplusAmount;
+    }
+
+    public void setSurplusAmount(String surplusAmount) {
+        this.surplusAmount = surplusAmount;
+    }
+
+    public String getMaterialDesc() {
+        return materialDesc;
+    }
+
+    public void setMaterialDesc(String materialDesc) {
+        this.materialDesc = materialDesc;
     }
 }

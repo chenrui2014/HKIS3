@@ -62,6 +62,7 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
         setContentView(R.layout.fragment_shelves_material_detail);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
+        backImg = (ImageView) findViewById(R.id.img_back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +95,7 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
                 adapter.clearSelectedState();
                 for(int i = 0; i < shelvesDetails.size(); i++){
                     adapter.switchSelectedState(i);
+                    adapter.notifyDataSetChanged();
                 }
                 selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
             }
@@ -279,10 +281,17 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
     @Override
     public void onItemClick(View view, int position) {
         adapter.switchSelectedState(position);
-        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
-        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
-        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
-        startActivity(intent);
+        ImageView selectImg = (ImageView) view.findViewById(R.id.select_img);
+        if(adapter.isSelected(position)){
+
+            selectImg.setImageResource(R.mipmap.card_select);
+        }else{
+            selectImg.setImageResource(R.mipmap.card_unselect);
+        }
+//        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
+//        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
+//        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
+//        startActivity(intent);
     }
 
     @Override
