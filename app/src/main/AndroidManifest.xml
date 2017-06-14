@@ -28,6 +28,7 @@
         <activity android:name=".UpdatePasswordActivity"></activity>
         <activity android:name=".UpgradeActivity"></activity>
         <activity android:name=".InStoreSummaryActivity"></activity>
+        <activity android:name=".ShelvesMDActivity"></activity>
         <activity android:name="LoginActivity" android:screenOrientation="portrait" />
     </application>
 
