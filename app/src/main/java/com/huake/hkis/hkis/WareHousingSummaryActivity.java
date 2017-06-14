@@ -61,20 +61,20 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_up_putin);
-        ptrClassicFrameLayout = (PtrClassicFrameLayout) this.findViewById(R.id.recycler_view_frame);
-        mRecyclerView = (RecyclerView) this.findViewById(R.id.recycler_view);
-        backImg = (ImageView) findViewById(R.id.img_back);
-        backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(WareHousingSummaryActivity.this, MainActivity.class);
-                startActivity(intent);
-                WareHousingSummaryActivity.this.finish();
-            }
-        });
-        initData();
-        init();
+//        ptrClassicFrameLayout = (PtrClassicFrameLayout) this.findViewById(R.id.recycler_view_frame);
+//        mRecyclerView = (RecyclerView) this.findViewById(R.id.recycler_view);
+//        backImg = (ImageView) findViewById(R.id.img_back);
+//        backImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(WareHousingSummaryActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                WareHousingSummaryActivity.this.finish();
+//            }
+//        });
+//        initData();
+//        init();
     }
 
     private void initData(){

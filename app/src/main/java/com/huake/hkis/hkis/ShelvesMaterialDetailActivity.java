@@ -63,23 +63,23 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shelves_material_detail);
-        ptrClassicFrameLayout = (PtrClassicFrameLayout) this.findViewById(R.id.recycler_view_frame);
-        mRecyclerView = (RecyclerView) this.findViewById(R.id.recycler_view);
-        backImg = (ImageView) findViewById(R.id.img_back);
-
-        allSelectTv = (TextView)findViewById(R.id.con_con2);
-        confirmTv = (TextView)findViewById(R.id.con_con2);
-        backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ShelvesMaterialDetailActivity.this, InStoreSummaryActivity.class);
-                startActivity(intent);
-                ShelvesMaterialDetailActivity.this.finish();
-            }
-        });
-        initData();
-        init();
+//        ptrClassicFrameLayout = (PtrClassicFrameLayout) this.findViewById(R.id.recycler_view_frame);
+//        mRecyclerView = (RecyclerView) this.findViewById(R.id.recycler_view);
+//        backImg = (ImageView) findViewById(R.id.img_back);
+//
+//        allSelectTv = (TextView)findViewById(R.id.con_con2);
+//        confirmTv = (TextView)findViewById(R.id.con_con2);
+//        backImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setClass(ShelvesMaterialDetailActivity.this, InStoreSummaryActivity.class);
+//                startActivity(intent);
+//                ShelvesMaterialDetailActivity.this.finish();
+//            }
+//        });
+//        initData();
+//        init();
     }
 
     private void initData(){
@@ -90,7 +90,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
 
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
-        hkisRep.getShelvesDetail(loginName,"1",taskNO);
+        hkisRep.getShelvesDetail(loginName,"1",taskNO,page,PAGE_SIZE);
 
     }
 
@@ -119,7 +119,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
                         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
                         String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
-                        LiveData<List<ShelvesDetail>> shelvesDetail = hkisRep.getShelvesDetail(userId,"1",taskNO);
+                        LiveData<List<ShelvesDetail>> shelvesDetail = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
                         shelvesDetail.observe(ShelvesMaterialDetailActivity.this,shelvesDetailList ->{
 
                             mData.addAll(shelvesDetailList);
@@ -146,7 +146,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
                         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
                         String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
-                        LiveData<List<ShelvesDetail>> shelvesDetail = hkisRep.getShelvesDetail(userId,"1",taskNO);
+                        LiveData<List<ShelvesDetail>> shelvesDetail = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
                         shelvesDetail.observe(ShelvesMaterialDetailActivity.this,shelvesDetailList ->{
 
                             mData.addAll(shelvesDetailList);

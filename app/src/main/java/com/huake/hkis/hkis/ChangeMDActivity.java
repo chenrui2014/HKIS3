@@ -5,63 +5,155 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huake.hkis.hkis.dagger.AppModule;
-import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.MaterialDetails;
+import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshLayout;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshView;
 import com.huake.hkis.hkis.repository.HKISRepository;
 import com.huake.hkis.hkis.utils.Constants;
+import com.huake.hkis.hkis.utils.DisplayUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by chen on 2017/6/14.
+ * Created by ysstech on 2017/6/14.
  */
 
-public class InStoreSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,SimpleAdapter.OnItemClickListener {
+public class ChangeMDActivity extends AppCompatActivity  implements LifecycleRegistryOwner,ChangeMDAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
-    private static final String TAG = "InStoreSummaryActivity";
-    private List<Task> tasks;
+    private static final String TAG = "ShelvesMDActivity";
+    private List<MaterialDetails> materialDetailsList;
     private PullRefreshLayout refreshLayout;
-    private SimpleAdapter adapter;
+    private ChangeMDAdapter adapter;
 
     private HKISRepository hkisRep;
     int page = 0;
 
     private static final int PAGE_SIZE = 5;
 
-    private String taskNO = "2017052511";
+    private String resourceStorageSpace = "2017052511";
 
-    private String documentsType= "入库单";
 
     private String userId;
+
+    private TextView selectTv;
+    private TextView confirmTv;
+
+    private ImageView backImg;
+
+    private PopupWindow mPopupWindow;
+
+    private EditText targetEt;
+
+    private Button changeBtn;
+    private Button cancelBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_up_putin);
+        setContentView(R.layout.fragment_shelves_material_detail);
+        View popupView = getLayoutInflater().inflate(R.layout.up_pop_window, null);
+
+        targetEt = (EditText) popupView.findViewById(R.id.et_pos);
+        changeBtn = (Button) popupView.findViewById(R.id.tb_confirm);
+        cancelBtn = (Button) popupView.findViewById(R.id.bt_cancel);
+        mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+
+        mPopupWindow.setOutsideTouchable(true);
+        //设置可以获取焦点，否则弹出菜单中的EditText是无法获取输入的
+        mPopupWindow.setFocusable(true);
+        //这句是为了防止弹出菜单获取焦点之后，点击activity的其他组件没有响应
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //防止虚拟软键盘被弹出菜单遮住
+        mPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        selectTv = (TextView) findViewById(R.id.con_con2);
+        confirmTv = (TextView) findViewById(R.id.con_con3);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ChangeMDActivity.this, MainActivity.class);
+                startActivity(intent);
+                ChangeMDActivity.this.finish();
+            }
+        });
+
+        confirmTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DisplayMetrics  metric = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metric);
+                int xOffset = DisplayUtil.px2dip(getApplication(),metric.widthPixels-mPopupWindow.getWidth());
+                int yOffset = DisplayUtil.px2dip(getApplication(),metric.heightPixels-mPopupWindow.getHeight());
+                mPopupWindow.showAsDropDown(v,xOffset,yOffset);
+            }
+        });
+
+        selectTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clearSelectedState();
+                for(int i = 0; i < materialDetailsList.size(); i++){
+                    adapter.switchSelectedState(i);
+                }
+                selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
+            }
+        });
+
+        changeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String target = targetEt.getText().toString().trim();
+                LiveData<Boolean> stateData = hkisRep.updataMdetailed(userId,resourceStorageSpace,target);
+                stateData.observe(ChangeMDActivity.this, state ->{
+
+                    if(state){
+                        Toast.makeText(getApplicationContext(),"物料移仓成功！",Toast.LENGTH_LONG).show();
+                    }
+                });
+                mPopupWindow.dismiss();
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
+            }
+        });
         initData();
-       // initRecyclerView();
-       // initRefreshLayout();
+        // initRecyclerView();
+        // initRefreshLayout();
 
     }
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SimpleAdapter(this, tasks);
+        adapter = new ChangeMDAdapter(this, materialDetailsList);
         adapter.setOnItemClickLitener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -190,10 +282,10 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
-                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                            tasks.addAll(myTasks);
-                            adapter.notifyItemInserted(tasks.size());
+                        LiveData<List<MaterialDetails>> shelvesDetailData = hkisRep.getMaterialDetails(userId,resourceStorageSpace,page,PAGE_SIZE);
+                        shelvesDetailData.observe(ChangeMDActivity.this, materialDetailsList1 ->{
+                            materialDetailsList.addAll(materialDetailsList1);
+                            adapter.notifyItemInserted(materialDetailsList.size());
                         });
                     }
                 }, 1000);
@@ -208,13 +300,11 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
         Intent intent = getIntent(); //用于激活它的意图对象
-        taskNO = intent.getStringExtra("taskNO");
-        documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
+        resourceStorageSpace = intent.getStringExtra("taskNO");
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
-        taskData.observe(this,myTasks ->{
-            tasks = myTasks;
+        LiveData<List<MaterialDetails>> materialDetailsData = hkisRep.getMaterialDetails(userId,resourceStorageSpace,page,PAGE_SIZE);
+        materialDetailsData.observe(this,materialDetails ->{
+            materialDetailsList = materialDetails;
             initRecyclerView();
             initRefreshLayout();
             refreshLayout.postDelayed(new Runnable() {
@@ -233,10 +323,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     @Override
     public void onItemClick(View view, int position) {
-        Task task = tasks.get(position);
-        Intent intent = new Intent(InStoreSummaryActivity.this,ShelvesMDActivity.class);
-        intent.putExtra("taskNO", task.getTaskNO());
-        startActivity(intent);
+        adapter.switchSelectedState(position);
     }
 
     @Override

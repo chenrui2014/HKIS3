@@ -9,34 +9,36 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
-import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshLayout;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshView;
 import com.huake.hkis.hkis.repository.HKISRepository;
 import com.huake.hkis.hkis.utils.Constants;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by chen on 2017/6/14.
+ * Created by ysstech on 2017/6/14.
  */
 
-public class InStoreSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,SimpleAdapter.OnItemClickListener {
+public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRegistryOwner,ShelvesMDAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
-    private static final String TAG = "InStoreSummaryActivity";
-    private List<Task> tasks;
+    private static final String TAG = "ShelvesMDActivity";
+    private List<ShelvesDetail> shelvesDetails;
     private PullRefreshLayout refreshLayout;
-    private SimpleAdapter adapter;
+    private ShelvesMDAdapter adapter;
 
     private HKISRepository hkisRep;
     int page = 0;
@@ -49,19 +51,62 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private String userId;
 
+    private TextView selectTv;
+    private TextView confirmTv;
+
+    private ImageView backImg;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_up_putin);
+        setContentView(R.layout.fragment_shelves_material_detail);
+        selectTv = (TextView) findViewById(R.id.con_con2);
+        confirmTv = (TextView) findViewById(R.id.con_con3);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ShelvesMDActivity.this, InStoreSummaryActivity.class);
+                startActivity(intent);
+                ShelvesMDActivity.this.finish();
+            }
+        });
+
+        confirmTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Integer> selectItems = adapter.getSelectedItems();
+                List<ShelvesDetail> selectShelvesDetail = new ArrayList<ShelvesDetail>();
+                for(Integer i = 0; i < selectItems.size(); i++){
+                    selectShelvesDetail.add(shelvesDetails.get(selectItems.get(i)));
+                }
+
+                Intent intent = new Intent();
+                intent.setClass(ShelvesMDActivity.this,MaterialShelvesActivity.class);
+                intent.putExtra("selectShelvesDetail",(Serializable) selectShelvesDetail);
+                startActivity(intent);
+            }
+        });
+
+        selectTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clearSelectedState();
+                for(int i = 0; i < shelvesDetails.size(); i++){
+                    adapter.switchSelectedState(i);
+                }
+                selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
+            }
+        });
         initData();
-       // initRecyclerView();
-       // initRefreshLayout();
+        // initRecyclerView();
+        // initRefreshLayout();
 
     }
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SimpleAdapter(this, tasks);
+        adapter = new ShelvesMDAdapter(this, shelvesDetails);
         adapter.setOnItemClickLitener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -190,10 +235,10 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
-                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                            tasks.addAll(myTasks);
-                            adapter.notifyItemInserted(tasks.size());
+                        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
+                        shelvesDetailData.observe(ShelvesMDActivity.this,shelvesDetails1 ->{
+                            shelvesDetails.addAll(shelvesDetails1);
+                            adapter.notifyItemInserted(shelvesDetails.size());
                         });
                     }
                 }, 1000);
@@ -212,9 +257,9 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         documentsType = intent.getStringExtra("documentsType");
         documentsType = null;
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
-        taskData.observe(this,myTasks ->{
-            tasks = myTasks;
+        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
+        shelvesDetailData.observe(this,shelvesDetails1 ->{
+            shelvesDetails = shelvesDetails1;
             initRecyclerView();
             initRefreshLayout();
             refreshLayout.postDelayed(new Runnable() {
@@ -233,9 +278,10 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     @Override
     public void onItemClick(View view, int position) {
-        Task task = tasks.get(position);
-        Intent intent = new Intent(InStoreSummaryActivity.this,ShelvesMDActivity.class);
-        intent.putExtra("taskNO", task.getTaskNO());
+        adapter.switchSelectedState(position);
+        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
+        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
+        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
         startActivity(intent);
     }
 

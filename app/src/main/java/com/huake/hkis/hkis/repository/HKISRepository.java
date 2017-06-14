@@ -44,12 +44,14 @@ public interface HKISRepository {
 
     /**
      * 任务详细接口
-     * @param loginName
+     * @param userId
      * @param taskType
      * @param taskNO
+     * @param pageNo
+     * @param pageSize
      * @return
      */
-    LiveData<List<ShelvesDetail>> getShelvesDetail(String loginName,String taskType,String taskNO);
+    LiveData<List<ShelvesDetail>> getShelvesDetail(String userId,String taskType,String taskNO,int pageNo,int pageSize);
 
     /**
      * 物料上/下架接口
@@ -83,7 +85,7 @@ public interface HKISRepository {
      * @param targetStorageSpace
      * @return
      */
-    LiveData<String> updataMdetailed(String userId,String resourceStorageSpace,String targetStorageSpace);
+    LiveData<Boolean> updataMdetailed(String userId,String resourceStorageSpace,String targetStorageSpace);
 
     /**
      * 明盘/暗盘接口

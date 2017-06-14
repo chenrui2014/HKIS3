@@ -79,9 +79,9 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<List<ShelvesDetail>> getShelvesDetail(String loginName, String taskType, String taskNO) {
+    public LiveData<List<ShelvesDetail>> getShelvesDetail(String userId, String taskType, String taskNO,int pageNo,int pageSize) {
         final MutableLiveData<List<ShelvesDetail>> liveData = new MutableLiveData<>();
-        hkisAPI.shelvesDetail(loginName,taskType,taskNO).enqueue(new Callback<MyResponsBody<List<ShelvesDetail>>>() {
+        hkisAPI.shelvesDetail(userId,taskType,taskNO,pageNo+"",pageSize+"").enqueue(new Callback<MyResponsBody<List<ShelvesDetail>>>() {
             @Override
             public void onResponse(Call<MyResponsBody<List<ShelvesDetail>>> call, Response<MyResponsBody<List<ShelvesDetail>>> response) {
                 if(response.isSuccessful()){
@@ -174,22 +174,24 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<String> updataMdetailed(String userId, String resourceStorageSpace, String targetStorageSpace) {
-        final MutableLiveData<String> liveData = new MutableLiveData<>();
+    public LiveData<Boolean> updataMdetailed(String userId, String resourceStorageSpace, String targetStorageSpace) {
+        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
         hkisAPI.updataMdetailed(userId,resourceStorageSpace,targetStorageSpace).enqueue(new Callback<MyResponsBody<String>>() {
             @Override
             public void onResponse(Call<MyResponsBody<String>> call, Response<MyResponsBody<String>> response) {
                 if(response.isSuccessful()){
-
                     MyResponsBody<String> rb = response.body();
-                    String tempshelvesDetail = rb.getData();
-                    liveData.setValue(tempshelvesDetail);
+                    HKISMessage msg = rb.getMsg();
+                    if(SUCCESS_CODE.equals(msg.getCode())){
+                        liveData.setValue(true);
+                    }
                 }
+                liveData.setValue(false);
             }
 
             @Override
             public void onFailure(Call<MyResponsBody<String>> call, Throwable t) {
-
+                liveData.setValue(false);
             }
         });
 

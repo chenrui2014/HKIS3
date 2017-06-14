@@ -111,6 +111,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_changeNum"/>
 
     <ImageView
+        android:id="@+id/select_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/card_select"
