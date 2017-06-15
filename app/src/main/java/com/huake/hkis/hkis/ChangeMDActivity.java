@@ -55,7 +55,7 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
 
     private static final int PAGE_SIZE = 5;
 
-    private String resourceStorageSpace = "2017052511";
+    private String wareHouseNO = "T01-001-01-01-01";
 
 
     private String userId;
@@ -72,12 +72,17 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
     private Button changeBtn;
     private Button cancelBtn;
 
+    private TextView titleTv;
+    private TextView wareHouseTv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_shelves_material_detail);
+        setContentView(R.layout.fragment_change_detail);
         View popupView = getLayoutInflater().inflate(R.layout.change_pop_window, null);
-
+        titleTv = (TextView) findViewById(R.id.tv_title);
+        wareHouseTv = (TextView) findViewById(R.id.tv_sourceWh);
+        backImg = (ImageView) findViewById(R.id.img_back);
         targetEt = (EditText) popupView.findViewById(R.id.et_pos);
         changeBtn = (Button) popupView.findViewById(R.id.tb_confirm);
         cancelBtn = (Button) popupView.findViewById(R.id.bt_cancel);
@@ -128,7 +133,7 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
             @Override
             public void onClick(View v) {
                 String target = targetEt.getText().toString().trim();
-                LiveData<Boolean> stateData = hkisRep.updataMdetailed(userId,resourceStorageSpace,target);
+                LiveData<Boolean> stateData = hkisRep.updataMdetailed(userId,wareHouseNO,target);
                 stateData.observe(ChangeMDActivity.this, state ->{
 
                     if(state){
@@ -282,7 +287,7 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<MaterialDetails>> shelvesDetailData = hkisRep.getMaterialDetails(userId,resourceStorageSpace,page,PAGE_SIZE);
+                        LiveData<List<MaterialDetails>> shelvesDetailData = hkisRep.getMaterialDetails(userId,wareHouseNO,page,PAGE_SIZE);
                         shelvesDetailData.observe(ChangeMDActivity.this, materialDetailsList1 ->{
                             materialDetailsList.addAll(materialDetailsList1);
                             adapter.notifyItemInserted(materialDetailsList.size());
@@ -300,13 +305,17 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
         Intent intent = getIntent(); //用于激活它的意图对象
-        resourceStorageSpace = intent.getStringExtra("taskNO");
+        wareHouseNO = intent.getStringExtra("wareHouseNO");
+        wareHouseTv.setText(wareHouseNO);
 
-        LiveData<List<MaterialDetails>> materialDetailsData = hkisRep.getMaterialDetails(userId,resourceStorageSpace,page,PAGE_SIZE);
-        materialDetailsData.observe(this,materialDetails ->{
+        LiveData<List<MaterialDetails>> materialDetailsData = hkisRep.getMaterialDetails(userId,wareHouseNO,page,PAGE_SIZE);
+        materialDetailsData.observe(ChangeMDActivity.this,materialDetails ->{
             materialDetailsList = materialDetails;
             initRecyclerView();
             initRefreshLayout();
+            if(materialDetails != null && materialDetails.size() > 0) {
+                titleTv.setText(titleTv.getText().toString().trim() + "(" + materialDetails.size() + ")");
+            }
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {

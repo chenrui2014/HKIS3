@@ -32,10 +32,10 @@ class InventoryWareHouseAdapter extends RecyclerView.Adapter<InventoryWareHouseA
     }
 
     private Context context;
-    private List<ShelvesDetail> datas;
+    private List<String> datas;
     private SparseBooleanArray selectedItems;
 
-    public InventoryWareHouseAdapter(Context context, List<ShelvesDetail> datas) {
+    public InventoryWareHouseAdapter(Context context, List<String> datas) {
         this.context = context;
         this.datas = datas;
         this.selectedItems = new SparseBooleanArray();
@@ -84,11 +84,7 @@ class InventoryWareHouseAdapter extends RecyclerView.Adapter<InventoryWareHouseA
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
-        holder.wlhTv.setText(datas.get(position).getMaterialNO());
-        holder.wlmTv.setText(datas.get(position).getMaterialCode());
-        holder.hasBeenTv.setText(datas.get(position).getAmount());
-        holder.toStayTv.setText(datas.get(position).getAmount());
-        holder.suggestTv.setText(datas.get(position).getRecommendStorageSpace());
+        holder.wareHouseNOTv.setText(datas.get(position));
 
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -117,21 +113,11 @@ class InventoryWareHouseAdapter extends RecyclerView.Adapter<InventoryWareHouseA
 
     class SimpleViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView selectImg;
-        TextView wlhTv;
-        TextView wlmTv;
-        TextView hasBeenTv;
-        TextView toStayTv;
-        TextView suggestTv;
+        TextView wareHouseNOTv;
 
         public SimpleViewHolder(View view) {
             super(view);
-            wlhTv = (TextView) view.findViewById(R.id.tv_wlh);
-            wlmTv = (TextView) view.findViewById(R.id.tv_wlm);
-            hasBeenTv = (TextView) view.findViewById(R.id.tv_hasBeen);
-            toStayTv = (TextView) view.findViewById(R.id.tv_toStay);
-            suggestTv = (TextView) view.findViewById(R.id.tv_suggest);
-            selectImg = (ImageView) view.findViewById(R.id.select_img);
+            wareHouseNOTv = (TextView) view.findViewById(R.id.textView5);
         }
     }
 }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
+import com.huake.hkis.hkis.model.CheckDetail;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshLayout;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshView;
@@ -35,7 +36,7 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
     private static final String TAG = "ShelvesMDActivity";
-    private List<ShelvesDetail> shelvesDetails;
+    private List<CheckDetail> checkDetail;
     private PullRefreshLayout refreshLayout;
     private InventoryMPMDAdapter adapter;
 
@@ -43,10 +44,6 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
     int page = 0;
 
     private static final int PAGE_SIZE = 5;
-
-    private String taskNO = "2017052511";
-
-    private String documentsType= "入库单";
 
     private String userId;
 
@@ -56,12 +53,13 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
     private ImageView backImg;
 
     private TextView titleTv;
+    private String wareHouseNO;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_shelves_material_detail);
-        titleTv = (TextView) findViewById(R.id.title3);
+        setContentView(R.layout.pd_material_detail1);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg = (ImageView) findViewById(R.id.img_back);
@@ -79,14 +77,14 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
             @Override
             public void onClick(View v) {
                 List<Integer> selectItems = adapter.getSelectedItems();
-                List<ShelvesDetail> selectShelvesDetail = new ArrayList<ShelvesDetail>();
+                List<CheckDetail> selectCheckDetail = new ArrayList<CheckDetail>();
                 for(Integer i = 0; i < selectItems.size(); i++){
-                    selectShelvesDetail.add(shelvesDetails.get(selectItems.get(i)));
+                    selectCheckDetail.add(checkDetail.get(selectItems.get(i)));
                 }
 
                 Intent intent = new Intent();
                 intent.setClass(InventoryMPMDActivity.this,MaterialShelvesActivity.class);
-                intent.putExtra("selectShelvesDetail",(Serializable) selectShelvesDetail);
+                intent.putExtra("selectCheckDetail",(Serializable) selectCheckDetail);
                 startActivity(intent);
             }
         });
@@ -95,7 +93,7 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
             @Override
             public void onClick(View v) {
                 adapter.clearSelectedState();
-                for(int i = 0; i < shelvesDetails.size(); i++){
+                for(int i = 0; i < checkDetail.size(); i++){
                     adapter.switchSelectedState(i);
                     adapter.notifyDataSetChanged();
                 }
@@ -110,7 +108,7 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InventoryMPMDAdapter(this, shelvesDetails);
+        adapter = new InventoryMPMDAdapter(this, checkDetail);
         adapter.setOnItemClickLitener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -239,10 +237,10 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
-                        shelvesDetailData.observe(InventoryMPMDActivity.this, shelvesDetails1 ->{
-                            shelvesDetails.addAll(shelvesDetails1);
-                            adapter.notifyItemInserted(shelvesDetails.size());
+                        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,page,PAGE_SIZE);
+                        checkDetailData.observe(InventoryMPMDActivity.this, checkDetail1 ->{
+                            checkDetail.addAll(checkDetail1);
+                            adapter.notifyItemInserted(checkDetail.size());
                         });
                     }
                 }, 1000);
@@ -257,16 +255,14 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
         Intent intent = getIntent(); //用于激活它的意图对象
-        taskNO = intent.getStringExtra("taskNO");
-        documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
+        wareHouseNO = intent.getStringExtra("wareHouseNO");
 
-        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
-        shelvesDetailData.observe(this,shelvesDetails1 ->{
-            shelvesDetails = shelvesDetails1;
+        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,page,PAGE_SIZE);
+        checkDetailData.observe(this,checkDetail1 ->{
+            checkDetail = checkDetail1;
             initRecyclerView();
             initRefreshLayout();
-            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + shelvesDetails1.size() + ")");
+            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + checkDetail1.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -291,7 +287,7 @@ public class InventoryMPMDActivity extends AppCompatActivity  implements Lifecyc
         }else{
             selectImg.setImageResource(R.mipmap.card_unselect);
         }
-//        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
+//        ShelvesDetail shelvesDetail = checkDetail.get(position);
 //        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
 //        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
 //        startActivity(intent);

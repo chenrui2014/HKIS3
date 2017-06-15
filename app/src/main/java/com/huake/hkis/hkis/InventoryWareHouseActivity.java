@@ -31,22 +31,18 @@ import java.util.List;
  * Created by ysstech on 2017/6/14.
  */
 
-public class InventoryWareHouseActivity extends AppCompatActivity  implements LifecycleRegistryOwner,InventoryMSMDAdapter.OnItemClickListener {
+public class InventoryWareHouseActivity extends AppCompatActivity  implements LifecycleRegistryOwner,InventoryWareHouseAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
     private static final String TAG = "ShelvesMDActivity";
-    private List<ShelvesDetail> shelvesDetails;
+    private List<String> checkStorageList;
     private PullRefreshLayout refreshLayout;
-    private InventoryMSMDAdapter adapter;
+    private InventoryWareHouseAdapter adapter;
 
     private HKISRepository hkisRep;
     int page = 0;
 
     private static final int PAGE_SIZE = 5;
-
-    private String taskNO = "2017052511";
-
-    private String documentsType= "入库单";
 
     private String userId;
 
@@ -56,6 +52,8 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
     private ImageView backImg;
 
     private TextView titleTv;
+
+    private String checkNO;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,9 +77,9 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
             @Override
             public void onClick(View v) {
                 List<Integer> selectItems = adapter.getSelectedItems();
-                List<ShelvesDetail> selectShelvesDetail = new ArrayList<ShelvesDetail>();
+                List<String> selectShelvesDetail = new ArrayList<String>();
                 for(Integer i = 0; i < selectItems.size(); i++){
-                    selectShelvesDetail.add(shelvesDetails.get(selectItems.get(i)));
+                    selectShelvesDetail.add(checkStorageList.get(selectItems.get(i)));
                 }
 
                 Intent intent = new Intent();
@@ -95,7 +93,7 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
             @Override
             public void onClick(View v) {
                 adapter.clearSelectedState();
-                for(int i = 0; i < shelvesDetails.size(); i++){
+                for(int i = 0; i < checkStorageList.size(); i++){
                     adapter.switchSelectedState(i);
                     adapter.notifyDataSetChanged();
                 }
@@ -110,7 +108,7 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InventoryMSMDAdapter(this, shelvesDetails);
+        adapter = new InventoryWareHouseAdapter(this, checkStorageList);
         adapter.setOnItemClickLitener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -239,10 +237,10 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
-                        shelvesDetailData.observe(InventoryWareHouseActivity.this, shelvesDetails1 ->{
-                            shelvesDetails.addAll(shelvesDetails1);
-                            adapter.notifyItemInserted(shelvesDetails.size());
+                        LiveData<List<String>> checkStorageData = hkisRep.checkStorageList(checkNO);
+                        checkStorageData.observe(InventoryWareHouseActivity.this, checkStorageList1 ->{
+                            checkStorageList.addAll(checkStorageList1);
+                            adapter.notifyItemInserted(checkStorageList.size());
                         });
                     }
                 }, 1000);
@@ -257,16 +255,14 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
         Intent intent = getIntent(); //用于激活它的意图对象
-        taskNO = intent.getStringExtra("taskNO");
-        documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
+        checkNO = intent.getStringExtra("checkNO");
 
-        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
-        shelvesDetailData.observe(this,shelvesDetails1 ->{
-            shelvesDetails = shelvesDetails1;
+        LiveData<List<String>> checkStorageData = hkisRep.checkStorageList(checkNO);
+        checkStorageData.observe(this,checkStorageList1 ->{
+            checkStorageList = checkStorageList1;
             initRecyclerView();
             initRefreshLayout();
-            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + shelvesDetails1.size() + ")");
+            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + checkStorageList1.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -291,7 +287,7 @@ public class InventoryWareHouseActivity extends AppCompatActivity  implements Li
         }else{
             selectImg.setImageResource(R.mipmap.card_unselect);
         }
-//        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
+//        ShelvesDetail shelvesDetail = checkStorageList.get(position);
 //        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
 //        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
 //        startActivity(intent);

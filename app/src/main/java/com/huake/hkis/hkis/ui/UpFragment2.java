@@ -206,7 +206,14 @@ public class UpFragment2 extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                upBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                if(taskNOEt.getText().toString().isEmpty()){
+                    upBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal1));
+                    upBtn.setTextColor(getResources().getColor(R.color.black_bt_tx));
+                }else{
+                    upBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                    upBtn.setTextColor(Color.WHITE);
+                }
+
             }
         });
         return fv;

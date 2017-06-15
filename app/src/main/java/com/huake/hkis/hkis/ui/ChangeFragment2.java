@@ -1,9 +1,12 @@
 package com.huake.hkis.hkis.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +61,32 @@ public class ChangeFragment2 extends Fragment {
                 Map<String,String> params = new HashMap<String, String>();
 
                 if(wareHouseNO.isEmpty()){
-                    wareHouseNO = "2017052511";
+                    wareHouseNO = "T01-001-01-01-01";
                 }
                 params.put("wareHouseNO",wareHouseNO);
-                fListener.onFragmentAction(params,InventorySummaryActivity.class);
+                fListener.onFragmentAction(params,ChangeMDActivity.class);
+            }
+        });
+        etScan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(etScan.getText().toString().isEmpty()){
+                    changeBt.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal1));
+                    changeBt.setTextColor(getResources().getColor(R.color.black_bt_tx));
+                }else{
+                    changeBt.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                    changeBt.setTextColor(Color.WHITE);
+                }
             }
         });
         return fv;

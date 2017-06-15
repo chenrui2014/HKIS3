@@ -6,9 +6,11 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.huake.hkis.hkis.model.CheckDetail;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 
 import java.util.ArrayList;
@@ -32,10 +34,10 @@ class InventoryMPMDAdapter extends RecyclerView.Adapter<InventoryMPMDAdapter.Sim
     }
 
     private Context context;
-    private List<ShelvesDetail> datas;
+    private List<CheckDetail> datas;
     private SparseBooleanArray selectedItems;
 
-    public InventoryMPMDAdapter(Context context, List<ShelvesDetail> datas) {
+    public InventoryMPMDAdapter(Context context, List<CheckDetail> datas) {
         this.context = context;
         this.datas = datas;
         this.selectedItems = new SparseBooleanArray();
@@ -77,7 +79,7 @@ class InventoryMPMDAdapter extends RecyclerView.Adapter<InventoryMPMDAdapter.Sim
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         SimpleViewHolder holder = new SimpleViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.fragment_shelves_material_detail_item, parent,
+                context).inflate(R.layout.pd_material_detail_item, parent,
                 false));
         return holder;
     }
@@ -85,10 +87,9 @@ class InventoryMPMDAdapter extends RecyclerView.Adapter<InventoryMPMDAdapter.Sim
     @Override
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.wlhTv.setText(datas.get(position).getMaterialNO());
-        holder.wlmTv.setText(datas.get(position).getMaterialCode());
-        holder.hasBeenTv.setText(datas.get(position).getAmount());
-        holder.toStayTv.setText(datas.get(position).getAmount());
-        holder.suggestTv.setText(datas.get(position).getRecommendStorageSpace());
+        holder.wlmTv.setText(datas.get(position).getMaterialNO());
+        holder.unitTv.setText(datas.get(position).getCalculateUnit());
+        holder.zmTv.setText(datas.get(position).getRepertoryAmount());
 
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -120,17 +121,17 @@ class InventoryMPMDAdapter extends RecyclerView.Adapter<InventoryMPMDAdapter.Sim
         ImageView selectImg;
         TextView wlhTv;
         TextView wlmTv;
-        TextView hasBeenTv;
-        TextView toStayTv;
-        TextView suggestTv;
+        TextView unitTv;
+        TextView zmTv;
+        EditText realTv;
 
         public SimpleViewHolder(View view) {
             super(view);
             wlhTv = (TextView) view.findViewById(R.id.tv_wlh);
             wlmTv = (TextView) view.findViewById(R.id.tv_wlm);
-            hasBeenTv = (TextView) view.findViewById(R.id.tv_hasBeen);
-            toStayTv = (TextView) view.findViewById(R.id.tv_toStay);
-            suggestTv = (TextView) view.findViewById(R.id.tv_suggest);
+            unitTv = (TextView) view.findViewById(R.id.tv_unit);
+            zmTv = (TextView) view.findViewById(R.id.tv_kc);
+            realTv = (EditText) view.findViewById(R.id.tv_real);
             selectImg = (ImageView) view.findViewById(R.id.select_img);
         }
     }

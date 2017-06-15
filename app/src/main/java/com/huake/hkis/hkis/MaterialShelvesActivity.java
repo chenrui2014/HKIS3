@@ -110,7 +110,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
             swipeView.setAdapter(arrayAdapter);
         }
         confirmBtn = (Button)findViewById(R.id.bt_confirm);
-        confirmBtn.setEnabled(true);
+//        confirmBtn.setEnabled(true);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +118,11 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
                 if(current != null){
                     LiveData<Boolean> state = hkisRep.getMaterialShelves(current);
                     state.observe(MaterialShelvesActivity.this, myState ->{
-                        Toast.makeText(getApplicationContext(), "上架成功",Toast.LENGTH_LONG);
+                        if(myState){
+                            Toast.makeText(getApplicationContext(), "上架成功",Toast.LENGTH_LONG);
+                            titleTv.setText(getResources().getText(R.string.store_info_tv_title) + "(" + listObj.size() + ")");
+                        }
+
                     });
                 }
             }
@@ -145,18 +149,27 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
     }
 
     @Override
-    public void onLeftCardExit(Object dataObject) {
+    public void onLeftCardExit(Object dataObject)
+    {
+        if(listObj != null && listObj.size() > 0){
+
+            listObj.remove(0);
+        }
         current = (MaterialShelves)dataObject;
     }
 
     @Override
     public void onRightCardExit(Object dataObject) {
+        if(listObj != null && listObj.size() > 0){
+
+            listObj.remove(0);
+        }
         current = (MaterialShelves)dataObject;
     }
 
     @Override
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
-        confirmBtn.setEnabled(false);
+//        confirmBtn.setEnabled(false);
     }
 
     @Override
@@ -237,7 +250,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
     };
     //display barcode
     private void displayResult(final String barcode){
-        if(barCodeEt != null){
+        if(barCodeEt != null && barCodeEt.getText().toString().isEmpty()){
             barCodeEt.setText(barcode);
         }
         Util.play(1, 0);

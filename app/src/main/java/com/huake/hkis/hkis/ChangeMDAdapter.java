@@ -79,7 +79,7 @@ class ChangeMDAdapter extends RecyclerView.Adapter<ChangeMDAdapter.SimpleViewHol
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         SimpleViewHolder holder = new SimpleViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.fragment_shelves_material_detail_item, parent,
+                context).inflate(R.layout.fragment_change_detail_item, parent,
                 false));
         return holder;
     }

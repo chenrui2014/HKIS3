@@ -14,6 +14,7 @@ import com.huake.hkis.hkis.model.MaterialShelves;
 import com.huake.hkis.hkis.model.MyResponsBody;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.UpgradeVersion;
 import com.huake.hkis.hkis.model.User;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class HKISRepositoryImpl implements HKISRepository {
 
@@ -130,7 +132,7 @@ public class HKISRepositoryImpl implements HKISRepository {
     @Override
     public LiveData<List<MaterialDetails>> getMaterialDetails(String userId, String resourceStorageSpace, int pageNo, int pageSize) {
         final MutableLiveData<List<MaterialDetails>> liveData = new MutableLiveData<>();
-        hkisAPI.materialDetails(userId,resourceStorageSpace,pageNo,pageSize).enqueue(new Callback<MyResponsBody<List<MaterialDetails>>>() {
+        hkisAPI.changeMaterialDetails(userId,resourceStorageSpace,pageNo,pageSize).enqueue(new Callback<MyResponsBody<List<MaterialDetails>>>() {
             @Override
             public void onResponse(Call<MyResponsBody<List<MaterialDetails>>> call, Response<MyResponsBody<List<MaterialDetails>>> response) {
                 if(response.isSuccessful()){
@@ -405,6 +407,52 @@ public class HKISRepositoryImpl implements HKISRepository {
 
             @Override
             public void onFailure(Call<MyResponsBody<List<String>>> call, Throwable t) {
+
+            }
+        });
+
+        return liveData;
+    }
+
+    @Override
+    public LiveData<List<String>> checkStorageList(@Query("checkNO") String checkNO) {
+        final MutableLiveData<List<String>> liveData = new MutableLiveData<>();
+        hkisAPI.checkStorageList().enqueue(new Callback<MyResponsBody<List<String>>>() {
+            @Override
+            public void onResponse(Call<MyResponsBody<List<String>>> call, Response<MyResponsBody<List<String>>> response) {
+                if(response.isSuccessful()){
+
+                    MyResponsBody<List<String>> rb = response.body();
+                    List<String> tempshelvesDetail = rb.getData();
+                    liveData.setValue(tempshelvesDetail);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponsBody<List<String>>> call, Throwable t) {
+
+            }
+        });
+
+        return liveData;
+    }
+
+    @Override
+    public LiveData<List<UpgradeVersion>> updateVersion() {
+        final MutableLiveData<List<UpgradeVersion>> liveData = new MutableLiveData<>();
+        hkisAPI.updateVersion().enqueue(new Callback<MyResponsBody<List<UpgradeVersion>>>() {
+            @Override
+            public void onResponse(Call<MyResponsBody<List<UpgradeVersion>>> call, Response<MyResponsBody<List<UpgradeVersion>>> response) {
+                if(response.isSuccessful()){
+
+                    MyResponsBody<List<UpgradeVersion>> rb = response.body();
+                    List<UpgradeVersion> tempshelvesDetail = rb.getData();
+                    liveData.setValue(tempshelvesDetail);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponsBody<List<UpgradeVersion>>> call, Throwable t) {
 
             }
         });

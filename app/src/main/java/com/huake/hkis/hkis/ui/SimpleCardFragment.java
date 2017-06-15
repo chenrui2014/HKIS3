@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.huake.hkis.hkis.ChangeMDActivity;
+import com.huake.hkis.hkis.InventorySummaryActivity;
 import com.huake.hkis.hkis.OnFragmentListener;
 import com.huake.hkis.hkis.R;
 
@@ -69,12 +70,12 @@ public class SimpleCardFragment extends Fragment {
                 Map<String,String> params = new HashMap<String, String>();
 
                 if(wareHouseNO.isEmpty()){
-                    wareHouseNO = "2017052511";
+                    wareHouseNO = "T01-001-01-01-01";
                 }
                 params.put("wareHouseNO",wareHouseNO);
                 params.put("checkNO",checkNO);
                 params.put("checkType",checkType);
-                fListener.onFragmentAction(params, ChangeMDActivity.class);
+                fListener.onFragmentAction(params, InventorySummaryActivity.class);
             }
         });
 

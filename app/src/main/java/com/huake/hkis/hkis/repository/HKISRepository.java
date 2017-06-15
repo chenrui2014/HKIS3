@@ -10,6 +10,7 @@ import com.huake.hkis.hkis.model.MaterialDetails;
 import com.huake.hkis.hkis.model.MaterialShelves;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.UpgradeVersion;
 import com.huake.hkis.hkis.model.User;
 
 import java.util.List;
@@ -154,4 +155,17 @@ public interface HKISRepository {
      * @return
      */
     LiveData<List<String>> checkNoList();
+
+    /**
+     * 盘点仓位列表
+     * @param checkNO
+     * @return
+     */
+    LiveData<List<String>> checkStorageList(@Query("checkNO") String checkNO);
+
+    /**
+     * 更新信息
+     * @return
+     */
+    LiveData<List<UpgradeVersion>> updateVersion();
 }

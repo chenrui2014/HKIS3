@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huake.hkis.hkis.AboutUsActivity;
+import com.huake.hkis.hkis.LoginActivity;
 import com.huake.hkis.hkis.OnFragmentListener;
 import com.huake.hkis.hkis.R;
+import com.huake.hkis.hkis.SettingActivity;
 import com.huake.hkis.hkis.UpdatePasswordActivity;
 import com.huake.hkis.hkis.UpgradeActivity;
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -91,6 +94,7 @@ public class UserFragment2 extends Fragment  implements LifecycleRegistryOwner {
                         spe.putString(Constants.SP_PWD_KEY,"");
                         spe.putString(Constants.SP_USERNAME_KEY,"");
                         spe.commit();
+                        fListener.onFragmentAction(null,LoginActivity.class);
                         Toast.makeText(getActivity().getApplicationContext(),"退出成功",Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(),"退出失败",Toast.LENGTH_LONG).show();

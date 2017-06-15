@@ -57,6 +57,10 @@
     <string name="out_title_deliveryDate">发货日期</string>
 
     <!--上架信息页面-->
+    <string name="up_info_hint_mdcode">请扫描物料条形码</string>
+    <string name="up_info_hint_wareHouseNO">请扫描上架仓位</string>
+    <string name="up_info_hint_amount">请输入上架数量</string>
+    <string name="up_info_hint_boxNum">请输入上架箱数</string>
     <string name="down_sum_tv_title">出库单汇总页面</string>
     <string name="down_md_tv_title">下架物料明细</string>
     <string name="store_info_tv_title">上架信息</string>
@@ -86,6 +90,7 @@
     <string name="change_pop_tb_confirm">确定</string>
 
     <!--盘点页面-->
+    <string name="check_title_tv_title">盘点单汇总</string>
     <string name="check_sum_tv_title">盘点单汇总</string>
     <string name="check_title_deliveryDate">盘点日期</string>
     <string name="pd_et_hint">请输入盘点单号</string>

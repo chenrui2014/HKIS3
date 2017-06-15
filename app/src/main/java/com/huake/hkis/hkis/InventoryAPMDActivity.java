@@ -46,10 +46,6 @@ public class InventoryAPMDActivity extends AppCompatActivity  implements Lifecyc
 
     private static final int PAGE_SIZE = 5;
 
-    private String taskNO = "2017052511";
-
-    private String documentsType= "入库单";
-
     private String userId;
 
     private TextView selectTv;
@@ -64,8 +60,8 @@ public class InventoryAPMDActivity extends AppCompatActivity  implements Lifecyc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_shelves_material_detail);
-        titleTv = (TextView) findViewById(R.id.title3);
+        setContentView(R.layout.pd_material_detail2);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg = (ImageView) findViewById(R.id.img_back);

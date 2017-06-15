@@ -28,7 +28,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:ems="20"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="@string/setting_et_port_hint"
         android:textSize="14sp"
         android:textColor="#282e39"

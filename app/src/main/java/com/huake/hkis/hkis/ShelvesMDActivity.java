@@ -64,7 +64,7 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shelves_material_detail);
-        titleTv = (TextView) findViewById(R.id.title3);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg = (ImageView) findViewById(R.id.img_back);
@@ -261,8 +261,6 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
 
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
-        documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
 
         LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
         shelvesDetailData.observe(this,shelvesDetails1 ->{

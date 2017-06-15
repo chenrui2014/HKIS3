@@ -51,7 +51,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_down_outbound);
-        titleTv = (TextView) findViewById(R.id.title2);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         initData();
 
     }

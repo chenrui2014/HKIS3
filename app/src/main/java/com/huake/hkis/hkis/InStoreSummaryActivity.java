@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -70,7 +69,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
             }
         });
 
-        titleTv = (TextView) findViewById(R.id.title2);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         initData();
        // initRecyclerView();
        // initRefreshLayout();

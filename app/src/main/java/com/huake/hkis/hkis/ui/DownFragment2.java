@@ -207,7 +207,14 @@ public class DownFragment2 extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                downBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+
+                if(taskNOEt.getText().toString().isEmpty()){
+                    downBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal1));
+                    downBtn.setTextColor(getResources().getColor(R.color.black_bt_tx));
+                }else{
+                    downBtn.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                    downBtn.setTextColor(Color.WHITE);
+                }
             }
         });
         return fv;

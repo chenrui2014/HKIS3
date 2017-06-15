@@ -34,7 +34,7 @@
             android:id="@+id/et_ckh"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:text="TextView"
+            android:text=""
             android:gravity="center"
             android:textSize="24sp"
             android:textColor="#282f39"

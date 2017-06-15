@@ -9,6 +9,7 @@ import com.huake.hkis.hkis.model.MaterialDetails;
 import com.huake.hkis.hkis.model.MyResponsBody;
 import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.UpgradeVersion;
 import com.huake.hkis.hkis.model.User;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import retrofit2.http.Query;
  */
 public interface HKISAPI {
 
-    String URL = "http://59.110.164.202:8082/storage/";
+    //String URL = "http://59.110.164.202:8082/storage/";
 
     @FormUrlEncoded
     @POST("/storage/mine/login.do")
@@ -40,33 +41,41 @@ public interface HKISAPI {
     @POST("/storage/task/shelvesDetail.do")
     Call<MyResponsBody<List<ShelvesDetail>>> shelvesDetail(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO, @Field("pageNo") String pageNo, @Field("pageSize") String pageSize);
 
+    @FormUrlEncoded
     @POST("/storage/task/materialShelves.do")
     Call<MyResponsBody<String>> materialShelves(@Body MaterialShelves materialShelves);
 
-    @POST("/storage/task/MaterialDetails.do")
-    Call<MyResponsBody<List<MaterialDetails>>> materialDetails(@Field("userId") String userId, @Field("resourceStorageSpace") String resourceStorageSpace,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
+    @FormUrlEncoded
+    @POST("/storage/task/Materialdetails.do")
+    Call<MyResponsBody<List<MaterialDetails>>> changeMaterialDetails(@Field("userId") String userId, @Field("resourceStorageSpace") String resourceStorageSpace,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
 
+    @FormUrlEncoded
     @POST("/storage/task/insertMdetailed.do")
     Call<MyResponsBody<String>> insertMdetailed(@Field("userId") String userId, @Field("materialNO") String materialNO);
 
+    @FormUrlEncoded
     @GET("/storage/task/updataMdetailed.do")
     Call<MyResponsBody<String>> updataMdetailed(@Query("userId") String userId,@Query("resourceStorageSpace") String resourceStorageSpace,@Query("targetStorageSpace") String targetStorageSpace);
 
     //@POST("/storage/user/register.do")
     //Call<String> register(@Field("resourceStorageSpace") String resourceStorageSpace, @Field("targetStorageSpace") String targetStorageSpace);
 
+    @FormUrlEncoded
     @POST("/storage/check/checkList.do")
     Call<MyResponsBody<List<Check>>> check(@Body CheckParam checkParam,@Field("pageNo") String pageNo, @Field("pageSize") String pageSize);
 
+    @FormUrlEncoded
     @POST("/storage/check/checkDetailList.do")
     Call<MyResponsBody<List<CheckDetail>>> checkDetail(@Field("userId") String userId, @Field("storageSpace") String storageSpace,@Field("pageNo") String pageNo,@Field("pageSize") String pageSize);
 
+    @FormUrlEncoded
     @POST("/storage/check/updatacheckDetail.do")
     Call<MyResponsBody<String>> updateCheckDetail(@Query("userId") String userId,@Query("checkDetailId") String checkDetailId,@Query("checkAmount") String checkAmount);
 
     @GET("/storage/mine/exit.do")
     Call<MyResponsBody<String>> exit(@Query("userId") String userId);
 
+    @FormUrlEncoded
     @POST("/storage/mine/editPw.do")
     Call<MyResponsBody<String>> editPw(@Field("userId") String userId,@Field("password") String password,@Field("newPw") String newPw);
 
@@ -79,5 +88,11 @@ public interface HKISAPI {
     Call<MyResponsBody<List<String>>> warehouseList();
     @GET("/storage/check/CheckNoList.do")
     Call<MyResponsBody<List<String>>> checkNoList();
+
+    @GET("/storage/check/CheckStorageList.do")
+    Call<MyResponsBody<List<String>>> checkStorageList();
+
+    @GET("/storage/version/updateVersion.do")
+    Call<MyResponsBody<List<UpgradeVersion>>> updateVersion();
 
 }
