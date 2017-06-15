@@ -17,68 +17,100 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
-import com.huake.hkis.hkis.model.Check;
-import com.huake.hkis.hkis.model.CheckParam;
-import com.huake.hkis.hkis.model.Task;
+import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshLayout;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshView;
 import com.huake.hkis.hkis.repository.HKISRepository;
 import com.huake.hkis.hkis.utils.Constants;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ysstech on 2017/6/14.
  */
 
-public class InventorySummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,InventorySummaryAdapter.OnItemClickListener {
+public class InventoryMPMDActivity extends AppCompatActivity  implements LifecycleRegistryOwner,InventoryMPMDAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
-    private static final String TAG = "PDSummaryActivity";
-    private List<Check> checks;
+    private static final String TAG = "ShelvesMDActivity";
+    private List<ShelvesDetail> shelvesDetails;
     private PullRefreshLayout refreshLayout;
-    private InventorySummaryAdapter adapter;
+    private InventoryMPMDAdapter adapter;
 
     private HKISRepository hkisRep;
     int page = 0;
 
     private static final int PAGE_SIZE = 5;
 
+    private String taskNO = "2017052511";
+
+    private String documentsType= "入库单";
+
     private String userId;
+
+    private TextView selectTv;
+    private TextView confirmTv;
 
     private ImageView backImg;
 
     private TextView titleTv;
 
-    private String checkType = "1";
-    private String checkNO;
-    private String wareHouseNO;
-    
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_pd_sum);
-
+        setContentView(R.layout.fragment_shelves_material_detail);
+        titleTv = (TextView) findViewById(R.id.title3);
+        selectTv = (TextView) findViewById(R.id.con_con2);
+        confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg = (ImageView) findViewById(R.id.img_back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(InventorySummaryActivity.this, MainActivity.class);
+                intent.setClass(InventoryMPMDActivity.this, InStoreSummaryActivity.class);
                 startActivity(intent);
-                InventorySummaryActivity.this.finish();
+                InventoryMPMDActivity.this.finish();
             }
         });
 
-        titleTv = (TextView) findViewById(R.id.pd_title);
-        initData();
-    }
+        confirmTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Integer> selectItems = adapter.getSelectedItems();
+                List<ShelvesDetail> selectShelvesDetail = new ArrayList<ShelvesDetail>();
+                for(Integer i = 0; i < selectItems.size(); i++){
+                    selectShelvesDetail.add(shelvesDetails.get(selectItems.get(i)));
+                }
 
+                Intent intent = new Intent();
+                intent.setClass(InventoryMPMDActivity.this,MaterialShelvesActivity.class);
+                intent.putExtra("selectShelvesDetail",(Serializable) selectShelvesDetail);
+                startActivity(intent);
+            }
+        });
+
+        selectTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clearSelectedState();
+                for(int i = 0; i < shelvesDetails.size(); i++){
+                    adapter.switchSelectedState(i);
+                    adapter.notifyDataSetChanged();
+                }
+                selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
+            }
+        });
+        initData();
+        // initRecyclerView();
+        // initRefreshLayout();
+
+    }
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InventorySummaryAdapter(this, checks);
+        adapter = new InventoryMPMDAdapter(this, shelvesDetails);
         adapter.setOnItemClickLitener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -207,15 +239,10 @@ public class InventorySummaryActivity extends AppCompatActivity  implements Life
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        CheckParam checkParam = new CheckParam();
-                        checkParam.setCheckUser(userId);
-                        checkParam.setCheckType(checkType);
-                        checkParam.setCheckNO(checkNO);
-                        checkParam.setWarehouseNum(wareHouseNO);
-                        LiveData<List<Check>> checkData = hkisRep.getCheckList(checkParam,page,PAGE_SIZE);
-                        checkData.observe(InventorySummaryActivity.this,mychecks ->{
-                            checks.addAll(mychecks);
-                            adapter.notifyItemInserted(checks.size());
+                        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
+                        shelvesDetailData.observe(InventoryMPMDActivity.this, shelvesDetails1 ->{
+                            shelvesDetails.addAll(shelvesDetails1);
+                            adapter.notifyItemInserted(shelvesDetails.size());
                         });
                     }
                 }, 1000);
@@ -230,23 +257,16 @@ public class InventorySummaryActivity extends AppCompatActivity  implements Life
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
         Intent intent = getIntent(); //用于激活它的意图对象
-        checkType = intent.getStringExtra("checkType");
-        checkNO = intent.getStringExtra("checkNO");
-        wareHouseNO = intent.getStringExtra("wareHouseNO");
+        taskNO = intent.getStringExtra("taskNO");
+        documentsType = intent.getStringExtra("documentsType");
+        documentsType = null;
 
-        CheckParam checkParam = new CheckParam();
-        checkParam.setCheckUser(userId);
-        checkParam.setCheckType(checkType);
-        checkParam.setCheckNO(checkNO);
-        checkParam.setWarehouseNum(wareHouseNO);
-
-        LiveData<List<Check>> checkData = hkisRep.getCheckList(checkParam,page,PAGE_SIZE);
-        checkData.observe(this,mychecks ->{
-            checks = mychecks;
+        LiveData<List<ShelvesDetail>> shelvesDetailData = hkisRep.getShelvesDetail(userId,"1",taskNO,page,PAGE_SIZE);
+        shelvesDetailData.observe(this,shelvesDetails1 ->{
+            shelvesDetails = shelvesDetails1;
             initRecyclerView();
             initRefreshLayout();
-
-            titleTv.setText(getResources().getText(R.string.check_sum_tv_title) + "(" + mychecks.size() + ")");
+            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + shelvesDetails1.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -263,10 +283,18 @@ public class InventorySummaryActivity extends AppCompatActivity  implements Life
 
     @Override
     public void onItemClick(View view, int position) {
-        Check check = checks.get(position);
-        Intent intent = new Intent(InventorySummaryActivity.this,ShelvesMDActivity.class);
-        intent.putExtra("checkNO", check.getCheckNO());
-        startActivity(intent);
+        adapter.switchSelectedState(position);
+        ImageView selectImg = (ImageView) view.findViewById(R.id.select_img);
+        if(adapter.isSelected(position)){
+
+            selectImg.setImageResource(R.mipmap.card_select);
+        }else{
+            selectImg.setImageResource(R.mipmap.card_unselect);
+        }
+//        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
+//        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
+//        intent.putExtra("taskNO", shelvesDetail.getTaskNO());
+//        startActivity(intent);
     }
 
     @Override

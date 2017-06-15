@@ -24,6 +24,8 @@ import com.huake.hkis.hkis.repository.HKISRepository;
 import com.huake.hkis.hkis.utils.Constants;
 
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +58,13 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
 
     private ImageView backImg;
 
+    private TextView titleTv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shelves_material_detail);
+        titleTv = (TextView) findViewById(R.id.title3);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg = (ImageView) findViewById(R.id.img_back);
@@ -264,6 +269,7 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
             shelvesDetails = shelvesDetails1;
             initRecyclerView();
             initRefreshLayout();
+            titleTv.setText(getResources().getText(R.string.smd_title) + "(" + shelvesDetails1.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {

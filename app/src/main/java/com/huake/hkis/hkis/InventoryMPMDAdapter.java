@@ -10,12 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.model.ShelvesDetail;
-import com.huake.hkis.hkis.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewHolder> {
+class InventoryMPMDAdapter extends RecyclerView.Adapter<InventoryMPMDAdapter.SimpleViewHolder> {
 
     /**
      * Item 点击事件监听的回调
@@ -36,7 +35,7 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
     private List<ShelvesDetail> datas;
     private SparseBooleanArray selectedItems;
 
-    public ShelvesMDAdapter(Context context, List<ShelvesDetail> datas) {
+    public InventoryMPMDAdapter(Context context, List<ShelvesDetail> datas) {
         this.context = context;
         this.datas = datas;
         this.selectedItems = new SparseBooleanArray();
@@ -86,7 +85,7 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
     @Override
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.wlhTv.setText(datas.get(position).getMaterialNO());
-        holder.wlmTv.setText(datas.get(position).getMaterialDesc());
+        holder.wlmTv.setText(datas.get(position).getMaterialCode());
         holder.hasBeenTv.setText(datas.get(position).getAmount());
         holder.toStayTv.setText(datas.get(position).getAmount());
         holder.suggestTv.setText(datas.get(position).getRecommendStorageSpace());

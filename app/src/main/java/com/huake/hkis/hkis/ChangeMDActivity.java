@@ -76,7 +76,7 @@ public class ChangeMDActivity extends AppCompatActivity  implements LifecycleReg
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shelves_material_detail);
-        View popupView = getLayoutInflater().inflate(R.layout.up_pop_window, null);
+        View popupView = getLayoutInflater().inflate(R.layout.change_pop_window, null);
 
         targetEt = (EditText) popupView.findViewById(R.id.et_pos);
         changeBtn = (Button) popupView.findViewById(R.id.tb_confirm);

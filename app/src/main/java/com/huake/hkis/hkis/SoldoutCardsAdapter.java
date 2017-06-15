@@ -4,15 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.model.MaterialShelves;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,13 +16,13 @@ import java.util.Collection;
 /**
  * Created by arjun on 4/25/16.
  */
-public class CardsAdapter extends BaseAdapter {
+public class SoldoutCardsAdapter extends BaseAdapter {
   private final ArrayList<MaterialShelves> mss;
   private final LayoutInflater layoutInflater;
 
   private MDOnScanListener scanListener;
 
-  public CardsAdapter(Context context, ArrayList<MaterialShelves> mss) {
+  public SoldoutCardsAdapter(Context context, ArrayList<MaterialShelves> mss) {
     super();
     this.mss = mss;
     this.layoutInflater = LayoutInflater.from(context);
@@ -35,7 +31,7 @@ public class CardsAdapter extends BaseAdapter {
 
   @Override public View getView(int position, View convertView, ViewGroup parent) {
     MaterialShelves ms = mss.get(position);
-    View view = layoutInflater.inflate(R.layout.fragment_store_info_item, parent, false);
+    View view = layoutInflater.inflate(R.layout.fragment_down_material_info_item, parent, false);
     ((TextView) view.findViewById(R.id.tv_wlh)).setText(ms.getMaterialNO());
     ((TextView) view.findViewById(R.id.tv_desc)).setText(ms.getMaterialDesc());
     ((TextView) view.findViewById(R.id.tv_inNum)).setText(ms.getAmount());

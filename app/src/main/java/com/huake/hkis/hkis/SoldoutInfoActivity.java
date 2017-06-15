@@ -41,9 +41,9 @@ import java.util.List;
  * Created by chen on 2017/6/9.
  */
 
-public class MaterialShelvesActivity extends AppCompatActivity implements LifecycleRegistryOwner,MDOnScanListener, SwipeFlingAdapterView.onFlingListener,
+public class SoldoutInfoActivity extends AppCompatActivity implements LifecycleRegistryOwner,MDOnScanListener, SwipeFlingAdapterView.onFlingListener,
         SwipeFlingAdapterView.OnItemClickListener {
-    private static final String TAG = MaterialShelvesActivity.class.getSimpleName();
+    private static final String TAG = SoldoutInfoActivity.class.getSimpleName();
 
     private ArrayList<MaterialShelves> listObj;
     private CardsAdapter arrayAdapter;
@@ -66,7 +66,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_store_info);
+        setContentView(R.layout.fragment_down_material_info);
         titleTv = (TextView) findViewById(R.id.textView4);
 
         Util.initSoundPool(this);
@@ -75,9 +75,9 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MaterialShelvesActivity.this, ShelvesMDActivity.class);
+                intent.setClass(SoldoutInfoActivity.this, ShelvesMDActivity.class);
                 startActivity(intent);
-                MaterialShelvesActivity.this.finish();
+                SoldoutInfoActivity.this.finish();
             }
         });
         listObj = new ArrayList<MaterialShelves>();
@@ -96,7 +96,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
             }
         }
 
-        titleTv.setText(getResources().getText(R.string.store_info_tv_title) + "(" + listObj.size() + ")");
+        titleTv.setText(getResources().getText(R.string.down_info_tv_title) + "(" + listObj.size() + ")");
         if(listObj != null && listObj.size() > 0){
             current = listObj.get(0);
         }
@@ -117,7 +117,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
                 swipeView.swipeRight();
                 if(current != null){
                     LiveData<Boolean> state = hkisRep.getMaterialShelves(current);
-                    state.observe(MaterialShelvesActivity.this, myState ->{
+                    state.observe(SoldoutInfoActivity.this, myState ->{
                         Toast.makeText(getApplicationContext(), "上架成功",Toast.LENGTH_LONG);
                     });
                 }
@@ -195,7 +195,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
                 //set para
                 iScan.setInputMode(modeBroad) ;
                 //open barcode
-                String syms = ParaSave.getSymbology(MaterialShelvesActivity.this) ;
+                String syms = ParaSave.getSymbology(SoldoutInfoActivity.this) ;
                 if(syms != null && syms.length() > 0){
                     String[] symArrays = syms.split(",");
                     for(int i = 0 ; i < symArrays.length; i++){

@@ -26,6 +26,7 @@ import com.huake.hkis.hkis.ui.DownFragment2;
 import com.huake.hkis.hkis.ui.UpFragment2;
 import com.huake.hkis.hkis.ui.UserFragment2;
 import com.huake.hkis.hkis.utils.UIHelper;
+import com.pda.scan.DecoderConfigValues;
 import com.pda.scan.IHWScan;
 
 import java.util.ArrayList;
@@ -80,15 +81,18 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
                         Log.e("symbology", "value = " + symArrays[i]) ;
                     }
                 }
+
+                iScan.enableSymbology(DecoderConfigValues.SymbologyID.SYM_ALL) ;
+
 //				iScan.disableSymbology(SymbologyID.SYM_ALL) ;//disable all
-//				iScan.enableSymbology(SymbologyID.SYM_QR) ;
+//				iScan.enableSymbology(DecoderConfigValues.SymbologyID.SYM_QR) ;
 //				iScan.enableSymbology(SymbologyID.SYM_CODE128) ;
 //				iScan.enableSymbology(SymbologyID.SYM_CODE39) ;
 //				iScan.enableSymbology(SymbologyID.SYM_DATAMATRIX) ;
 //				iScan.enableSymbology(SymbologyID.SYM_PDF417) ;
 //				iScan.enableSymbology(SymbologyID.SYM_MAXICODE) ;
 //				iScan.enableSymbology(SymbologyID.SYM_HANXIN) ;//chinese hanxin
-//				iScan.enableSymbology(SymbologyID.SYM_ALL) ;
+
                 //iScan.setChar("GBK");
 
 //				iScan.setOnResultListener(new IScanResult.Stub() {
@@ -332,5 +336,29 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
         }
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(keyReceiver) ;
+        unregisterReceiver(resultReceiver) ;
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        if(connFlag){
+            connFlag = false ;
+            try {
+                Log.e(TAG, "close----");
+                iScan.close();
+            } catch (RemoteException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            unbindService(conn);
+        }
+        super.onPause();
     }
 }

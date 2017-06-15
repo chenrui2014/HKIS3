@@ -19,11 +19,12 @@ public class ShelvesDetail implements Serializable {
     public String handleStatus;
     public String recommendStorageSpace;
 
+    public String calculateUnit;
     public String finishAmount;
     public String surplusAmount;
     public String materialDesc;
 
-    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace,String finishAmount,String surplusAmount,String materialDesc) {
+    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace,String finishAmount,String surplusAmount,String materialDesc,String calculateUnit) {
         this.taskNO = taskNO;
         this.wareHouseNum = wareHouseNum;
         this.materialNO = materialNO;
@@ -38,6 +39,7 @@ public class ShelvesDetail implements Serializable {
         this.finishAmount = finishAmount;
         this.surplusAmount = surplusAmount;
         this.materialDesc = materialDesc;
+        this.calculateUnit = calculateUnit;
     }
 
     public String getTaskNO() {
@@ -150,5 +152,13 @@ public class ShelvesDetail implements Serializable {
 
     public void setMaterialDesc(String materialDesc) {
         this.materialDesc = materialDesc;
+    }
+
+    public String getCalculateUnit() {
+        return calculateUnit;
+    }
+
+    public void setCalculateUnit(String calculateUnit) {
+        this.calculateUnit = calculateUnit;
     }
 }

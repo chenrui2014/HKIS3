@@ -55,11 +55,13 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
 
     private ImageView backImg;
 
+    private TextView titleTv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_down_material_detail);
-
+        titleTv = (TextView) findViewById(R.id.title5);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +84,7 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
                 }
 
                 Intent intent = new Intent();
-                intent.setClass(SoldoutMDActivity.this,MaterialShelvesActivity.class);
+                intent.setClass(SoldoutMDActivity.this,SoldoutInfoActivity.class);
                 intent.putExtra("selectShelvesDetail",(Serializable) selectShelvesDetail);
                 startActivity(intent);
             }
@@ -260,6 +262,7 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
             shelvesDetails = shelvesDetails1;
             initRecyclerView();
             initRefreshLayout();
+            titleTv.setText(getResources().getText(R.string.down_md_tv_title) + "(" + shelvesDetails1.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {

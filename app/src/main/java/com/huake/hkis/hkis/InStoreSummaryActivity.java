@@ -52,6 +52,8 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private ImageView backImg;
 
+    private TextView titleTv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
             }
         });
 
+        titleTv = (TextView) findViewById(R.id.title2);
         initData();
        // initRecyclerView();
        // initRefreshLayout();
@@ -225,13 +228,14 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
 
         LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();
             initRefreshLayout();
+
+            titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {

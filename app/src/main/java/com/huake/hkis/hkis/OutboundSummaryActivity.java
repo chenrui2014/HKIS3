@@ -45,11 +45,13 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
     private String documentsType= "入库单";
 
     private String userId;
+    private TextView titleTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_down_outbound);
+        titleTv = (TextView) findViewById(R.id.title2);
         initData();
 
     }
@@ -213,6 +215,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
             tasks = myTasks;
             initRecyclerView();
             initRefreshLayout();
+            titleTv.setText(getResources().getText(R.string.down_sum_tv_title) + "(" + myTasks.size() + ")");
             refreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {

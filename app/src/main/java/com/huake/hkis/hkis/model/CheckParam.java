@@ -10,6 +10,8 @@ public class CheckParam {
     private String warehouseNum;
     private String checkNO;
 
+    public CheckParam(){}
+
     public CheckParam(String checkUser, String checkType, String warehouseNum, String checkNO) {
         this.checkUser = checkUser;
         this.checkType = checkType;

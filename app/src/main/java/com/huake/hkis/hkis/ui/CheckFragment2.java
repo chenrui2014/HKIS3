@@ -1,5 +1,6 @@
 package com.huake.hkis.hkis.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.huake.hkis.hkis.OnFragmentListener;
+import com.huake.hkis.hkis.OnScanListener;
 import com.huake.hkis.hkis.R;
 import com.huake.hkis.hkis.utils.ViewFindUtils;
 
@@ -26,6 +29,7 @@ public class CheckFragment2 extends Fragment {
     private SegmentTabLayout tabLayout_2;
     private String[] mTitles_2 = {"明盘", "暗盘", "盲扫"};
     private FragmentManager fm;
+
     //private mTabLayout;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class CheckFragment2 extends Fragment {
         tabLayout_2.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+
                 vp_3.setCurrentItem(position);
             }
 

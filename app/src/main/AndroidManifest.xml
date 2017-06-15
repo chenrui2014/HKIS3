@@ -29,6 +29,15 @@
         <activity android:name=".UpgradeActivity"></activity>
         <activity android:name=".InStoreSummaryActivity"></activity>
         <activity android:name=".ShelvesMDActivity"></activity>
+        <activity android:name=".InventorySummaryActivity"></activity>
+        <activity android:name=".SoldoutMDActivity"></activity>
+        <activity android:name=".SoldoutInfoActivity"></activity>
+        <activity android:name=".ChangeMDActivity"></activity>
+        <activity android:name=".InventoryAPMDActivity"></activity>
+        <activity android:name=".InventoryMPMDActivity"></activity>
+        <activity android:name=".InventoryMSMDActivity"></activity>
+        <activity android:name=".InventoryWareHouseActivity"></activity>
+
         <activity android:name="LoginActivity" android:screenOrientation="portrait" />
     </application>
 
