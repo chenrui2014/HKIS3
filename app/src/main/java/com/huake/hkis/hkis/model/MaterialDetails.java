@@ -18,8 +18,10 @@ public class MaterialDetails {
     public String materialDesc;//物料描述
     public String calculateUnit;//计量单位
     public String repertoryAmount;//库存量
+    public String materBatch;//批次
 
-    public MaterialDetails(String wareHouseNum, String resourceStorageSpace, String storageSpace, String supplierNum, String storageType, String storageArea, String storageSpaceCode, String inStorageTime, String repertoryStatus, String materialNum, String materialDesc, String calculateUnit, String repertoryAmount) {
+    public MaterialDetails(String materBatch,String wareHouseNum, String resourceStorageSpace, String storageSpace, String supplierNum, String storageType, String storageArea, String storageSpaceCode, String inStorageTime, String repertoryStatus, String materialNum, String materialDesc, String calculateUnit, String repertoryAmount) {
+       this.materBatch = materBatch;
         this.wareHouseNum = wareHouseNum;
         this.resourceStorageSpace = resourceStorageSpace;
         this.storageSpace = storageSpace;
@@ -137,5 +139,13 @@ public class MaterialDetails {
 
     public void setRepertoryAmount(String repertoryAmount) {
         this.repertoryAmount = repertoryAmount;
+    }
+
+    public String getMaterBatch() {
+        return materBatch;
+    }
+
+    public void setMaterBatch(String materBatch) {
+        this.materBatch = materBatch;
     }
 }

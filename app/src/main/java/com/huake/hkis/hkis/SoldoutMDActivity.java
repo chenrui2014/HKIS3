@@ -61,7 +61,7 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_down_material_detail);
-        titleTv = (TextView) findViewById(R.id.title5);
+        titleTv = (TextView) findViewById(R.id.tv_title);
         selectTv = (TextView) findViewById(R.id.con_con2);
         confirmTv = (TextView) findViewById(R.id.con_con3);
         backImg.setOnClickListener(new View.OnClickListener() {
