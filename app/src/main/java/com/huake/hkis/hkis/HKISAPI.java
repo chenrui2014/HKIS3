@@ -35,7 +35,7 @@ public interface HKISAPI {
 
     @FormUrlEncoded
     @POST("/storage/task/shelves.do")
-    Call<MyResponsBody<List<Task>>> task(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO,@Field("documentsType")String documentsType,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
+    Call<MyResponsBody<List<Task>>> task(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO,@Field("documentsType")String documentsType,@Field("wareHouseNum")String wareHouseNum,@Field("inStorageTime")String inStorageTime,@Field("pageNo") int pageNo,@Field("pageSize") int pageSize);
 
     @FormUrlEncoded
     @POST("/storage/task/shelvesDetail.do")
@@ -66,7 +66,7 @@ public interface HKISAPI {
 
     @FormUrlEncoded
     @POST("/storage/check/checkDetailList.do")
-    Call<MyResponsBody<List<CheckDetail>>> checkDetail(@Field("userId") String userId, @Field("storageSpace") String storageSpace,@Field("pageNo") String pageNo,@Field("pageSize") String pageSize);
+    Call<MyResponsBody<List<CheckDetail>>> checkDetail(@Field("userId") String userId, @Field("storageSpace") String storageSpace, @Field("checkNO") String checkNO,@Field("pageNo") String pageNo,@Field("pageSize") String pageSize);
 
     @FormUrlEncoded
     @POST("/storage/check/updatacheckDetail.do")

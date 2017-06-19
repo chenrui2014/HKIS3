@@ -46,7 +46,7 @@
         android:id="@+id/tv_wlm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text=""
         android:layout_marginTop="15dp"
         android:textColor="#282e39"
         android:textSize="16sp"
@@ -61,6 +61,30 @@
         android:textColor="#a2b0c6"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_wlm"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_lb_batch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_batch"
+        android:textSize="16sp"
+        android:textColor="#616976"
+        android:gravity="center_vertical"
+        android:drawableStart="@mipmap/batch"
+        android:drawablePadding="2dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wlm"/>
+    <TextView
+        android:id="@+id/tv_batck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="#f2a929"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_batch"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_batch"/>
     <TextView
         android:id="@+id/tv_lb_kc"
         android:layout_width="wrap_content"
@@ -73,7 +97,7 @@
         android:drawablePadding="2dp"
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="@+id/gl"
-        app:layout_constraintTop_toBottomOf="@+id/tv_wlm"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_batck"/>
     <TextView
         android:id="@+id/tv_kc"
         android:layout_width="wrap_content"

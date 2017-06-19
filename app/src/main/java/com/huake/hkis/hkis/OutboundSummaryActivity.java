@@ -42,7 +42,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
 
     private String taskNO = "2017052511";
 
-    private String documentsType= "入库单";
+    private String documentsType= "出库单";
 
     private String userId;
     private TextView titleTv;
@@ -188,7 +188,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
                         taskData.observe(OutboundSummaryActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
@@ -208,9 +208,8 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
-        documentsType = null;
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();

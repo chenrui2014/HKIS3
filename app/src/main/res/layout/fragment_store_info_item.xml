@@ -102,6 +102,28 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_lb_unit"/>
 
     <TextView
+        android:id="@+id/tv_lb_batch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#a2b0c7"
+        android:layout_marginTop="20dp"
+        android:text="@string/tv_batch"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_unit"
+        app:layout_constraintLeft_toLeftOf="@+id/gl"/>
+
+    <TextView
+        android:id="@+id/tv_batch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#616976"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lb_batch"
+        app:layout_constraintLeft_toRightOf="@+id/tv_lb_batch"/>
+
+    <TextView
         android:id="@+id/tv_lb_suggest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +131,7 @@
         android:textColor="#a2b0c7"
         android:layout_marginTop="20dp"
         android:text="@string/store_info_tv_suggest"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lb_unit"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_batch"
         app:layout_constraintLeft_toLeftOf="@+id/gl"/>
 
     <TextView

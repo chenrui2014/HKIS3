@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 
 public class ShelvesDetail implements Serializable {
+
+    public String materBatch;
+    public String taskDetailId;
     public String taskNO;
     public String wareHouseNum;
     public String materialNO;
@@ -24,7 +27,10 @@ public class ShelvesDetail implements Serializable {
     public String surplusAmount;
     public String materialDesc;
 
-    public ShelvesDetail(String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace,String finishAmount,String surplusAmount,String materialDesc,String calculateUnit) {
+    public ShelvesDetail(String materBatch,String taskDetailId,String taskNO, String wareHouseNum, String materialNO,String materialCode, String foxAmount, String supplierNum, String storageSpaceCode, String amount, String recommendAmount, String handleStatus, String recommendStorageSpace,String finishAmount,String surplusAmount,String materialDesc,String calculateUnit) {
+
+        this.materBatch = materBatch;
+        this.taskDetailId = taskDetailId;
         this.taskNO = taskNO;
         this.wareHouseNum = wareHouseNum;
         this.materialNO = materialNO;
@@ -160,5 +166,21 @@ public class ShelvesDetail implements Serializable {
 
     public void setCalculateUnit(String calculateUnit) {
         this.calculateUnit = calculateUnit;
+    }
+
+    public String getTaskDetailId() {
+        return taskDetailId;
+    }
+
+    public void setTaskDetailId(String taskDetailId) {
+        this.taskDetailId = taskDetailId;
+    }
+
+    public String getMaterBatch() {
+        return materBatch;
+    }
+
+    public void setMaterBatch(String materBatch) {
+        this.materBatch = materBatch;
     }
 }

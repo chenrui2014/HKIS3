@@ -5,6 +5,7 @@ package com.huake.hkis.hkis.model;
  */
 
 public class Check {
+    private String storageSpaceCode;//仓位条码
     private String warehouseNO;//仓库号
     private String checkNO;//盘点单号
     private String rowProject;//行项目
@@ -15,7 +16,9 @@ public class Check {
     private String status;//状态（是否结算）
     private String checkType;//盘点类型1.明盘，2.暗盘
 
-    public Check(String warehouseNO, String checkNO, String rowProject, String checkTime, String checkUser, String superviseUser, String auditUser, String status, String checkType) {
+    public Check(String storageSpaceCode,String warehouseNO, String checkNO, String rowProject, String checkTime, String checkUser, String superviseUser, String auditUser, String status, String checkType) {
+
+        this.storageSpaceCode = storageSpaceCode;
         this.warehouseNO = warehouseNO;
         this.checkNO = checkNO;
         this.rowProject = rowProject;
@@ -98,4 +101,12 @@ public class Check {
     public void setCheckType(String checkType) {
         this.checkType = checkType;
     }
+
+        public String getStorageSpaceCode() {
+            return storageSpaceCode;
+        }
+
+        public void setStorageSpaceCode(String storageSpaceCode) {
+            this.storageSpaceCode = storageSpaceCode;
+        }
 }
