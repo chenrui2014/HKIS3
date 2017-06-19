@@ -75,10 +75,11 @@
     <string name="store_info_tv_boxNum">上架箱数</string>
     <string name="store_info_bt_confirm">确认上架</string>
 
+
     <!--移仓首页面-->
     <string name="change_et_hint_scan">请扫描源仓位</string>
     <string name="change_bt_change">立即移仓</string>
-
+<string name="tv_batch">批次</string>
     <!--移仓详情页-->
     <string name="out_title_tv">原仓位</string>
     <string name="change_detail_tv_wlh">物料号</string>
