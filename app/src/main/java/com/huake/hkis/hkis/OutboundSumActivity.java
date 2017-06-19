@@ -28,9 +28,9 @@ import java.util.List;
  * Created by ysstech on 2017/6/13.
  */
 
-public class OutboundSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,OutBoundAdapter.OnItemClickListener {
+public class OutboundSumActivity extends AppCompatActivity  implements LifecycleRegistryOwner,OutBoundAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    private static final String TAG = "OutboundSummaryActivity";
+    private static final String TAG = "OutboundSumActivity";
     private List<Task> tasks;
     private PullRefreshLayout refreshLayout;
     private OutBoundAdapter adapter;
@@ -188,8 +188,8 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
-                        taskData.observe(OutboundSummaryActivity.this,myTasks ->{
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,null,null,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
                         });
@@ -209,7 +209,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,null,null,page,PAGE_SIZE);
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();
@@ -232,7 +232,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
     @Override
     public void onItemClick(View view, int position) {
         Task task = tasks.get(position);
-        Intent intent = new Intent(OutboundSummaryActivity.this,SoldoutMDActivity.class);
+        Intent intent = new Intent(OutboundSumActivity.this,SoldoutMDActivity.class);
         intent.putExtra("taskNO", task.getTaskNO());
         startActivity(intent);
     }
