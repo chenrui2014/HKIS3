@@ -33,7 +33,8 @@ public class SimpleCardFragment extends Fragment {
     public static SimpleCardFragment getInstance(int index) {
         SimpleCardFragment sf = new SimpleCardFragment();
         sf.index = index;
-        sf.checkType = ++index + "";
+        int temp = index + 1;
+        sf.checkType = temp + "";
         return sf;
     }
 
@@ -49,11 +50,16 @@ public class SimpleCardFragment extends Fragment {
         switch(this.index){
             case 0:
                 layoutId = R.layout.fragment_check_mp;
+                break;
             case 1:
                 layoutId = R.layout.fragment_check_ap;
+                break;
             case 2:
                 layoutId = R.layout.fragment_check_ms;
-            default:layoutId = R.layout.fragment_check_mp;
+                break;
+            default:
+                layoutId = R.layout.fragment_check_mp;
+                break;
         }
 
         View view = inflater.inflate(layoutId, null);

@@ -18,11 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.huake.hkis.hkis.InStoreSummaryActivity;
 import com.huake.hkis.hkis.OnFragmentListener;
-import com.huake.hkis.hkis.OutboundSummaryActivity;
+import com.huake.hkis.hkis.OutboundSumActivity;
 import com.huake.hkis.hkis.R;
-import com.huake.hkis.hkis.WareHousingSummaryActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -190,7 +188,7 @@ public class DownFragment2 extends Fragment {
                 }
                 params.put("taskNO",taskNO);
                 params.put("documentsType",documentsType);
-                fListener.onFragmentAction(params,OutboundSummaryActivity.class);
+                fListener.onFragmentAction(params,OutboundSumActivity.class);
 
             }
         });

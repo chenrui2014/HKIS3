@@ -1,6 +1,5 @@
 package com.huake.hkis.hkis.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,10 +12,7 @@ import android.view.ViewGroup;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.huake.hkis.hkis.OnFragmentListener;
-import com.huake.hkis.hkis.OnScanListener;
 import com.huake.hkis.hkis.R;
-import com.huake.hkis.hkis.utils.ViewFindUtils;
 
 import java.util.ArrayList;
 
@@ -29,6 +25,13 @@ public class CheckFragment2 extends Fragment {
     private SegmentTabLayout tabLayout_2;
     private String[] mTitles_2 = {"明盘", "暗盘", "盲扫"};
     private FragmentManager fm;
+
+    public CheckFragment2(){
+
+        for (int i = 0;i < mTitles_2.length;i++) {
+            mFragments2.add(SimpleCardFragment.getInstance(i));
+        }
+    }
 
     //private mTabLayout;
     @Override
@@ -45,12 +48,8 @@ public class CheckFragment2 extends Fragment {
         if(fm == null){
             fm = getActivity().getSupportFragmentManager();
         }
-        for (int i = 0;i < mTitles_2.length;i++) {
-            mFragments2.add(SimpleCardFragment.getInstance(i));
-        }
         tabLayout_2 = (SegmentTabLayout)fv.findViewById(R.id.tl_2);
         tabLayout_2.setTabData(mTitles_2);
-
         final ViewPager vp_3 = (ViewPager)fv.findViewById(R.id.vp_2);
         vp_3.setAdapter(new MyPagerAdapter(fm));
         tabLayout_2.setOnTabSelectListener(new OnTabSelectListener() {
@@ -73,12 +72,13 @@ public class CheckFragment2 extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+
                 tabLayout_2.setCurrentTab(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+//                tabLayout_2.setCurrentTab(state);
             }
         });
         vp_3.setCurrentItem(0);
@@ -97,6 +97,7 @@ public class CheckFragment2 extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
+
             return mTitles_2[position];
         }
 
