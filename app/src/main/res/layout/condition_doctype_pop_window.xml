@@ -79,7 +79,6 @@
             android:background="@drawable/bt_bg2"
             android:layout_marginStart="15dp" />
 
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"

@@ -28,6 +28,33 @@
         android:layout_marginTop="15dp"/>
 
     <TextView
+        android:id="@+id/tv_con_doc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#d7e6ef"
+        android:textSize="14sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:drawableEnd="@mipmap/select_white"
+        android:text="@string/sum_tv_po"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_line"/>
+    <TextView
+        android:id="@+id/tv_line"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:background="#d7e6ef"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_con_doc"
+        app:layout_constraintRight_toLeftOf="@+id/tv_wh_NO"/>
+
+    <TextView
         android:id="@+id/tv_wh_NO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +65,7 @@
         android:layout_marginBottom="20dp"
         android:drawableEnd="@mipmap/select_white"
         android:text="@string/sum_tv_wh"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_line"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_line2"/>

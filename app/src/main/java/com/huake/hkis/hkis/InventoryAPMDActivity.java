@@ -239,7 +239,7 @@ public class InventoryAPMDActivity extends AppCompatActivity  implements Lifecyc
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,page,PAGE_SIZE);
+                        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,null,page,PAGE_SIZE);
                         checkDetailData.observe(InventoryAPMDActivity.this, checkDetailList1 ->{
                             checkDetailList.addAll(checkDetailList1);
                             adapter.notifyItemInserted(checkDetailList.size());
@@ -259,7 +259,7 @@ public class InventoryAPMDActivity extends AppCompatActivity  implements Lifecyc
         Intent intent = getIntent(); //用于激活它的意图对象
         wareHouseNO = intent.getStringExtra("wareHouseNO");
 
-        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,page,PAGE_SIZE);
+        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,null,page,PAGE_SIZE);
         checkDetailData.observe(this,checkDetailList1 ->{
             checkDetailList = checkDetailList1;
             initRecyclerView();

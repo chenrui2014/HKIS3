@@ -88,7 +88,7 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
         documentsType = intent.getStringExtra("documentsType");
         documentsType = null;
 
-        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
         tasks.observe(this,myTasks ->{
 
             mData = myTasks;
@@ -125,7 +125,7 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
 
                         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
                         String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
-                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
                         tasks.observe(WareHousingSummaryActivity.this,myTasks ->{
 
                             mData = myTasks;
@@ -152,7 +152,7 @@ public class WareHousingSummaryActivity extends AppCompatActivity implements Lif
                         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
                         String userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
-                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        LiveData<List<Task>> tasks = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
                         tasks.observe(WareHousingSummaryActivity.this,myTasks ->{
 
                             mData.addAll(myTasks);

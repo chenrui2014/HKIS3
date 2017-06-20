@@ -13,13 +13,19 @@
     <string name="up_fragment_bt_text">立即上架</string>
     <string name="up_condition_text6">入库单</string>
     <string name="down_condition_text">出库单</string>
-    <string name="up_fragment_condition_text1">销售订单号</string>
-    <string name="up_fragment_condition_text2">采购订单号</string>
-    <string name="up_fragment_condition_text3">调拨单号</string>
-    <string name="up_fragment_condition_text4">采料单</string>
-    <string name="up_fragment_condition_text5">报废单</string>
+    <string name="up_fragment_condition_text1">销售出库单</string>
+    <string name="up_fragment_condition_text2">采购收货单</string>
+    <string name="up_fragment_condition_text3">调拨单</string>
+    <string name="up_fragment_condition_text4">领料单</string>
+    <string name="up_fragment_condition_other1">其他出库单</string>
+    <string name="up_fragment_condition_other2">其他入库单</string>
+    <string name="up_fragment_condition_text5">报损单</string>
     <string name="up_fragment_condition_reset">重置</string>
     <string name="up_fragment_condition_confirm">确定</string>
+    <string name="condition_inTime_year">年</string>
+    <string name="condition_inTime_month">月</string>
+    <string name="condition_inTime_day">日</string>
+
     <string name="up_fragment_condition_desc">上架图片</string>
     <!--登陆页面-->
     <string name="login_bt_login">登录</string>

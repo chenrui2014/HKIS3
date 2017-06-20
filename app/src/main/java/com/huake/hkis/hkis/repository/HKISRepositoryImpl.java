@@ -58,9 +58,9 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<List<Task>> getTask(String userId, String taskType, String taskNO,String documentsType,int pageNo,int pageSize) {
+    public LiveData<List<Task>> getTask(String userId, String taskType, String taskNO,String documentsType,String wareHouseNum,String inStorageTime,int pageNo,int pageSize) {
         final MutableLiveData<List<Task>> liveData = new MutableLiveData<>();
-        hkisAPI.task(userId,taskType,taskNO,documentsType,pageNo,pageSize).enqueue(new Callback<MyResponsBody<List<Task>>>() {
+        hkisAPI.task(userId,taskType,taskNO,documentsType,wareHouseNum,inStorageTime,pageNo,pageSize).enqueue(new Callback<MyResponsBody<List<Task>>>() {
             @Override
             public void onResponse(Call<MyResponsBody<List<Task>>> call, Response<MyResponsBody<List<Task>>> response) {
                 if(response.isSuccessful()){
@@ -224,9 +224,9 @@ public class HKISRepositoryImpl implements HKISRepository {
     }
 
     @Override
-    public LiveData<List<CheckDetail>> getCheckDetail(String userId, String storageSpace, int pageNo, int pageSize) {
+    public LiveData<List<CheckDetail>> getCheckDetail(String userId, String storageSpace,String checkNO, int pageNo, int pageSize) {
         final MutableLiveData<List<CheckDetail>> liveData = new MutableLiveData<>();
-        hkisAPI.checkDetail(userId,storageSpace,pageNo+"",pageSize+"").enqueue(new Callback<MyResponsBody<List<CheckDetail>>>() {
+        hkisAPI.checkDetail(userId,storageSpace,checkNO,pageNo+"",pageSize+"").enqueue(new Callback<MyResponsBody<List<CheckDetail>>>() {
             @Override
             public void onResponse(Call<MyResponsBody<List<CheckDetail>>> call, Response<MyResponsBody<List<CheckDetail>>> response) {
                 if(response.isSuccessful()){

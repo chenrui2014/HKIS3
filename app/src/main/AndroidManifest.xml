@@ -19,24 +19,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".WareHousingSummaryActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".AboutUsActivity"></activity>
-        <activity android:name=".MaterialShelvesActivity"></activity>
-        <activity android:name=".ShelvesMaterialDetailActivity"></activity>
-        <activity android:name=".UpdatePasswordActivity"></activity>
-        <activity android:name=".UpgradeActivity"></activity>
-        <activity android:name=".InStoreSummaryActivity"></activity>
-        <activity android:name=".ShelvesMDActivity"></activity>
-        <activity android:name=".InventorySummaryActivity"></activity>
-        <activity android:name=".SoldoutMDActivity"></activity>
-        <activity android:name=".SoldoutInfoActivity"></activity>
-        <activity android:name=".ChangeMDActivity"></activity>
-        <activity android:name=".InventoryAPMDActivity"></activity>
-        <activity android:name=".InventoryMPMDActivity"></activity>
-        <activity android:name=".InventoryMSMDActivity"></activity>
-        <activity android:name=".InventoryWareHouseActivity"></activity>
+        <activity android:name=".MainActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".WareHousingSummaryActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SettingActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".AboutUsActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".MaterialShelvesActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ShelvesMaterialDetailActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".UpdatePasswordActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".UpgradeActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InStoreSummaryActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ShelvesMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InventorySummaryActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SoldoutMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SoldoutInfoActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ChangeMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InventoryAPMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InventoryMPMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InventoryMSMDActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".InventoryWareHouseActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutboundSumActivity" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
 
         <activity android:name="LoginActivity" android:screenOrientation="portrait" />
     </application>

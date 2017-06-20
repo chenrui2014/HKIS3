@@ -41,7 +41,7 @@ public interface HKISRepository {
      * @param pageSize
      * @return
      */
-    LiveData<List<Task>> getTask(String userId,String taskType,String taskNO,String documentsType,int pageNo,int pageSize);
+    LiveData<List<Task>> getTask(String userId,String taskType,String taskNO,String documentsType,String wareHouseNum,String inStorageTime,int pageNo,int pageSize);
 
     /**
      * 任务详细接口
@@ -105,7 +105,7 @@ public interface HKISRepository {
      * @param pageSize
      * @return
      */
-    LiveData<List<CheckDetail>> getCheckDetail(String userId, String storageSpace, int pageNo,int pageSize);
+    LiveData<List<CheckDetail>> getCheckDetail(String userId, String storageSpace, String checkNO,int pageNo,int pageSize);
 
     /**
      * 更新盘点详情接口

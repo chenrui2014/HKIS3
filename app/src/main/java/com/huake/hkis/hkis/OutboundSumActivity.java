@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -202,6 +201,8 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                         refreshLayout.loadMoreComplete();
                         LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
                         taskData.observe(OutboundSumActivity.this,myTasks ->{
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,null,null,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
                         });
@@ -221,7 +222,7 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,null,null,page,PAGE_SIZE);
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();

@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -24,6 +28,7 @@ import com.huake.hkis.hkis.repository.HKISRepository;
 import com.huake.hkis.hkis.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -37,6 +42,12 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
     private List<Task> tasks;
     private PullRefreshLayout refreshLayout;
     private SimpleAdapter adapter;
+
+    private PopupWindow docTypePopupWindow,whPopupWindow,docNOPopupWindow,inTimePopupWindow;
+
+    private TextView docTypeTV,whNOTv,docNOTv,inTimeTv;
+
+    private PickerView whNOPv,docNOPv,yearPv,monthPv,dayPv;
 
     private HKISRepository hkisRep;
     int page = 0;
@@ -53,10 +64,156 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private TextView titleTv;
 
+    private String inDate;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_up_putin);
+
+        docTypeTV = (TextView) findViewById(R.id.tv_con_doc);
+        whNOTv = (TextView) findViewById(R.id.tv_wh_NO);
+        docNOTv = (TextView) findViewById(R.id.tv_bill_NO);
+        inTimeTv = (TextView) findViewById(R.id.tv_inDate);
+
+        View popView1 = getLayoutInflater().inflate(R.layout.condition_doctype_pop_window,null);
+        docTypePopupWindow = new PopupWindow(popView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+        View popView2 = getLayoutInflater().inflate(R.layout.condition_whno_pop_window,null);
+        whPopupWindow = new PopupWindow(popView2, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+        View popView3 = getLayoutInflater().inflate(R.layout.condition_docno_pop_window,null);
+        docNOPopupWindow = new PopupWindow(popView3, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+        View popView4 = getLayoutInflater().inflate(R.layout.condition_intime_pop_window,null);
+        inTimePopupWindow = new PopupWindow(popView4, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+
+        initPopWindow(docTypePopupWindow);
+        initPopWindow(whPopupWindow);
+        initPopWindow(docNOPopupWindow);
+        initPopWindow(inTimePopupWindow);
+
+        docTypeTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                docTypePopupWindow.showAsDropDown(v);
+            }
+        });
+        docNOTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                docNOPopupWindow.showAsDropDown(v);
+            }
+        });
+        whNOTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whPopupWindow.showAsDropDown(v);
+            }
+        });
+        inTimeTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inTimePopupWindow.showAsDropDown(v);
+            }
+        });
+
+        whNOPv = (PickerView) popView2.findViewById(R.id.whNOList) ;
+        docNOPv  = (PickerView) popView2.findViewById(R.id.docNOList) ;
+        yearPv  = (PickerView) popView2.findViewById(R.id.pv_year) ;
+        monthPv  = (PickerView) popView2.findViewById(R.id.pv_month) ;
+        dayPv  = (PickerView) popView2.findViewById(R.id.pv_day) ;
+
+        List<String> yearList = new ArrayList<String>();
+
+        yearList.add("2003");
+        yearList.add("2004");
+        yearList.add("2005");
+        yearList.add("2006");
+        yearList.add("2007");
+        yearList.add("2008");
+        yearList.add("2009");
+        yearList.add("2010");
+        yearList.add("2011");
+        yearList.add("2012");
+        yearList.add("2013");
+        yearList.add("2014");
+        yearList.add("2015");
+        yearList.add("2016");
+        yearList.add("2017");
+
+        List<String> monthList = new ArrayList<String>();
+        monthList.add("1");
+        monthList.add("2");
+        monthList.add("3");
+        monthList.add("4");
+        monthList.add("5");
+        monthList.add("6");
+        monthList.add("7");
+        monthList.add("8");
+        monthList.add("9");
+        monthList.add("10");
+        monthList.add("11");
+        monthList.add("12");
+
+        List<String> dayList = new ArrayList<String>();
+
+        dayList.add("1");
+        dayList.add("2");
+        dayList.add("3");
+        dayList.add("4");
+        dayList.add("5");
+        dayList.add("6");
+        dayList.add("7");
+        dayList.add("8");
+        dayList.add("9");
+        dayList.add("10");
+        dayList.add("11");
+        dayList.add("12");
+        dayList.add("13");
+        dayList.add("14");
+        dayList.add("15");
+        dayList.add("16");
+        dayList.add("17");
+        dayList.add("18");
+        dayList.add("19");
+        dayList.add("20");
+        dayList.add("21");
+        dayList.add("22");
+        dayList.add("23");
+        dayList.add("24");
+        dayList.add("25");
+        dayList.add("26");
+        dayList.add("27");
+        dayList.add("28");
+        dayList.add("29");
+        dayList.add("30");
+        dayList.add("31");
+        yearPv.setData(yearList);
+        monthPv.setData(monthList);
+        dayPv.setData(dayList);
+
+        Calendar now = Calendar.getInstance();
+        yearPv.setSelected(now.get(Calendar.YEAR));
+       // monthPv.setSelected();
+
+        yearPv.setOnSelectListener(new PickerView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+
+            }
+        });
+
+        yearPv.setOnSelectListener(new PickerView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+
+            }
+        });
+
+        yearPv.setOnSelectListener(new PickerView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+
+            }
+        });
 
         backImg = (ImageView) findViewById(R.id.img_back);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +231,16 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
        // initRecyclerView();
        // initRefreshLayout();
 
+    }
+
+    private void initPopWindow(PopupWindow mPopupWindow){
+        mPopupWindow.setOutsideTouchable(true);
+        //设置可以获取焦点，否则弹出菜单中的EditText是无法获取输入的
+        mPopupWindow.setFocusable(true);
+        //这句是为了防止弹出菜单获取焦点之后，点击activity的其他组件没有响应
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //防止虚拟软键盘被弹出菜单遮住
+        mPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -207,7 +374,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
                         taskData.observe(InStoreSummaryActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
@@ -228,7 +395,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();
