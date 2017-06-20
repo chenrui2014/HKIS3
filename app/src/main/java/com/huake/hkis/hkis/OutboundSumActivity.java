@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -28,9 +29,9 @@ import java.util.List;
  * Created by ysstech on 2017/6/13.
  */
 
-public class OutboundSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,OutBoundAdapter.OnItemClickListener {
+public class OutboundSumActivity extends AppCompatActivity  implements LifecycleRegistryOwner,OutBoundAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    private static final String TAG = "OutboundSummaryActivity";
+    private static final String TAG = "OutboundSumActivity";
     private List<Task> tasks;
     private PullRefreshLayout refreshLayout;
     private OutBoundAdapter adapter;
@@ -46,12 +47,23 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
 
     private String userId;
     private TextView titleTv;
+    private ImageView backImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_down_outbound);
         titleTv = (TextView) findViewById(R.id.tv_title);
+        backImg = (ImageView) findViewById(R.id.img_back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(OutboundSumActivity.this, MainActivity.class);
+                startActivity(intent);
+                OutboundSumActivity.this.finish();
+            }
+        });
         initData();
 
     }
@@ -189,7 +201,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
                     public void run() {
                         refreshLayout.loadMoreComplete();
                         LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
-                        taskData.observe(OutboundSummaryActivity.this,myTasks ->{
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
                         });
@@ -232,7 +244,7 @@ public class OutboundSummaryActivity extends AppCompatActivity  implements Lifec
     @Override
     public void onItemClick(View view, int position) {
         Task task = tasks.get(position);
-        Intent intent = new Intent(OutboundSummaryActivity.this,SoldoutMDActivity.class);
+        Intent intent = new Intent(OutboundSumActivity.this,SoldoutMDActivity.class);
         intent.putExtra("taskNO", task.getTaskNO());
         startActivity(intent);
     }
