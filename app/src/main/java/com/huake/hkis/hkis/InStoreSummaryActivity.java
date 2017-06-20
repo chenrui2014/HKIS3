@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huake.hkis.hkis.dagger.AppModule;
 import com.huake.hkis.hkis.model.Task;
@@ -29,6 +31,8 @@ import com.huake.hkis.hkis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -49,6 +53,8 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private PickerView whNOPv,docNOPv,yearPv,monthPv,dayPv;
 
+    private TextView resetTv4,confirmTv4;
+
     private HKISRepository hkisRep;
     int page = 0;
 
@@ -65,11 +71,16 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
     private TextView titleTv;
 
     private String inDate;
+    private String wareHouseNO;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_up_putin);
+
+        AppModule appModule = new AppModule(getApplication());
+        hkisRep = appModule.providesHKISRepository(appModule.providesHKISApi());
+
 
         docTypeTV = (TextView) findViewById(R.id.tv_con_doc);
         whNOTv = (TextView) findViewById(R.id.tv_wh_NO);
@@ -89,6 +100,36 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         initPopWindow(whPopupWindow);
         initPopWindow(docNOPopupWindow);
         initPopWindow(inTimePopupWindow);
+
+        resetTv4 = (TextView) popView4.findViewById(R.id.tv_reset);
+        confirmTv4 = (TextView) popView4.findViewById(R.id.tv_confirm);
+        resetTv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                yearPv.setSelected(0);
+                monthPv.setSelected(0);
+                dayPv.setSelected(0);
+            }
+        });
+
+        confirmTv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String yearStr = yearPv.getText();
+                String monthStr = monthPv.getText();
+                String dayStr = dayPv.getText();
+                inTimePopupWindow.dismiss();
+                inDate = yearStr+"-"+monthStr + "-" + dayStr;
+
+                page=0;
+                LiveData<List<Task>> taskData = getData();
+                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                    tasks = myTasks;
+                    refreshLayout.autoRefresh();
+                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                });
+            }
+        });
 
         docTypeTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,10 +157,10 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         });
 
         whNOPv = (PickerView) popView2.findViewById(R.id.whNOList) ;
-        docNOPv  = (PickerView) popView2.findViewById(R.id.docNOList) ;
-        yearPv  = (PickerView) popView2.findViewById(R.id.pv_year) ;
-        monthPv  = (PickerView) popView2.findViewById(R.id.pv_month) ;
-        dayPv  = (PickerView) popView2.findViewById(R.id.pv_day) ;
+        docNOPv  = (PickerView) popView3.findViewById(R.id.docNOList) ;
+        yearPv  = (PickerView) popView4.findViewById(R.id.pv_year) ;
+        monthPv  = (PickerView) popView4.findViewById(R.id.pv_month) ;
+        dayPv  = (PickerView) popView4.findViewById(R.id.pv_day) ;
 
         List<String> yearList = new ArrayList<String>();
 
@@ -140,30 +181,30 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         yearList.add("2017");
 
         List<String> monthList = new ArrayList<String>();
-        monthList.add("1");
-        monthList.add("2");
-        monthList.add("3");
-        monthList.add("4");
-        monthList.add("5");
-        monthList.add("6");
-        monthList.add("7");
-        monthList.add("8");
-        monthList.add("9");
+        monthList.add("01");
+        monthList.add("02");
+        monthList.add("03");
+        monthList.add("04");
+        monthList.add("05");
+        monthList.add("06");
+        monthList.add("07");
+        monthList.add("08");
+        monthList.add("09");
         monthList.add("10");
         monthList.add("11");
         monthList.add("12");
 
         List<String> dayList = new ArrayList<String>();
 
-        dayList.add("1");
-        dayList.add("2");
-        dayList.add("3");
-        dayList.add("4");
-        dayList.add("5");
-        dayList.add("6");
-        dayList.add("7");
-        dayList.add("8");
-        dayList.add("9");
+        dayList.add("01");
+        dayList.add("02");
+        dayList.add("03");
+        dayList.add("04");
+        dayList.add("05");
+        dayList.add("06");
+        dayList.add("07");
+        dayList.add("08");
+        dayList.add("09");
         dayList.add("10");
         dayList.add("11");
         dayList.add("12");
@@ -190,25 +231,41 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         monthPv.setData(monthList);
         dayPv.setData(dayList);
 
-        Calendar now = Calendar.getInstance();
-        yearPv.setSelected(now.get(Calendar.YEAR));
-       // monthPv.setSelected();
-
         yearPv.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
 
+                String monthStr = monthPv.getText();
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.YEAR,Integer.valueOf(text));
+                cal.set(Calendar.MONTH,Integer.valueOf(monthStr)-1);
+                int maxDay = cal.getActualMaximum(Calendar.DATE);
+                List<String> dayList = new ArrayList<String>();
+                for(int i = 1; i <= maxDay; i++){
+                    dayList.add(i+"");
+                }
+
+                dayPv.setData(dayList);
             }
         });
 
-        yearPv.setOnSelectListener(new PickerView.onSelectListener() {
+        monthPv.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
-
+                String yearStr = monthPv.getText();
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.YEAR,Integer.valueOf(yearStr));
+                cal.set(Calendar.MONTH,Integer.valueOf(text)-1);
+                int maxDay = cal.getActualMaximum(Calendar.DATE);
+                List<String> dayList = new ArrayList<String>();
+                for(int i = 1; i <= maxDay; i++){
+                    dayList.add(i+"");
+                }
+                dayPv.setData(dayList);
             }
         });
 
-        yearPv.setOnSelectListener(new PickerView.onSelectListener() {
+        dayPv.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
 
@@ -374,7 +431,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
                         taskData.observe(InStoreSummaryActivity.this,myTasks ->{
                             tasks.addAll(myTasks);
                             adapter.notifyItemInserted(tasks.size());
@@ -385,9 +442,13 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         });
     }
 
+    private LiveData<List<Task>> getData(){
+
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+        return taskData;
+    }
+
     protected void initData() {
-        AppModule appModule = new AppModule(getApplication());
-        hkisRep = appModule.providesHKISRepository(appModule.providesHKISApi());
         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
 
@@ -395,7 +456,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,null,null,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = getData();
         taskData.observe(this,myTasks ->{
             tasks = myTasks;
             initRecyclerView();

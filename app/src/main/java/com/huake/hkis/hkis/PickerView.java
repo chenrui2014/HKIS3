@@ -36,13 +36,13 @@ public class PickerView extends View {
     private int mCurrentSelected;
     private Paint mPaint;
 
-    private float mMaxTextSize = 80;
-    private float mMinTextSize = 40;
+    private float mMaxTextSize = 60;
+    private float mMinTextSize = 30;
 
     private float mMaxTextAlpha = 255;
     private float mMinTextAlpha = 120;
 
-    private int mColorText = 0x333333;
+    private int mColorText = 0x36adf7;
 
     private int mViewHeight;
     private int mViewWidth;
@@ -136,7 +136,7 @@ public class PickerView extends View {
         mViewHeight = getMeasuredHeight();
         mViewWidth = getMeasuredWidth();
         // 按照View的高度计算字体大小
-        mMaxTextSize = mViewHeight / 4.0f;
+        mMaxTextSize = mViewHeight / 6.0f;
         mMinTextSize = mMaxTextSize / 2f;
         isInit = true;
         invalidate();
@@ -241,6 +241,10 @@ public class PickerView extends View {
                 break;
         }
         return true;
+    }
+
+    public String getText(){
+        return mDataList.get(mCurrentSelected);
     }
 
     private void doDown(MotionEvent event)

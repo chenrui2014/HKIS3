@@ -55,6 +55,8 @@ public class InventoryMSMDActivity extends AppCompatActivity  implements Lifecyc
     private TextView titleTv;
     private String wareHouseNO;
 
+    private String checkNO;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,7 +239,7 @@ public class InventoryMSMDActivity extends AppCompatActivity  implements Lifecyc
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,null,page,PAGE_SIZE);
+                        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,checkNO,page,PAGE_SIZE);
                         checkDetailData.observe(InventoryMSMDActivity.this, checkDetail1 ->{
                             checkDetail.addAll(checkDetail1);
                             adapter.notifyItemInserted(checkDetail.size());
@@ -257,7 +259,7 @@ public class InventoryMSMDActivity extends AppCompatActivity  implements Lifecyc
         Intent intent = getIntent(); //用于激活它的意图对象
         wareHouseNO = intent.getStringExtra("wareHouseNO");
 
-        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,null,page,PAGE_SIZE);
+        LiveData<List<CheckDetail>> checkDetailData = hkisRep.getCheckDetail(userId,wareHouseNO,checkNO,page,PAGE_SIZE);
         checkDetailData.observe(this,checkDetail1 ->{
             checkDetail = checkDetail1;
             initRecyclerView();
