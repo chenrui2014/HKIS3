@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
@@ -199,8 +200,6 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                     @Override
                     public void run() {
                         refreshLayout.loadMoreComplete();
-                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,page,PAGE_SIZE);
-                        taskData.observe(OutboundSumActivity.this,myTasks ->{
                         LiveData<List<Task>> taskData = hkisRep.getTask(userId,"2",taskNO,documentsType,null,null,page,PAGE_SIZE);
                         taskData.observe(OutboundSumActivity.this,myTasks ->{
                             tasks.addAll(myTasks);

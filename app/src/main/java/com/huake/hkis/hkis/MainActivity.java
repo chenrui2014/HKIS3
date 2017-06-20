@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
     private static final String CURR_INDEX = "currIndex";
     private static int currIndex = 0;
 
+    private HashMap<Integer,Fragment> mainFragment = new HashMap<Integer,Fragment>(5);
+
     private RadioGroup group;
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
@@ -243,11 +245,52 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
 
     private Fragment instantFragment(int currIndex) {
         switch (currIndex) {
-            case 0: return new UpFragment2();
-            case 1: return new DownFragment2();
-            case 2: return new ChangeFragment2();
-            case 3: return new CheckFragment2();
-            case 4: return new UserFragment2();
+            case 0: {
+                if(mainFragment.containsKey(currIndex)){
+                    return mainFragment.get(currIndex);
+                }else{
+                    UpFragment2 up = new UpFragment2();
+                    mainFragment.put(currIndex,up);
+                    return up;
+                }
+
+            }
+            case 1: {
+                if(mainFragment.containsKey(currIndex)){
+                    return mainFragment.get(currIndex);
+                }else{
+                    DownFragment2 down = new DownFragment2();
+                    mainFragment.put(currIndex,down);
+                    return down;
+                }
+            }
+            case 2: {
+                if(mainFragment.containsKey(currIndex)){
+                    return mainFragment.get(currIndex);
+                }else{
+                    ChangeFragment2 change = new ChangeFragment2();
+                    mainFragment.put(currIndex,change);
+                    return change;
+                }
+            }
+            case 3: {
+                if(mainFragment.containsKey(currIndex)){
+                    return mainFragment.get(currIndex);
+                }else{
+                    CheckFragment2 check = new CheckFragment2();
+                    mainFragment.put(currIndex,check);
+                    return check;
+                }
+            }
+            case 4: {
+                if(mainFragment.containsKey(currIndex)){
+                    return mainFragment.get(currIndex);
+                }else{
+                    UserFragment2 user = new UserFragment2();
+                    mainFragment.put(currIndex,user);
+                    return user;
+                }
+            }
             default: return null;
         }
     }
