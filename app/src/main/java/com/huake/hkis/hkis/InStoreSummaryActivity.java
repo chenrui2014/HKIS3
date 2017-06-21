@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -42,6 +44,7 @@ import java.util.List;
 public class InStoreSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,SimpleAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
+    public static final String TASK_TYPE_UP = "1";//上架
     private static final String TAG = "InStoreSummaryActivity";
     private List<Task> tasks;
     private PullRefreshLayout refreshLayout;
@@ -55,6 +58,12 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private TextView resetTv4,confirmTv4;
 
+    private Button bt1;
+    private Button bt2;
+    private Button bt3;
+    private Button bt4;
+    private Button bt5;
+
     private HKISRepository hkisRep;
     int page = 0;
 
@@ -62,7 +71,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private String taskNO = "2017052511";
 
-    private String documentsType= "入库单";
+    private String documentsType= "采购收货单";
 
     private String userId;
 
@@ -87,7 +96,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         docNOTv = (TextView) findViewById(R.id.tv_bill_NO);
         inTimeTv = (TextView) findViewById(R.id.tv_inDate);
 
-        View popView1 = getLayoutInflater().inflate(R.layout.condition_doctype_pop_window,null);
+        View popView1 = getLayoutInflater().inflate(R.layout.condition_in_doctype_pop_window,null);
         docTypePopupWindow = new PopupWindow(popView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
         View popView2 = getLayoutInflater().inflate(R.layout.condition_whno_pop_window,null);
         whPopupWindow = new PopupWindow(popView2, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
@@ -100,6 +109,134 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         initPopWindow(whPopupWindow);
         initPopWindow(docNOPopupWindow);
         initPopWindow(inTimePopupWindow);
+
+        bt1 = (Button) popView1.findViewById(R.id.button5);
+        bt2 = (Button) popView1.findViewById(R.id.button);
+        bt3 = (Button) popView1.findViewById(R.id.button2);
+        bt4 = (Button) popView1.findViewById(R.id.button3);
+        bt5 = (Button) popView1.findViewById(R.id.button4);
+
+        TextView confirm = (TextView) popView1.findViewById(R.id.tv_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(docTypePopupWindow != null && docTypePopupWindow.isShowing()){
+                    docTypePopupWindow.dismiss();
+                }
+
+                page=0;
+                LiveData<List<Task>> taskData = getData();
+                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                    tasks = myTasks;
+                    refreshLayout.autoRefresh();
+                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                });
+
+            }
+        });
+
+        TextView reset = (TextView) popView1.findViewById(R.id.tv_reset);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt1.getText().toString();
+                bt1.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+
+        documentsType = bt1.getText().toString();
+        bt1.setTextColor(Color.WHITE);
+        bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt1.getText().toString();
+                bt1.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt2.getText().toString();
+                bt2.setTextColor(Color.WHITE);
+                bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt3.getText().toString();
+                bt3.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+        bt4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt4.getText().toString();
+                bt4.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+
+        bt5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt5.getText().toString();
+                bt5.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
 
         resetTv4 = (TextView) popView4.findViewById(R.id.tv_reset);
         confirmTv4 = (TextView) popView4.findViewById(R.id.tv_confirm);
@@ -134,30 +271,91 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         docTypeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docTypePopupWindow.showAsDropDown(v);
+                docTypePopupWindow.showAsDropDown(v,0,20);
             }
         });
         docNOTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docNOPopupWindow.showAsDropDown(v);
+                docNOPopupWindow.showAsDropDown(v,0,20);
             }
         });
         whNOTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                whPopupWindow.showAsDropDown(v);
+                whPopupWindow.showAsDropDown(v,0,20);
             }
         });
         inTimeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inTimePopupWindow.showAsDropDown(v);
+                inTimePopupWindow.showAsDropDown(v,0,20);
             }
         });
 
         whNOPv = (PickerView) popView2.findViewById(R.id.whNOList) ;
+
+        TextView resetTv2 = (TextView) popView2.findViewById(R.id.tv_reset) ;
+        resetTv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whPopupWindow.dismiss();
+            }
+        });
+        TextView confirmTv2 = (TextView) popView2.findViewById(R.id.tv_confirm) ;
+        confirmTv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wareHouseNO = whNOPv.getText();
+                whPopupWindow.dismiss();
+
+                LiveData<List<Task>> taskData = getData();
+                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                    tasks = myTasks;
+                    refreshLayout.autoRefresh();
+                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                });
+            }
+        });
         docNOPv  = (PickerView) popView3.findViewById(R.id.docNOList) ;
+
+        TextView resetTv3 = (TextView) popView3.findViewById(R.id.tv_reset) ;
+        resetTv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                docNOPopupWindow.dismiss();
+            }
+        });
+        TextView confirmTv3 = (TextView) popView3.findViewById(R.id.tv_confirm) ;
+        confirmTv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                taskNO = docNOPv.getText();
+                docNOPopupWindow.dismiss();
+
+                LiveData<List<Task>> taskData = getData();
+                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                    tasks = myTasks;
+                    refreshLayout.autoRefresh();
+                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                });
+            }
+        });
+
+        docNOPv.setOnSelectListener(new PickerView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+
+            }
+        });
+
+        whNOPv.setOnSelectListener(new PickerView.onSelectListener() {
+            @Override
+            public void onSelect(String text) {
+
+            }
+        });
+
         yearPv  = (PickerView) popView4.findViewById(R.id.pv_year) ;
         monthPv  = (PickerView) popView4.findViewById(R.id.pv_month) ;
         dayPv  = (PickerView) popView4.findViewById(R.id.pv_day) ;
@@ -444,7 +642,7 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private LiveData<List<Task>> getData(){
 
-        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+        LiveData<List<Task>> taskData = hkisRep.getTask(userId,TASK_TYPE_UP,taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
         return taskData;
     }
 
@@ -469,6 +667,16 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                     refreshLayout.autoRefresh();
                 }
             }, 150);
+        });
+
+        LiveData<List<String>> docNOData = hkisRep.taskNoList();
+        docNOData.observe(InStoreSummaryActivity.this,docNOList->{
+            docNOPv.setData(docNOList);
+        });
+
+        LiveData<List<String>> wareHouseNOData = hkisRep.warehouseList();
+        wareHouseNOData.observe(InStoreSummaryActivity.this,wareHouseNOList->{
+            whNOPv.setData(wareHouseNOList);
         });
     }
 

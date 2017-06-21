@@ -41,6 +41,7 @@ public class UpFragment2 extends Fragment {
     private Button bt2;
     private Button bt3;
     private Button bt4;
+    private Button bt5;
 
     private Button upBtn;
     private EditText taskNOEt;
@@ -66,6 +67,7 @@ public class UpFragment2 extends Fragment {
         bt2 = (Button) popupView.findViewById(R.id.button);
         bt3 = (Button) popupView.findViewById(R.id.button2);
         bt4 = (Button) popupView.findViewById(R.id.button3);
+        bt5 = (Button) popupView.findViewById(R.id.button4);
 
         TextView confirm = (TextView) popupView.findViewById(R.id.tv_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +90,12 @@ public class UpFragment2 extends Fragment {
                 bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
                 bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
-
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
             }
         });
 
@@ -108,10 +111,12 @@ public class UpFragment2 extends Fragment {
                 bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
                 bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
@@ -123,10 +128,12 @@ public class UpFragment2 extends Fragment {
                 bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
                 bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
             }
         });
         bt3.setOnClickListener(new View.OnClickListener() {
@@ -138,10 +145,12 @@ public class UpFragment2 extends Fragment {
                 bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
                 bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
             }
         });
         bt4.setOnClickListener(new View.OnClickListener() {
@@ -153,10 +162,30 @@ public class UpFragment2 extends Fragment {
                 bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
                 bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
                 bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
                 bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            }
+        });
+
+        bt5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentsType = bt5.getText().toString();
+                tvTitle.setText(bt5.getText());
+                bt5.setTextColor(Color.WHITE);
+                bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+                bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+                bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+                bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
             }
         });
 

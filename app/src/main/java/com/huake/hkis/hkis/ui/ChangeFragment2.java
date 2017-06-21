@@ -61,7 +61,7 @@ public class ChangeFragment2 extends Fragment {
                 Map<String,String> params = new HashMap<String, String>();
 
                 if(wareHouseNO.isEmpty()){
-                    wareHouseNO = "T01-001-01-01-01";
+                    wareHouseNO = "ZT1";
                 }
                 params.put("wareHouseNO",wareHouseNO);
                 fListener.onFragmentAction(params,ChangeMDActivity.class);

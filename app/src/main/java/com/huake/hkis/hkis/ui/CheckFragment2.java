@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.huake.hkis.hkis.R;
+import com.huake.hkis.hkis.utils.ViewFindUtils;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 
 public class CheckFragment2 extends Fragment {
     private ArrayList<Fragment> mFragments2 = new ArrayList<>();
-    private SegmentTabLayout tabLayout_2;
+    private View mDecorView;
+    private SegmentTabLayout mTabLayout_3;
     private String[] mTitles_2 = {"明盘", "暗盘", "盲扫"};
     private FragmentManager fm;
 
@@ -44,15 +46,23 @@ public class CheckFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.fragment_check, container, false);
-
         if(fm == null){
             fm = getActivity().getSupportFragmentManager();
         }
-        tabLayout_2 = (SegmentTabLayout)fv.findViewById(R.id.tl_2);
-        tabLayout_2.setTabData(mTitles_2);
-        final ViewPager vp_3 = (ViewPager)fv.findViewById(R.id.vp_2);
+
+        mDecorView = getActivity().getWindow().getDecorView();
+        mTabLayout_3 = ViewFindUtils.find(fv, R.id.tl_2);
+        tl_3(fv);
+        return fv;
+    }
+
+    private void tl_3(View fv) {
+        final ViewPager vp_3 = ViewFindUtils.find(fv, R.id.vp_2);
+        vp_3.removeAllViews();
         vp_3.setAdapter(new MyPagerAdapter(fm));
-        tabLayout_2.setOnTabSelectListener(new OnTabSelectListener() {
+
+        mTabLayout_3.setTabData(mTitles_2);
+        mTabLayout_3.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
 
@@ -72,17 +82,15 @@ public class CheckFragment2 extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-
-                tabLayout_2.setCurrentTab(position);
+                mTabLayout_3.setCurrentTab(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-//                tabLayout_2.setCurrentTab(state);
+
             }
         });
         vp_3.setCurrentItem(0);
-        return fv;
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.huake.hkis.hkis.dagger.AppModule;
 import com.huake.hkis.hkis.model.CheckDetail;
-import com.huake.hkis.hkis.model.ShelvesDetail;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshLayout;
 import com.huake.hkis.hkis.pullrefreshlayout.PullRefreshView;
 import com.huake.hkis.hkis.repository.HKISRepository;
