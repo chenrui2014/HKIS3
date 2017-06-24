@@ -85,11 +85,16 @@ class SoldoutMDAdapter extends RecyclerView.Adapter<SoldoutMDAdapter.SimpleViewH
     @Override
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.wlhTv.setText(datas.get(position).getMaterialNO());
-        holder.wlmTv.setText(datas.get(position).getMaterialCode());
-        holder.hasBeenTv.setText(datas.get(position).getAmount());
-        holder.toStayTv.setText(datas.get(position).getAmount());
+        holder.wlmTv.setText(datas.get(position).getMaterialDesc());
+        holder.hasBeenTv.setText(datas.get(position).getFinishAmount());
+        holder.toStayTv.setText(datas.get(position).getSurplusAmount());
         holder.suggestTv.setText(datas.get(position).getRecommendStorageSpace());
+        if(this.isSelected(position)){
 
+            holder.selectImg.setImageResource(R.mipmap.card_select);
+        }else{
+            holder.selectImg.setImageResource(R.mipmap.card_unselect);
+        }
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

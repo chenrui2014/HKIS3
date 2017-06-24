@@ -48,7 +48,7 @@ class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleViewHolder>
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.inDateTv.setText(datas.get(position).getInStorageTime());
         holder.inBillsTv.setText(datas.get(position).getTaskNO());
-        holder.wareHouseNOTv.setText(datas.get(position).getResourceStorageSpaceCode());
+        holder.wareHouseNOTv.setText(datas.get(position).getWareHouseNum());
         holder.billTypeTv.setText(datas.get(position).getDocumentsType());
 
         if (mOnItemClickListener != null) {

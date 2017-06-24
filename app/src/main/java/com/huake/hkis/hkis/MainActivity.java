@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.huake.hkis.hkis.ui.ChangeFragment2;
 import com.huake.hkis.hkis.ui.CheckFragment2;
@@ -330,7 +331,11 @@ public class MainActivity extends AppCompatActivity implements OnFragmentListene
     protected void onResume() {
         super.onResume();
         //bind service
-        bindScanService();
+//        try{
+//            bindScanService();
+//        }catch(Exception e){
+//            Toast.makeText(getApplicationContext(),"绑定扫描服务",Toast.LENGTH_LONG);
+//        }
         IntentFilter filter = new IntentFilter() ;
         filter.addAction("com.scan.RESULT") ;
         registerReceiver(resultReceiver, filter) ;

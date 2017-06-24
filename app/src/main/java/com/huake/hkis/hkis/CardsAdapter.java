@@ -40,6 +40,7 @@ public class CardsAdapter extends BaseAdapter {
     ((TextView) view.findViewById(R.id.tv_desc)).setText(ms.getMaterialDesc());
     ((TextView) view.findViewById(R.id.tv_inNum)).setText(ms.getAmount());
     ((TextView) view.findViewById(R.id.tv_unit)).setText(ms.getCalculateUnit());
+    ((TextView) view.findViewById(R.id.tv_batch)).setText(ms.getMaterBatch());
     ((TextView) view.findViewById(R.id.tv_suggest)).setText(ms.getSysRecommendWarehouse());
     EditText qrEt = (EditText) view.findViewById(R.id.et_qr);
     EditText storeEt = (EditText) view.findViewById(R.id.et_store);

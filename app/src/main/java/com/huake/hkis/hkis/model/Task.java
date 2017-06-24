@@ -13,6 +13,7 @@ public class Task {
     private String targetStorageSpace;
     private String resourceStorageSpaceCode;
     private String targetStorageSpaceCode;
+    private String wareHouseNum;
     private String clientName;
     private String documentsType;
     private String contractNum;
@@ -22,8 +23,9 @@ public class Task {
     private String shipmentsTime;
     private String inStorageTime;
     private String logisticsType;
+    private String referenceNo;
 
-    public Task(String taskId, String taskNO, String resourceStorageSpace, String targetStorageSpace, String resourceStorageSpaceCode, String targetStorageSpaceCode, String clientName, String documentsType,String contractNum, String rowProject, String taskType, String handleUser, String shipmentsTime, String inStorageTime, String logisticsType) {
+    public Task(String taskId, String taskNO, String resourceStorageSpace, String targetStorageSpace, String resourceStorageSpaceCode, String targetStorageSpaceCode, String clientName, String documentsType,String contractNum, String rowProject, String taskType, String handleUser, String shipmentsTime, String inStorageTime, String logisticsType,String referenceNo,String wareHouseNum) {
         this.taskId = taskId;
         this.taskNO = taskNO;
         this.resourceStorageSpace = resourceStorageSpace;
@@ -39,6 +41,8 @@ public class Task {
         this.shipmentsTime = shipmentsTime;
         this.inStorageTime = inStorageTime;
         this.logisticsType = logisticsType;
+        this.referenceNo = referenceNo;
+        this.wareHouseNum = wareHouseNum;
     }
 
     public String getTaskId() {
@@ -159,5 +163,21 @@ public class Task {
 
     public void setDocumentsType(String documentsType) {
         this.documentsType = documentsType;
+    }
+
+    public String getReferenceNo() {
+        return referenceNo;
+    }
+
+    public void setReferenceNo(String referenceNo) {
+        this.referenceNo = referenceNo;
+    }
+
+    public String getWareHouseNum() {
+        return wareHouseNum;
+    }
+
+    public void setWareHouseNum(String wareHouseNum) {
+        this.wareHouseNum = wareHouseNum;
     }
 }

@@ -40,6 +40,7 @@ import java.util.List;
 public class OutboundSumActivity extends AppCompatActivity  implements LifecycleRegistryOwner,OutBoundAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
+    public static final String OBO =  "出库单";
     public static final String TASK_TYPE_DOWN = "2";//下架
     private static final String TAG = "OutboundSumActivity";
     private List<Task> tasks;
@@ -65,16 +66,16 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
 
     private static final int PAGE_SIZE = 5;
 
-    private String taskNO = "2017052511";
+    private String taskNO = "CG1111";
 
     private String documentsType= "出库单";
 
-    private String userId;
+    private String userId="";
     private TextView titleTv;
     private ImageView backImg;
 
-    private String inDate;
-    private String wareHouseNO;
+    private String inDate="";
+    private String wareHouseNO="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,13 +119,20 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                 }
 
                 page=0;
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(OutboundSumActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
 
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+                            titleTv.setText(getResources().getText(R.string.down_sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -252,12 +260,19 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                 inDate = yearStr+"-"+monthStr + "-" + dayStr;
 
                 page=0;
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(OutboundSumActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+                            titleTv.setText(getResources().getText(R.string.down_sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -302,12 +317,20 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                 wareHouseNO = whNOPv.getText();
                 whPopupWindow.dismiss();
 
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(OutboundSumActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                page = 0;
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+                            titleTv.setText(getResources().getText(R.string.down_sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
         docNOPv  = (PickerView) popView3.findViewById(R.id.docNOList) ;
@@ -326,12 +349,20 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
                 taskNO = docNOPv.getText();
                 docNOPopupWindow.dismiss();
 
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(OutboundSumActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                page = 0;
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(OutboundSumActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+                            titleTv.setText(getResources().getText(R.string.down_sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -501,13 +532,13 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
     private void initRefreshLayout() {
         refreshLayout = (PullRefreshLayout) findViewById(R.id.refreshLayout);
 //        refreshLayout.setPullTwinkEnable(false);
-        refreshLayout.setAdjustTwinkValue(40);// 值越大回弹效果越明显
+        refreshLayout.setAdjustTwinkValue(10);// 值越大回弹效果越明显
 //        refreshLayout.setLoadMoreEnable(false);
 //        refreshLayout.setRefreshEnable(false);
 //        refreshLayout.setAutoLoadingEnable(true);
-//        refreshLayout.setDuringAdjustValue(10f);// 动画执行时间调节，越大动画执行越慢
+        refreshLayout.setDuringAdjustValue(1f);// 动画执行时间调节，越大动画执行越慢
         // 刷新或加载完成后回复动画执行时间，为-1时，根据setDuringAdjustValue（）方法实现
-//        refreshLayout.setRefreshBackTime(300);
+        refreshLayout.setRefreshBackTime(3);
 //        refreshLayout.setPullViewHeight(400);// 设置头部和底部的高度
 //        refreshLayout.setDragDampingRatio(0.6f);// 阻尼系数
 //        refreshLayout.setPullFlowHeight(400);// 拖拽最大范围，为-1时拖拽范围不受限制
@@ -680,6 +711,11 @@ public class OutboundSumActivity extends AppCompatActivity  implements Lifecycle
         Task task = tasks.get(position);
         Intent intent = new Intent(OutboundSumActivity.this,SoldoutMDActivity.class);
         intent.putExtra("taskNO", task.getTaskNO());
+//        if(OBO.equals(task.getDocumentsType())){
+//            intent.putExtra("taskNO", task.getTaskNO());
+//        }else{
+//            intent.putExtra("taskNO", task.getReferenceNo());
+//        }
         startActivity(intent);
     }
 

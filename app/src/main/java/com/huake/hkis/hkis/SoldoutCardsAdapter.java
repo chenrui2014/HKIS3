@@ -46,7 +46,7 @@ public class SoldoutCardsAdapter extends BaseAdapter {
       }
     });
 
-    qrEt.setOnClickListener(new View.OnClickListener() {
+    storeEt.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
 

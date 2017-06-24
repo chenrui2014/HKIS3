@@ -258,8 +258,9 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             ShelvesMaterialDetailActivity.ChildViewHolder holder = (ShelvesMaterialDetailActivity.ChildViewHolder) viewHolder;
             holder.wlhTv.setText(datas.get(position).getMaterialNO());
-            holder.wlmTv.setText(datas.get(position).getMaterialCode());
+            holder.wlmTv.setText(datas.get(position).getMaterialDesc());
             holder.toStayTV.setText(datas.get(position).getAmount());
+            holder.batchTv.setText(datas.get(position).getMaterBatch());
             holder.sysRecommendWarehouseTv.setText(datas.get(position).getWareHouseNum());
             if(isSelected(position)){
                 holder.selectImg.setImageResource(R.mipmap.card_select);
@@ -281,6 +282,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
         public TextView wlhTv;
         public TextView wlmTv;
         public TextView toStayTV;
+        public TextView batchTv;
         public TextView sysRecommendWarehouseTv;
         public ImageView selectImg;
 
@@ -289,6 +291,7 @@ public class ShelvesMaterialDetailActivity extends AppCompatActivity implements 
 
         public ChildViewHolder(View view,MyItemClickListener myItemClickListener) {
             super(view);
+            batchTv = (TextView) view.findViewById(R.id.tv_batch);
             wlhTv = (TextView) view.findViewById(R.id.tv_wlh);
             wlmTv = (TextView) view.findViewById(R.id.tv_wlm);
             toStayTV = (TextView) view.findViewById(R.id.tv_toStay);

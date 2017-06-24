@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -97,12 +98,26 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
         selectTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.clearSelectedState();
-                for(int i = 0; i < shelvesDetails.size(); i++){
-                    adapter.switchSelectedState(i);
-                    adapter.notifyDataSetChanged();
+                List<Integer> selectedItems = adapter.getSelectedItems();
+                if(selectedItems.size() < shelvesDetails.size()){
+                    adapter.clearSelectedState();
+                    for(int i = 0; i < shelvesDetails.size(); i++){
+                        adapter.switchSelectedState(i);
+//                    adapter.notifyDataSetChanged();
+                    }
+                    Drawable drawable = getDrawable(R.mipmap.card_select);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    selectTv.setCompoundDrawablesRelative(drawable,null,null,null);
+                }else{
+                    for(int i = 0; i < shelvesDetails.size(); i++){
+                        adapter.switchSelectedState(i);
+                    }
+                    Drawable drawable = getDrawable(R.mipmap.card_unselect);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    selectTv.setCompoundDrawablesRelative(drawable,null,null,null);
+
                 }
-                selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
+
             }
         });
         initData();
@@ -285,13 +300,13 @@ public class ShelvesMDActivity extends AppCompatActivity  implements LifecycleRe
     @Override
     public void onItemClick(View view, int position) {
         adapter.switchSelectedState(position);
-        ImageView selectImg = (ImageView) view.findViewById(R.id.select_img);
-        if(adapter.isSelected(position)){
-
-            selectImg.setImageResource(R.mipmap.card_select);
-        }else{
-            selectImg.setImageResource(R.mipmap.card_unselect);
-        }
+//        ImageView selectImg = (ImageView) view.findViewById(R.id.select_img);
+//        if(adapter.isSelected(position)){
+//
+//            selectImg.setImageResource(R.mipmap.card_select);
+//        }else{
+//            selectImg.setImageResource(R.mipmap.card_unselect);
+//        }
 //        ShelvesDetail shelvesDetail = shelvesDetails.get(position);
 //        Intent intent = new Intent(ShelvesMDActivity.this,ShelvesMaterialDetailActivity.class);
 //        intent.putExtra("taskNO", shelvesDetail.getTaskNO());

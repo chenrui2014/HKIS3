@@ -91,6 +91,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
                 materialShelves.setMaterialDesc(sd.getMaterialDesc());
                 materialShelves.setAmount(sd.getAmount());
                 materialShelves.setCalculateUnit(sd.getCalculateUnit());
+                materialShelves.setMaterBatch(sd.getMaterBatch());
                 materialShelves.setSysRecommendWarehouse(sd.getRecommendStorageSpace());
                 listObj.add(materialShelves);
             }
@@ -352,7 +353,7 @@ public class MaterialShelvesActivity extends AppCompatActivity implements Lifecy
     protected void onResume() {
         super.onResume();
         //bind service
-        bindScanService();
+       // bindScanService();
         IntentFilter filter = new IntentFilter() ;
         filter.addAction("com.scan.RESULT") ;
         registerReceiver(resultReceiver, filter) ;

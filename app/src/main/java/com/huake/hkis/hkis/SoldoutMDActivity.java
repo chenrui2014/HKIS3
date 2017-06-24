@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -93,11 +94,25 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
         selectTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.clearSelectedState();
-                for(int i = 0; i < shelvesDetails.size(); i++){
-                    adapter.switchSelectedState(i);
+                List<Integer> selectedItems = adapter.getSelectedItems();
+                if(selectedItems.size() < shelvesDetails.size()){
+                    adapter.clearSelectedState();
+                    for(int i = 0; i < shelvesDetails.size(); i++){
+                        adapter.switchSelectedState(i);
+//                    adapter.notifyDataSetChanged();
+                    }
+                    Drawable drawable = getDrawable(R.mipmap.card_select);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    selectTv.setCompoundDrawablesRelative(drawable,null,null,null);
+                }else{
+                    for(int i = 0; i < shelvesDetails.size(); i++){
+                        adapter.switchSelectedState(i);
+                    }
+                    Drawable drawable = getDrawable(R.mipmap.card_unselect);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    selectTv.setCompoundDrawablesRelative(drawable,null,null,null);
+
                 }
-                selectTv.setCompoundDrawablesRelative(getDrawable(R.mipmap.card_select),null,null,null);
             }
         });
         initData();
@@ -279,7 +294,7 @@ public class SoldoutMDActivity extends AppCompatActivity implements LifecycleReg
 
     @Override
     public void onItemClick(View view, int position) {
-
+        adapter.switchSelectedState(position);
     }
 
     @Override

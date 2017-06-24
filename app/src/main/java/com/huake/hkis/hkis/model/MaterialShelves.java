@@ -15,10 +15,12 @@ public class MaterialShelves {
     public String calculateUnit;
     public String sysRecommendWarehouse;
     public String storageSpace;
+
+    public String materBatch;
     public String recommendAmount;
 
     public MaterialShelves(){}
-    public MaterialShelves(String userId, String taskType, String materialNO, String materialDesc, String barcode, String amount, String calculateUnit, String sysRecommendWarehouse, String storageSpace, String recommendAmount) {
+    public MaterialShelves(String userId, String taskType, String materialNO, String materialDesc, String barcode, String amount, String calculateUnit, String sysRecommendWarehouse, String storageSpace, String recommendAmount, String materBatch) {
         this.userId = userId;
         this.taskType = taskType;
         this.materialNO = materialNO;
@@ -29,6 +31,7 @@ public class MaterialShelves {
         this.sysRecommendWarehouse = sysRecommendWarehouse;
         this.storageSpace = storageSpace;
         this.recommendAmount = recommendAmount;
+        this.materBatch = materBatch;
     }
 
     public String getUserId() {
@@ -109,5 +112,13 @@ public class MaterialShelves {
 
     public void setRecommendAmount(String recommendAmount) {
         this.recommendAmount = recommendAmount;
+    }
+
+    public String getMaterBatch() {
+        return materBatch;
+    }
+
+    public void setMaterBatch(String materBatch) {
+        this.materBatch = materBatch;
     }
 }

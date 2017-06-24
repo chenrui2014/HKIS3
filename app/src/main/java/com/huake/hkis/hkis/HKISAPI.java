@@ -41,7 +41,6 @@ public interface HKISAPI {
     @POST("/storage/task/shelvesDetail.do")
     Call<MyResponsBody<List<ShelvesDetail>>> shelvesDetail(@Field("userId") String userId, @Field("taskType") String taskType, @Field("taskNO") String taskNO, @Field("pageNo") String pageNo, @Field("pageSize") String pageSize);
 
-    @FormUrlEncoded
     @POST("/storage/task/materialShelves.do")
     Call<MyResponsBody<String>> materialShelves(@Body MaterialShelves materialShelves);
 

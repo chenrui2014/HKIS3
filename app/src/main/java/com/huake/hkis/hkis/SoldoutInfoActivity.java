@@ -91,6 +91,7 @@ public class SoldoutInfoActivity extends AppCompatActivity implements LifecycleR
                 materialShelves.setMaterialDesc(sd.getMaterialDesc());
                 materialShelves.setAmount(sd.getAmount());
                 materialShelves.setCalculateUnit(sd.getCalculateUnit());
+                materialShelves.setMaterBatch(sd.getMaterBatch());
                 materialShelves.setSysRecommendWarehouse(sd.getRecommendStorageSpace());
                 listObj.add(materialShelves);
             }

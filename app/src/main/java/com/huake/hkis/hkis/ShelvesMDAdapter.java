@@ -64,7 +64,7 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
         } else {
             selectedItems.put(position, true);
         }
-        //notifyItemChanged(position);
+        notifyItemChanged(position);
     }
 
     public List<Integer> getSelectedItems() {
@@ -87,10 +87,16 @@ class ShelvesMDAdapter extends RecyclerView.Adapter<ShelvesMDAdapter.SimpleViewH
     public void onBindViewHolder(final SimpleViewHolder holder, int position) {
         holder.wlhTv.setText(datas.get(position).getMaterialNO());
         holder.wlmTv.setText(datas.get(position).getMaterialDesc());
-        holder.hasBeenTv.setText(datas.get(position).getAmount());
-        holder.toStayTv.setText(datas.get(position).getAmount());
+        holder.hasBeenTv.setText(datas.get(position).getFinishAmount());
+        holder.toStayTv.setText(datas.get(position).getSurplusAmount());
         holder.suggestTv.setText(datas.get(position).getRecommendStorageSpace());
 
+        if(this.isSelected(position)){
+
+            holder.selectImg.setImageResource(R.mipmap.card_select);
+        }else{
+            holder.selectImg.setImageResource(R.mipmap.card_unselect);
+        }
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

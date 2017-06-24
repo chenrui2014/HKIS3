@@ -44,6 +44,7 @@ import java.util.List;
 public class InStoreSummaryActivity extends AppCompatActivity  implements LifecycleRegistryOwner,SimpleAdapter.OnItemClickListener {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
+    public static final String GRN  = "入库单";
     public static final String TASK_TYPE_UP = "1";//上架
     private static final String TAG = "InStoreSummaryActivity";
     private List<Task> tasks;
@@ -69,18 +70,18 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 
     private static final int PAGE_SIZE = 5;
 
-    private String taskNO = "2017052511";
+    private String taskNO = "CG1111";
 
     private String documentsType= "采购收货单";
 
-    private String userId;
+    private String userId="";
 
     private ImageView backImg;
 
     private TextView titleTv;
 
-    private String inDate;
-    private String wareHouseNO;
+    private String inDate="";
+    private String wareHouseNO="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,12 +126,46 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                 }
 
                 page=0;
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+
+                            titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
+
+//                LiveData<List<Task>> taskData = getData();
+//                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+//                    tasks = myTasks;
+//                    page = 0;
+//                    refreshLayout.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            refreshLayout.loadMoreComplete();
+//                            LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+//                            taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+//                                tasks.addAll(myTasks);
+//                                adapter.notifyItemInserted(tasks.size());
+//                            });
+//                        }
+//                    }, 1000);
+//                    initRecyclerView();
+//                    refreshLayout.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            refreshLayout.refreshComplete();
+//                        }
+//                    }, 1000);
+
+//                });
 
             }
         });
@@ -259,12 +294,20 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
                 inDate = yearStr+"-"+monthStr + "-" + dayStr;
 
                 page=0;
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+
+                            titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -308,13 +351,22 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
             public void onClick(View v) {
                 wareHouseNO = whNOPv.getText();
                 whPopupWindow.dismiss();
+                page=0;
 
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
+
+                            titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
         docNOPv  = (PickerView) popView3.findViewById(R.id.docNOList) ;
@@ -332,13 +384,21 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
             public void onClick(View v) {
                 taskNO = docNOPv.getText();
                 docNOPopupWindow.dismiss();
+                page=0;
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.loadMoreComplete();
+                        LiveData<List<Task>> taskData = hkisRep.getTask(userId,"1",taskNO,documentsType,wareHouseNO,inDate,page,PAGE_SIZE);
+                        taskData.observe(InStoreSummaryActivity.this,myTasks ->{
+                            tasks.clear();
+                            tasks.addAll(myTasks);
+                            adapter.notifyItemInserted(tasks.size());
 
-                LiveData<List<Task>> taskData = getData();
-                taskData.observe(InStoreSummaryActivity.this,myTasks ->{
-                    tasks = myTasks;
-                    refreshLayout.autoRefresh();
-                    titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
-                });
+                            titleTv.setText(getResources().getText(R.string.sum_tv_title) + "(" + myTasks.size() + ")");
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -514,9 +574,9 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
 //        refreshLayout.setLoadMoreEnable(false);
 //        refreshLayout.setRefreshEnable(false);
 //        refreshLayout.setAutoLoadingEnable(true);
-//        refreshLayout.setDuringAdjustValue(10f);// 动画执行时间调节，越大动画执行越慢
+        refreshLayout.setDuringAdjustValue(1f);// 动画执行时间调节，越大动画执行越慢
         // 刷新或加载完成后回复动画执行时间，为-1时，根据setDuringAdjustValue（）方法实现
-//        refreshLayout.setRefreshBackTime(300);
+        refreshLayout.setRefreshBackTime(3);
 //        refreshLayout.setPullViewHeight(400);// 设置头部和底部的高度
 //        refreshLayout.setDragDampingRatio(0.6f);// 阻尼系数
 //        refreshLayout.setPullFlowHeight(400);// 拖拽最大范围，为-1时拖拽范围不受限制
@@ -646,6 +706,69 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         return taskData;
     }
 
+    private void selectDocumentTypeBtn(String documentsType){
+        if(documentsType != null && documentsType.equals(bt1.getText().toString().trim())){
+            bt1.setTextColor(Color.WHITE);
+            bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+            bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+        }
+        if(documentsType != null && documentsType.equals(bt2.getText().toString().trim())){
+            bt2.setTextColor(Color.WHITE);
+            bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+            bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+        }
+        if(documentsType != null && documentsType.equals(bt3.getText().toString().trim())){
+            bt3.setTextColor(Color.WHITE);
+            bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+            bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+        }
+        if(documentsType != null && documentsType.equals(bt4.getText().toString().trim())){
+            bt4.setTextColor(Color.WHITE);
+            bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt5.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+            bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+        }
+        if(documentsType != null && documentsType.equals(bt5.getText().toString().trim())){
+            bt5.setTextColor(Color.WHITE);
+            bt2.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt3.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt4.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt1.setTextColor(getResources().getColor(R.color.up_condition_font));
+            bt5.setBackground(getResources().getDrawable(R.drawable.shape_corner_press2));
+            bt2.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt3.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt4.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+            bt1.setBackground(getResources().getDrawable(R.drawable.shape_corner_normal2));
+        }
+    }
+
     protected void initData() {
         SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
         userId =sp.getString(Constants.SP_USER_ID_KEY,"");
@@ -653,6 +776,9 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         Intent intent = getIntent(); //用于激活它的意图对象
         taskNO = intent.getStringExtra("taskNO");
         documentsType = intent.getStringExtra("documentsType");
+
+
+        selectDocumentTypeBtn(documentsType);
 
         LiveData<List<Task>> taskData = getData();
         taskData.observe(this,myTasks ->{
@@ -690,6 +816,12 @@ public class InStoreSummaryActivity extends AppCompatActivity  implements Lifecy
         Task task = tasks.get(position);
         Intent intent = new Intent(InStoreSummaryActivity.this,ShelvesMDActivity.class);
         intent.putExtra("taskNO", task.getTaskNO());
+//        if(GRN.equals(task.getDocumentsType())){
+//            intent.putExtra("taskNO", task.getTaskNO());
+//        }else{
+//            intent.putExtra("taskNO", task.getReferenceNo());
+//        }
+
         startActivity(intent);
     }
 

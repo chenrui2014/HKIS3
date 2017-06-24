@@ -34,6 +34,11 @@ public class SettingActivity extends AppCompatActivity {
         portEt = (EditText)findViewById(R.id.et_port);
         settingBtn = (Button) findViewById(R.id.bt_setting);
 
+        SharedPreferences sp = getSharedPreferences(Constants.SP_STORE_KEY,MODE_PRIVATE);
+
+        addressEt.setText(sp.getString(Constants.SP_ADDRESS_KEY,""));
+        portEt.setText(sp.getString(Constants.SP_PORT_KEY,""));
+
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
